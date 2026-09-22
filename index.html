@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Muziso Android - High-Fidelity Native Android Music Player</title>
   <meta name="description" content="Official documentation and APK download hub for Muziso Android: A premium, native Kotlin music player powered by Jetpack Media3, ExoPlayer, 320 kbps streaming, and 100% offline playback." />
   
-  <!-- Fonts: Comfortaa (from iuno.lol), Space Grotesk, Inter, JetBrains Mono -->
+  <!-- Fonts: Comfortaa, Space Grotesk, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -14,33 +17,40 @@
   <style>
     :root {
       --bg-base: #000000;
-      --bg-surface: #0a0a0a;
-      --bg-card: rgba(255, 255, 255, 0.03);
-      --bg-card-hover: rgba(255, 255, 255, 0.065);
-      --border-subtle: rgba(255, 255, 255, 0.1);
-      --border-glow: rgba(255, 255, 255, 0.4);
+      --bg-surface: #0a0a0d;
+      --bg-card: rgba(14, 14, 18, 0.90);
+      --bg-card-hover: rgba(22, 22, 28, 0.96);
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-glow: rgba(255, 255, 255, 0.35);
       --accent-white: #ffffff;
-      --accent-white-glow: rgba(255, 255, 255, 0.35);
+      --accent-white-glow: rgba(255, 255, 255, 0.3);
       --accent-silver: #d4d4d8;
       --text-main: #ffffff;
-      --text-muted: #a1a1aa;
+      --text-muted: #b4b4bc;
+      --text-dim: #71717a;
       --text-dark: #000000;
       --font-comfortaa: 'Comfortaa', cursive, sans-serif;
       --font-heading: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
       --font-code: 'JetBrains Mono', monospace;
+      
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     /* Sleek Monochrome Scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
     }
     ::-webkit-scrollbar-track {
       background: #000000;
@@ -56,6 +66,7 @@
       scrollbar-width: thin;
       scrollbar-color: rgba(255, 255, 255, 0.25) #000000;
       scroll-behavior: smooth;
+      background-color: #000000;
     }
 
     body {
@@ -66,11 +77,11 @@
       overflow-x: hidden;
       min-height: 100vh;
       position: relative;
+      padding-left: var(--safe-left);
+      padding-right: var(--safe-right);
     }
 
-    /* ==========================================================================
-       Black & White WebGL 3D Domain-Warped Fluid Canvas (iuno.lol Monochrome)
-       ========================================================================== */
+    /* WebGL Background Canvas with Dark Vignette Overlay */
     .color-bends-bg {
       position: fixed;
       top: 0;
@@ -79,23 +90,35 @@
       height: 100%;
       z-index: 0;
       pointer-events: none;
-      filter: blur(3px);
-      -webkit-filter: blur(3px);
-      opacity: 0.85;
+      filter: blur(4px);
+      -webkit-filter: blur(4px);
+      opacity: 0.55;
     }
     #shader-canvas {
       display: block;
       width: 100%;
       height: 100%;
     }
+    .bg-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 20%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.88) 70%, #000000 100%);
+    }
 
     /* Layout Container */
     .container {
       max-width: 1240px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 1.25rem;
       position: relative;
       z-index: 10;
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
     }
 
     /* Header Navigation */
@@ -105,136 +128,370 @@
       z-index: 100;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.88);
       border-bottom: 1px solid var(--border-subtle);
+      padding-top: var(--safe-top);
     }
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 74px;
+      height: 64px;
+      gap: 0.75rem;
     }
+    @media (min-width: 768px) {
+      .nav-inner {
+        height: 72px;
+      }
+    }
+
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.6rem;
       text-decoration: none;
       color: #fff;
+      flex-shrink: 0;
     }
     .brand-logo-img {
-      width: 42px;
-      height: 42px;
+      width: 36px;
+      height: 36px;
       object-fit: contain;
-      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.35));
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
       transition: transform 0.25s ease;
     }
-    .brand-logo-img:hover {
-      transform: scale(1.1) rotate(6deg);
+    @media (min-width: 768px) {
+      .brand-logo-img {
+        width: 42px;
+        height: 42px;
+      }
     }
     .brand-title {
       font-family: var(--font-heading);
-      font-size: 1.45rem;
+      font-size: 1.25rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: #fff;
       display: flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.35rem;
+      white-space: nowrap;
+    }
+    @media (min-width: 768px) {
+      .brand-title {
+        font-size: 1.45rem;
+      }
     }
     .brand-title span {
       color: #a1a1aa;
     }
     .brand-tag {
       font-family: var(--font-code);
-      font-size: 0.72rem;
-      padding: 0.2rem 0.55rem;
+      font-size: 0.68rem;
+      padding: 0.15rem 0.45rem;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       color: #ffffff;
       font-weight: 600;
+      white-space: nowrap;
     }
 
+    /* Desktop Navigation Links */
     .nav-links {
-      display: flex;
+      display: none;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.25rem;
       list-style: none;
+    }
+    @media (min-width: 960px) {
+      .nav-links {
+        display: flex;
+      }
     }
     .nav-link {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
-      padding: 0.5rem 0.9rem;
+      padding: 0.45rem 0.8rem;
       border-radius: 8px;
       transition: all 0.2s ease;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      white-space: nowrap;
     }
     .nav-link:hover, .nav-link.active {
       color: #fff;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.18);
     }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
     .nav-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: center;
+      gap: 0.45rem;
       background: #ffffff;
       color: #000000;
-      padding: 0.55rem 1.25rem;
+      padding: 0.45rem 1rem;
       border-radius: 999px;
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       text-decoration: none;
-      transition: all 0.25s ease;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+      transition: all 0.2s ease;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      white-space: nowrap;
+      min-height: 38px;
+    }
+    .nav-btn:active {
+      transform: scale(0.96);
     }
     .nav-btn:hover {
       background: #e4e4e7;
-      transform: translateY(-1px);
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.45);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Mobile Hamburger Menu Toggle Button */
+    .mobile-menu-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      cursor: pointer;
+      gap: 5px;
+      padding: 0;
+      transition: all 0.25s ease;
+    }
+    .mobile-menu-btn:active {
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    @media (min-width: 960px) {
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+    .mobile-menu-btn span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background-color: #ffffff;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .mobile-menu-btn.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .mobile-menu-btn.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-menu-btn.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile Navigation Drawer Overlay */
+    .mobile-drawer {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.96);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem 1.25rem calc(var(--safe-bottom) + 1.5rem);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      overflow-y: auto;
+    }
+    .mobile-drawer.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    @media (min-width: 960px) {
+      .mobile-drawer {
+        display: none !important;
+      }
+    }
+    .mobile-drawer-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+      font-family: var(--font-code);
+      font-weight: 600;
+    }
+    .mobile-drawer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .mobile-drawer-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .mobile-drawer-link:active, .mobile-drawer-link.active {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: scale(0.98);
+    }
+    .mobile-drawer-link span {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .mobile-drawer-cta {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Sticky Horizontal Tab Pill Bar (Mobile / Tablet only) */
+    .tab-bar-wrap {
+      position: sticky;
+      top: 64px;
+      z-index: 90;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.4rem 0;
+    }
+    @media (min-width: 960px) {
+      .tab-bar-wrap {
+        display: none;
+      }
+    }
+    .tab-pills-scroll {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.2rem 1.25rem;
+      scroll-snap-type: x proximity;
+    }
+    .tab-pills-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .tab-pill {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.42rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      scroll-snap-align: start;
+      white-space: nowrap;
+    }
+    .tab-pill:active {
+      transform: scale(0.95);
+    }
+    .tab-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .tab-pill.active {
+      color: #000000;
+      background: #ffffff;
+      border-color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
+    }
+    .tab-pill svg {
+      width: 14px;
+      height: 14px;
     }
 
     /* Hero Section */
     .hero {
-      padding: 4.5rem 0 3.5rem;
+      padding: clamp(2rem, 6vw, 4.5rem) 0 clamp(1.5rem, 5vw, 3rem);
       text-align: center;
     }
     .hero-badges-wrap {
       display: flex;
       justify-content: center;
-      gap: 0.75rem;
+      gap: 0.45rem;
       flex-wrap: wrap;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.9rem;
-      background: rgba(255, 255, 255, 0.04);
+      gap: 0.4rem;
+      padding: 0.3rem 0.7rem;
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-subtle);
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-size: clamp(0.72rem, 2.5vw, 0.82rem);
       color: var(--text-muted);
       backdrop-filter: blur(12px);
+      white-space: nowrap;
     }
     .hero-badge-dot {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       background: #ffffff;
       border-radius: 50%;
-      box-shadow: 0 0 8px #ffffff;
+      box-shadow: 0 0 6px #ffffff;
     }
     .hero h1 {
       font-family: var(--font-heading);
-      font-size: 3.8rem;
+      font-size: clamp(1.85rem, 6.5vw, 3.8rem);
       font-weight: 900;
       line-height: 1.15;
       letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.65rem;
       color: #ffffff;
+      word-break: break-word;
+      text-shadow: 0 3px 18px rgba(0, 0, 0, 0.9);
     }
     .hero h1 span {
       background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
@@ -243,27 +500,31 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* ==========================================================================
-       Hero Text Animation Loop (Vertical Slide + Blur-to-Focus from iuno.lol)
-       ========================================================================== */
+    /* Hero Text Animation Loop */
     .rotating-text-container {
-      height: 60px;
+      height: clamp(40px, 8vw, 56px);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
-      margin: 0.5rem auto 1.5rem;
+      margin: 0.25rem auto 1.25rem;
+      width: 100%;
+      max-width: 100%;
     }
     .rotating-text {
       font-family: var(--font-comfortaa);
-      font-size: 2.2rem;
-      font-weight: 400;
+      font-size: clamp(1.05rem, 4.2vw, 2.1rem);
+      font-weight: 500;
       color: #e4e4e7;
       letter-spacing: -0.02em;
       position: absolute;
       white-space: nowrap;
-      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 95vw;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       will-change: opacity, transform, filter;
     }
     .rotating-text.enter {
@@ -273,34 +534,36 @@
     }
     .rotating-text.exit {
       opacity: 0;
-      transform: translateY(-12px);
-      filter: blur(6px);
+      transform: translateY(-10px);
+      filter: blur(5px);
     }
     .rotating-text.initial {
       opacity: 0;
-      transform: translateY(12px);
-      filter: blur(6px);
+      transform: translateY(10px);
+      filter: blur(5px);
     }
 
     .hero p.hero-desc {
-      max-width: 760px;
-      margin: 0 auto 2.5rem;
-      font-size: 1.15rem;
+      max-width: 740px;
+      margin: 0 auto clamp(1.5rem, 4vw, 2.5rem);
+      font-size: clamp(0.92rem, 3.2vw, 1.15rem);
       color: var(--text-muted);
-      line-height: 1.7;
+      line-height: 1.65;
+      padding: 0 0.25rem;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
     }
 
-    /* Black & White Glassmorphism Hub Card */
+    /* Android Download Hero Hub Card */
     .android-hero-hub {
       max-width: 880px;
-      margin: 0 auto 3rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 1.75rem;
-      padding: 2.5rem;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 255, 255, 0.08);
+      margin: 0 auto 2.5rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: clamp(1rem, 3vw, 1.75rem);
+      padding: clamp(1.25rem, 4vw, 2.5rem);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 255, 255, 0.05);
       position: relative;
       overflow: hidden;
       text-align: left;
@@ -317,119 +580,153 @@
     .hub-grid-layout {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 1.25rem;
       align-items: center;
     }
     .hub-info h2 {
       font-family: var(--font-heading);
-      font-size: 1.75rem;
+      font-size: clamp(1.35rem, 4.5vw, 1.8rem);
       color: #fff;
       margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
     .hub-info p {
       margin: 0 0 1.25rem;
       color: var(--text-muted);
-      font-size: 0.98rem;
+      font-size: clamp(0.88rem, 2.8vw, 0.98rem);
       line-height: 1.6;
     }
     .hub-specs {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.85rem;
-      margin-bottom: 1.75rem;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
     }
     .spec-item {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      font-size: 0.84rem;
+      gap: 0.35rem;
+      font-size: clamp(0.76rem, 2.4vw, 0.84rem);
       color: #f4f4f5;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 0.35rem 0.85rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.35rem 0.75rem;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      white-space: nowrap;
     }
     .spec-item svg {
       color: #ffffff;
+      flex-shrink: 0;
     }
+
+    /* Action Buttons with 48px Touch Targets */
     .hub-action-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.85rem;
+      gap: 0.75rem;
     }
+    @media (max-width: 640px) {
+      .hub-action-buttons {
+        flex-direction: column;
+      }
+    }
+
     .btn-apk-main {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.65rem;
       background: #ffffff;
       color: #000000;
-      padding: 0.85rem 1.65rem;
+      padding: 0.85rem 1.5rem;
       border-radius: 12px;
-      font-size: 1.05rem;
+      font-size: clamp(0.95rem, 3vw, 1.05rem);
       font-weight: 700;
       text-decoration: none;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
       box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+      min-height: 48px;
+      text-align: center;
+    }
+    .btn-apk-main:active {
+      transform: scale(0.97);
     }
     .btn-apk-main:hover {
       background: #e4e4e7;
-      transform: translateY(-2px);
       box-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
     }
+
     .btn-apk-secondary {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      background: rgba(255, 255, 255, 0.05);
+      justify-content: center;
+      gap: 0.55rem;
+      background: rgba(255, 255, 255, 0.06);
       color: #fff;
-      padding: 0.85rem 1.35rem;
+      padding: 0.8rem 1.25rem;
       border-radius: 12px;
-      font-size: 0.95rem;
+      font-size: clamp(0.88rem, 2.8vw, 0.95rem);
       font-weight: 600;
       text-decoration: none;
       border: 1px solid var(--border-subtle);
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
+      min-height: 48px;
+      text-align: center;
+    }
+    .btn-apk-secondary:active {
+      transform: scale(0.97);
+      background: rgba(255, 255, 255, 0.12);
     }
     .btn-apk-secondary:hover {
       background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.4);
+      border-color: rgba(255, 255, 255, 0.35);
       color: #ffffff;
-      transform: translateY(-2px);
     }
 
     /* Cards and Grids */
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
     }
+    @media (max-width: 680px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
     }
+    @media (max-width: 680px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 1.25rem;
-      padding: 1.75rem;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      transition: all 0.3s ease;
+      padding: clamp(1.2rem, 3.5vw, 1.75rem);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      transition: all 0.25s ease;
       position: relative;
     }
     .card:hover {
       background: var(--bg-card-hover);
       border-color: var(--border-glow);
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.05);
     }
     .card-icon {
       width: 44px;
@@ -441,40 +738,48 @@
       align-items: center;
       justify-content: center;
       color: #ffffff;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
+      flex-shrink: 0;
     }
     .card h3 {
       font-family: var(--font-heading);
-      font-size: 1.3rem;
+      font-size: clamp(1.15rem, 3.5vw, 1.3rem);
       color: #fff;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
     .card p {
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: clamp(0.88rem, 2.7vw, 0.95rem);
       line-height: 1.6;
     }
 
-    /* Screenshot Gallery Previews */
-    .hero-dashboard-preview {
+    /* Native Android UI Showcase Components */
+    .app-preview-box {
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 14px;
       overflow: hidden;
-      border: 1px solid var(--border-subtle);
-      background: #000;
-      cursor: pointer;
+      margin-top: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
       position: relative;
-      transition: all 0.3s ease;
     }
-    .hero-dashboard-preview:hover {
-      border-color: #ffffff;
-      transform: scale(1.02);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.25);
+    .app-preview-header {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.6rem 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-family: var(--font-code);
     }
-    .dashboard-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.3s ease;
+    .preview-badge {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
     }
 
     /* Content Tabs */
@@ -486,13 +791,13 @@
       display: block;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     /* Code Blocks */
     .code-block {
-      background: #050505;
+      background: #050508;
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
       overflow: hidden;
@@ -503,24 +808,32 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.6rem 1rem;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.04);
       border-bottom: 1px solid var(--border-subtle);
       font-size: 0.8rem;
       color: var(--text-muted);
       font-family: var(--font-code);
+      gap: 0.5rem;
     }
     .copy-btn {
-      background: transparent;
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border-subtle);
       color: var(--text-muted);
-      padding: 0.25rem 0.6rem;
+      padding: 0.35rem 0.75rem;
       border-radius: 6px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       cursor: pointer;
       transition: all 0.2s ease;
+      min-height: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .copy-btn:active {
+      transform: scale(0.95);
     }
     .copy-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.18);
       border-color: #ffffff;
       color: #ffffff;
     }
@@ -528,9 +841,10 @@
       padding: 1rem;
       overflow-x: auto;
       font-family: var(--font-code);
-      font-size: 0.88rem;
+      font-size: clamp(0.78rem, 2.7vw, 0.88rem);
       line-height: 1.6;
       color: #e4e4e7;
+      -webkit-overflow-scrolling: touch;
     }
     code {
       font-family: var(--font-code);
@@ -547,11 +861,19 @@
     }
 
     /* Tables */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1.25rem 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
     table {
       width: 100%;
+      min-width: 540px;
       border-collapse: collapse;
-      margin: 1.25rem 0;
-      font-size: 0.92rem;
+      font-size: clamp(0.82rem, 2.6vw, 0.92rem);
     }
     th, td {
       padding: 0.85rem 1rem;
@@ -559,7 +881,7 @@
       border-bottom: 1px solid var(--border-subtle);
     }
     th {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       color: #fff;
       font-family: var(--font-heading);
       font-weight: 600;
@@ -568,20 +890,25 @@
       background: rgba(255, 255, 255, 0.02);
     }
 
-    /* Architecture Flow Diagram */
+    /* Architecture Flow Diagram (Responsive on Mobile) */
     .arch-diagram {
-      background: #050505;
+      background: #050508;
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
-      padding: 1.75rem;
+      padding: clamp(1rem, 3vw, 1.75rem);
       margin: 1.5rem 0;
     }
     .arch-nodes {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.75rem;
+    }
+    @media (max-width: 768px) {
+      .arch-nodes {
+        flex-direction: column;
+        width: 100%;
+      }
     }
     .arch-node {
       background: rgba(255, 255, 255, 0.04);
@@ -589,45 +916,46 @@
       border-radius: 10px;
       padding: 0.85rem 1.25rem;
       text-align: center;
-      min-width: 160px;
+      min-width: 150px;
+      transition: all 0.2s ease;
+    }
+    @media (max-width: 768px) {
+      .arch-node {
+        width: 100%;
+        min-width: unset;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
     }
     .arch-node.active-mobile {
       background: rgba(255, 255, 255, 0.12);
       border-color: #ffffff;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
     }
     .arch-node h4 {
       color: #fff;
-      font-size: 0.95rem;
-      margin-bottom: 0.2rem;
+      font-size: 0.92rem;
+      margin-bottom: 0.15rem;
     }
     .arch-node span {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
     }
     .arch-arrow {
       color: #ffffff;
       font-weight: 800;
       font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border-subtle);
-      background: #000000;
-      padding: 3rem 0;
-      margin-top: 5rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-    footer a:hover {
-      color: #ffffff;
+    @media (max-width: 768px) {
+      .arch-arrow {
+        transform: rotate(90deg);
+        padding: 0.25rem 0;
+      }
     }
 
     /* Lightbox Modal */
@@ -639,67 +967,108 @@
       z-index: 1000;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
+      padding: 1rem;
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
     .lightbox-modal.active {
       display: flex;
     }
     .lightbox-content {
       position: relative;
-      max-width: 90vw;
-      max-height: 90vh;
+      max-width: 92vw;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .lightbox-img {
       max-width: 100%;
-      max-height: 85vh;
+      max-height: 75vh;
       border-radius: 12px;
       border: 1px solid var(--border-glow);
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 255, 255, 0.25);
+      object-fit: contain;
     }
     .lightbox-close {
       position: absolute;
-      top: -40px;
+      top: -46px;
       right: 0;
-      background: transparent;
-      border: none;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: #fff;
-      font-size: 2rem;
+      font-size: 1.6rem;
       cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       line-height: 1;
+      transition: all 0.2s ease;
+    }
+    .lightbox-close:hover {
+      background: #ffffff;
+      color: #000000;
     }
     .lightbox-caption {
       text-align: center;
       color: var(--text-muted);
       margin-top: 0.75rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .rotating-text { font-size: 1.4rem; }
-      .nav-links { display: none; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      background: #000000;
+      padding: clamp(2rem, 5vw, 3.5rem) 0 calc(var(--safe-bottom) + 2rem);
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 10;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+    }
+    footer a:hover {
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
 
-  <!-- ==========================================================================
-       Black & White WebGL Domain-Warped Fluid Canvas (iuno.lol B&W Shader)
-       ========================================================================== -->
+  <!-- WebGL Fluid Canvas with Dark Monochrome Shader -->
   <div class="color-bends-bg">
     <canvas id="shader-canvas"></canvas>
   </div>
+  <div class="bg-vignette"></div>
 
   <!-- Header -->
   <header>
     <div class="container nav-inner">
-      <a href="#" class="brand">
+      <a href="#" class="brand" onclick="switchTab('overview', event)">
         <img src="assets/logo.png" alt="Muziso Android Logo" class="brand-logo-img" />
         <div class="brand-title">Muziso <span>Android</span></div>
-        <span class="brand-tag" id="app-version">v1.0.1</span>
+        <span class="brand-tag">v1.0.1</span>
       </a>
+
+      <!-- Desktop Nav Links -->
       <ul class="nav-links">
         <li><a href="#overview" class="nav-link active" onclick="switchTab('overview', event)">Overview</a></li>
         <li><a href="#gallery" class="nav-link" onclick="switchTab('gallery', event)">Gallery</a></li>
@@ -709,12 +1078,112 @@
         <li><a href="#build" class="nav-link" onclick="switchTab('build', event)">Build Guide</a></li>
         <li><a href="#privacy" class="nav-link" onclick="switchTab('privacy', event)">Privacy</a></li>
       </ul>
-      <a href="https://github.com/xtros/Muziso-Android" target="_blank" class="nav-btn">
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
-      </a>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <a href="https://github.com/xtros/Muziso-Android" target="_blank" class="nav-btn">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle Navigation Menu" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-drawer" class="mobile-drawer">
+    <div class="mobile-drawer-title">Navigation Sections</div>
+    <ul class="mobile-drawer-list">
+      <li>
+        <a href="#overview" class="mobile-drawer-link active" onclick="selectMobileTab('overview', event)">
+          <span>✨ Overview</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#gallery" class="mobile-drawer-link" onclick="selectMobileTab('gallery', event)">
+          <span>🖼️ App Showcase</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#features" class="mobile-drawer-link" onclick="selectMobileTab('features', event)">
+          <span>⚡ Engine Features</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#installation" class="mobile-drawer-link" onclick="selectMobileTab('installation', event)">
+          <span>📱 Download APKs</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#architecture" class="mobile-drawer-link" onclick="selectMobileTab('architecture', event)">
+          <span>🏛️ Android Architecture</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#build" class="mobile-drawer-link" onclick="selectMobileTab('build', event)">
+          <span>🛠️ Build Guide</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#privacy" class="mobile-drawer-link" onclick="selectMobileTab('privacy', event)">
+          <span>🛡️ Privacy Policy</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </li>
+    </ul>
+
+    <div class="mobile-drawer-cta">
+      <a href="downloads/Muziso-arm64.apk" download="Muziso-arm64.apk" class="btn-apk-main">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Direct Download ARM64 APK
+      </a>
+      <a href="https://github.com/xtros/Muziso-Android" target="_blank" class="btn-apk-secondary">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Repository
+      </a>
+    </div>
+  </div>
+
+  <!-- Sticky Horizontal Tab Pill Bar (Mobile / Tablet only) -->
+  <div class="tab-bar-wrap">
+    <div class="container">
+      <nav class="tab-pills-scroll" id="tab-pills-container">
+        <a href="#overview" class="tab-pill active" onclick="switchTab('overview', event)">
+          <span>Overview</span>
+        </a>
+        <a href="#gallery" class="tab-pill" onclick="switchTab('gallery', event)">
+          <span>Showcase</span>
+        </a>
+        <a href="#features" class="tab-pill" onclick="switchTab('features', event)">
+          <span>Features</span>
+        </a>
+        <a href="#installation" class="tab-pill" onclick="switchTab('installation', event)">
+          <span>Download APKs</span>
+        </a>
+        <a href="#architecture" class="tab-pill" onclick="switchTab('architecture', event)">
+          <span>Architecture</span>
+        </a>
+        <a href="#build" class="tab-pill" onclick="switchTab('build', event)">
+          <span>Build Guide</span>
+        </a>
+        <a href="#privacy" class="tab-pill" onclick="switchTab('privacy', event)">
+          <span>Privacy</span>
+        </a>
+      </nav>
+    </div>
+  </div>
 
   <!-- Main Container -->
   <main class="container">
@@ -744,7 +1213,7 @@
         
         <h1>Pure High-Fidelity Audio<br/><span>Engineered For Android</span></h1>
         
-        <!-- Rotating Text Loop (Exact iuno.lol vertical slide + blur transition) -->
+        <!-- Rotating Text Loop -->
         <div class="rotating-text-container">
           <span id="rotating-text" class="rotating-text enter">Pure Native Android</span>
         </div>
@@ -758,7 +1227,7 @@
           <div class="hub-grid-layout">
             <div class="hub-info">
               <h2>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #ffffff;"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #ffffff;"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 Muziso Android v1.0.1 (Build #20)
               </h2>
               <p>Official release compiled from commit <a href="https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190" target="_blank" style="color: #ffffff; text-decoration: underline;">4126588</a>. Standalone APK binaries available for ARM64, Universal FOSS, Google Cast, and Emulators.</p>
@@ -771,18 +1240,15 @@
 
               <div class="hub-action-buttons">
                 <a href="downloads/Muziso-arm64.apk" download="Muziso-arm64.apk" class="btn-apk-main" id="btn-hero-apk">
-                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                  Download Muziso-arm64.apk
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  Download ARM64 APK
                 </a>
                 <a href="downloads/Muziso.apk" download="Muziso.apk" class="btn-apk-secondary">
-                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                   Universal APK
                 </a>
                 <a href="#installation" onclick="switchTab('installation', event)" class="btn-apk-secondary">
-                  📱 All APK Variants
-                </a>
-                <a href="https://github.com/xtros/Muziso-Android" target="_blank" class="btn-apk-secondary">
-                  Source Code
+                  📱 All 5 APK Variants
                 </a>
               </div>
             </div>
@@ -832,48 +1298,142 @@
 
     <!-- TAB 2: GALLERY -->
     <section id="gallery" class="doc-section">
-      <div class="card" style="margin-bottom: 2rem;">
-        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; color: #fff;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <h2 style="font-family: var(--font-heading); font-size: clamp(1.35rem, 4.5vw, 1.8rem); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem; color: #fff;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
           Muziso Android UI &amp; Player Showcase
         </h2>
-        <p style="color: var(--text-muted); font-size: 1rem;">Click any screenshot below to view full-resolution previews of the Android application.</p>
+        <p style="color: var(--text-muted); font-size: clamp(0.88rem, 2.8vw, 0.98rem);">Responsive previews of Muziso Android's high-contrast monochrome interface.</p>
       </div>
 
       <div class="grid-2">
+        <!-- Showcase 1: Dashboard Explorer -->
         <div class="card">
           <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-          <h3>Android Dashboard &amp; Music Explorer</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">Fast music discovery, instant search query resolution, trending releases, and JioSaavn direct streaming.</p>
-          <div class="hero-dashboard-preview" style="margin: 0.5rem 0 0;" onclick="openLightbox('assets/dashboard.png', 'Muziso Android Dashboard')">
-            <img src="assets/dashboard.png" alt="Muziso Main Dashboard" class="dashboard-img" />
+          <h3>Android Music Explorer</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">Instant search query resolution, trending releases, artist discographies, and JioSaavn direct streaming.</p>
+          
+          <div class="app-preview-box">
+            <div class="app-preview-header">
+              <span>EXPLORER &bull; JIOSAAVN 320 KBPS</span>
+              <span class="preview-badge">LIVE CDN</span>
+            </div>
+            <div style="padding: 1.2rem; background: linear-gradient(180deg, #111116 0%, #08080a 100%);">
+              <div style="display: flex; align-items: center; gap: 0.65rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); padding: 0.55rem 0.85rem; border-radius: 999px; margin-bottom: 1rem;">
+                <svg width="16" height="16" fill="none" stroke="#a1a1aa" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span style="font-size: 0.82rem; color: #a1a1aa;">Search tracks, artists, albums...</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem;">
+                <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                  <div style="font-size: 1.2rem; margin-bottom: 0.2rem;">🎵</div>
+                  <div style="font-size: 0.82rem; font-weight: 700; color: #fff;">Top Charts</div>
+                  <div style="font-size: 0.7rem; color: #71717a;">320 kbps Direct</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                  <div style="font-size: 1.2rem; margin-bottom: 0.2rem;">✨</div>
+                  <div style="font-size: 0.82rem; font-weight: 700; color: #fff;">New Releases</div>
+                  <div style="font-size: 0.7rem; color: #71717a;">Spotify 640x640</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
+        <!-- Showcase 2: Fullscreen Player -->
         <div class="card">
           <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></div>
-          <h3>Fullscreen Audio Player</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">Ambient artwork glow, rotating vinyl disc animation, media scrubber, dynamic playback state, and volume controls.</p>
-          <div class="hero-dashboard-preview" style="margin: 0.5rem 0 0;" onclick="openLightbox('assets/player.png', 'Muziso Audio Player')">
-            <img src="assets/player.png" alt="Muziso Player View" class="dashboard-img" />
+          <h3>MediaSession Player Engine</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">Jetpack Media3 ExoPlayer foreground session with live buffer progress, volume faders, and DSP sound equalizer.</p>
+          
+          <div class="app-preview-box">
+            <div class="app-preview-header">
+              <span>NOW PLAYING &bull; EXOPLAYER</span>
+              <span class="preview-badge" style="background: #ffffff; color: #000;">320 KBPS</span>
+            </div>
+            <div style="padding: 1.2rem; background: linear-gradient(180deg, #13131a 0%, #09090c 100%); text-align: center;">
+              <div style="width: 80px; height: 80px; margin: 0.4rem auto 0.85rem; border-radius: 50%; background: radial-gradient(circle, #222 30%, #0a0a0a 70%); border: 3px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(255,255,255,0.15);">
+                <div style="width: 28px; height: 28px; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; color: #000; font-size: 0.75rem; font-weight: 800;">M</div>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 800; color: #fff;">High-Fidelity Master Bitstream</div>
+              <div style="font-size: 0.75rem; color: #a1a1aa; margin-bottom: 0.85rem;">Muziso Android Engine &bull; ExoPlayer Media3</div>
+              <div style="height: 4px; background: rgba(255,255,255,0.15); border-radius: 999px; position: relative; margin-bottom: 0.75rem;">
+                <div style="width: 64%; height: 100%; background: #ffffff; border-radius: 999px; box-shadow: 0 0 8px #ffffff;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #71717a;">
+                <span>02:14</span>
+                <span>03:45</span>
+              </div>
+            </div>
           </div>
         </div>
 
+        <!-- Showcase 3: Local Library & Playlists -->
         <div class="card">
           <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-          <h3>Your Library &amp; Custom Playlists</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">Local song indexing, Liked Songs playlist, fast search filtering, and custom playlist creation.</p>
-          <div class="hero-dashboard-preview" style="margin: 0.5rem 0 0;" onclick="openLightbox('assets/library.png', 'Muziso Library')">
-            <img src="assets/library.png" alt="Muziso Library View" class="dashboard-img" />
+          <h3>Your Library &amp; Room DB</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">Encrypted Room SQLite local persistence for Liked Songs, custom playlists, and offline file cache.</p>
+          
+          <div class="app-preview-box">
+            <div class="app-preview-header">
+              <span>ROOM SQLITE &bull; ZERO TELEMETRY</span>
+              <span class="preview-badge">100% LOCAL</span>
+            </div>
+            <div style="padding: 1rem; background: #0c0c10;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.55rem 0.75rem; background: rgba(255,255,255,0.04); border-radius: 8px; margin-bottom: 0.45rem; border: 1px solid rgba(255,255,255,0.08);">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="font-size: 1rem;">❤️</span>
+                  <div>
+                    <div style="font-size: 0.82rem; font-weight: 700; color: #fff;">Liked Songs</div>
+                    <div style="font-size: 0.68rem; color: #71717a;">128 Tracks &bull; Offline Cached</div>
+                  </div>
+                </div>
+                <span style="font-size: 0.7rem; color: #a1a1aa; font-family: var(--font-code);">PLAY</span>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.55rem 0.75rem; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                  <span style="font-size: 1rem;">📁</span>
+                  <div>
+                    <div style="font-size: 0.82rem; font-weight: 700; color: #fff;">Offline Storage</div>
+                    <div style="font-size: 0.68rem; color: #71717a;">Room DAO Index &bull; Sandboxed</div>
+                  </div>
+                </div>
+                <span style="font-size: 0.7rem; color: #a1a1aa; font-family: var(--font-code);">READY</span>
+              </div>
+            </div>
           </div>
         </div>
 
+        <!-- Showcase 4: 10-Band Graphic Equalizer -->
         <div class="card">
           <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <h3>10-Band Equalizer &amp; Sound DSP</h3>
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">10-band hardware equalizer faders, bass boost, virtualizer, and instant acoustic sound profiles.</p>
-          <div class="hero-dashboard-preview" style="margin: 0.5rem 0 0;" onclick="openLightbox('assets/equalizer.png', 'Muziso Equalizer')">
-            <img src="assets/equalizer.png" alt="Muziso Equalizer View" class="dashboard-img" />
+          <h3>10-Band Hardware Equalizer</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">Direct Android AudioEffect DSP interface with 10-band hardware faders, Bass Boost, and Acoustic Profiles.</p>
+          
+          <div class="app-preview-box">
+            <div class="app-preview-header">
+              <span>HARDWARE DSP &bull; 10-BAND EQ</span>
+              <span class="preview-badge" style="background: #ffffff; color: #000;">ENABLED</span>
+            </div>
+            <div style="padding: 1.2rem 1rem; background: #0c0c10;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 70px; padding: 0 0.5rem; margin-bottom: 0.5rem;">
+                <div style="width: 8px; height: 55%; background: #ffffff; border-radius: 4px;"></div>
+                <div style="width: 8px; height: 75%; background: #ffffff; border-radius: 4px;"></div>
+                <div style="width: 8px; height: 40%; background: #a1a1aa; border-radius: 4px;"></div>
+                <div style="width: 8px; height: 60%; background: #ffffff; border-radius: 4px;"></div>
+                <div style="width: 8px; height: 85%; background: #ffffff; border-radius: 4px;"></div>
+                <div style="width: 8px; height: 50%; background: #a1a1aa; border-radius: 4px;"></div>
+                <div style="width: 8px; height: 70%; background: #ffffff; border-radius: 4px;"></div>
+                <div style="width: 8px; height: 90%; background: #ffffff; border-radius: 4px;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: #71717a; font-family: var(--font-code);">
+                <span>31Hz</span>
+                <span>125Hz</span>
+                <span>500Hz</span>
+                <span>2kHz</span>
+                <span>8kHz</span>
+                <span>16kHz</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -882,11 +1442,11 @@
     <!-- TAB 3: FEATURES -->
     <section id="features" class="doc-section">
       <div class="card" style="margin-bottom: 1.5rem;">
-        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; color: #fff;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <h2 style="font-family: var(--font-heading); font-size: clamp(1.35rem, 4.5vw, 1.8rem); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem; color: #fff;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           Muziso Android Engine Features
         </h2>
-        <p style="color: var(--text-muted); font-size: 1rem;">Core native Android innovations designed for high-resolution bitstreams and battery efficiency.</p>
+        <p style="color: var(--text-muted); font-size: clamp(0.88rem, 2.8vw, 0.98rem);">Core native Android innovations engineered for high-resolution bitstreams and battery efficiency.</p>
       </div>
 
       <div class="grid-3">
@@ -916,7 +1476,7 @@
 
         <div class="card">
           <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg></div>
-          <h3>Smart Queue &amp; Deduplication</h3>
+          <h3>Smart Deduplication</h3>
           <p>Deterministic shuffle history preservation and automatic collapse of duplicate soundtrack albums while retaining distinct studio language dubs.</p>
         </div>
 
@@ -930,16 +1490,16 @@
 
     <!-- TAB 4: INSTALLATION & APK -->
     <section id="installation" class="doc-section">
-      <div class="card" style="margin-bottom: 2rem;">
-        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; color: #fff;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <h2 style="font-family: var(--font-heading); font-size: clamp(1.35rem, 4.5vw, 1.8rem); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem; color: #fff;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Muziso Android APK Downloads (Build #20)
         </h2>
-        <p style="color: var(--text-muted); font-size: 1rem;">Direct standalone APK binaries compiled from CI Build #20 (<a href="https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190" target="_blank" style="color: #fff; text-decoration: underline;">Commit 4126588</a>). Click any button to download directly to your device.</p>
+        <p style="color: var(--text-muted); font-size: clamp(0.88rem, 2.8vw, 0.98rem);">Direct standalone APK binaries compiled from CI Build #20 (<a href="https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190" target="_blank" style="color: #fff; text-decoration: underline;">Commit 4126588</a>). Tap any button to download directly.</p>
       </div>
 
       <!-- APK Matrix Grid -->
-      <div class="grid-3" style="margin-bottom: 2rem;">
+      <div class="grid-3" style="margin-bottom: 1.5rem;">
         <!-- 1. ARM64 (Recommended) -->
         <div class="card" style="border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.05);">
           <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
@@ -972,7 +1532,7 @@
         <!-- 3. Google Cast GMS -->
         <div class="card">
           <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
           </div>
           <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-with-Google-Cast.apk</h3>
           <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">Universal release with Google Play Services (GMS) and Chromecast / Google Home audio casting.</p>
@@ -1022,20 +1582,20 @@
       </div>
 
       <!-- Sideload Guide Card -->
-      <div class="card" style="margin-bottom: 2rem;">
-        <h3 style="color: #fff; margin-bottom: 1rem; font-family: var(--font-heading);">📱 Step-by-Step APK Sideloading Instructions:</h3>
-        <ol style="margin-left: 1.5rem; color: var(--text-muted); line-height: 1.9; font-size: 0.95rem;">
-          <li>Tap the <strong>Download ARM64 APK</strong> (or your target architecture) button above on your Android phone or tablet.</li>
-          <li>Once downloaded, open the downloaded <code>.apk</code> file from your notification bar or Downloads folder.</li>
-          <li>If your browser prompts <em>"For your security, your phone is not allowed to install unknown apps"</em>, tap <strong>Settings</strong> &rarr; toggle on <strong>"Allow from this source"</strong>.</li>
-          <li>Tap <strong>Install</strong>. Once installation completes, open Muziso and enjoy high-fidelity 320 kbps streaming!</li>
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <h3 style="color: #fff; margin-bottom: 1rem; font-family: var(--font-heading);">📱 Step-by-Step Android Sideloading Instructions:</h3>
+        <ol style="margin-left: 1.25rem; color: var(--text-muted); line-height: 1.85; font-size: 0.92rem;">
+          <li style="margin-bottom: 0.5rem;">Tap the <strong>Download ARM64 APK</strong> (or your device architecture) button above on your Android phone or tablet.</li>
+          <li style="margin-bottom: 0.5rem;">Once downloaded, tap the <code>.apk</code> notification in your Android shade or open it from your Downloads folder.</li>
+          <li style="margin-bottom: 0.5rem;">If prompted <em>"For your security, your phone is not allowed to install unknown apps"</em>, tap <strong>Settings</strong> &rarr; toggle on <strong>"Allow from this source"</strong>.</li>
+          <li>Tap <strong>Install</strong>. Open Muziso and enjoy high-fidelity 320 kbps streaming!</li>
         </ol>
       </div>
 
       <!-- Build Info & Git Reference -->
       <div class="card">
         <h3 style="color: #fff; margin-bottom: 0.75rem; font-family: var(--font-heading);">🔗 CI Build &amp; Source Verification:</h3>
-        <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;">
           Every APK binary is built automatically through GitHub Actions CI pipeline in the <a href="https://github.com/xtros/Muziso-Android" target="_blank" style="color: #fff; text-decoration: underline;">xtros/Muziso-Android</a> repository. You can verify the build logs, commit hash <a href="https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190" target="_blank" style="color: #fff; text-decoration: underline;"><code>4126588</code></a>, and sha256 checksums in the <a href="https://github.com/xtros/Muziso-Android/actions" target="_blank" style="color: #fff; text-decoration: underline;">GitHub Actions Build #20</a> run.
         </p>
       </div>
@@ -1043,38 +1603,46 @@
 
     <!-- TAB 5: ARCHITECTURE -->
     <section id="architecture" class="doc-section">
-      <div class="card" style="margin-bottom: 2rem;">
-        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; color: #fff;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <h2 style="font-family: var(--font-heading); font-size: clamp(1.35rem, 4.5vw, 1.8rem); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem; color: #fff;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
           Android Native System Architecture
         </h2>
-        <p style="color: var(--text-muted); font-size: 1rem;">Modular MVI/MVVM architecture built on Native Kotlin, Jetpack Media3, and Room SQLite Database.</p>
+        <p style="color: var(--text-muted); font-size: clamp(0.88rem, 2.8vw, 0.98rem);">Modular MVI/MVVM architecture built on Native Kotlin, Jetpack Media3, and Room SQLite Database.</p>
       </div>
 
       <div class="card" style="margin-bottom: 1.5rem;">
         <h3 style="color: #ffffff; margin-bottom: 0.5rem;">Android Audio Engine Pipeline</h3>
-        <p style="margin-bottom: 1.5rem;">Continuous foreground lifecycle orchestration with hardware audio offload and low-latency bitstream resolution:</p>
+        <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.92rem;">Continuous foreground lifecycle orchestration with hardware audio offload and low-latency bitstream resolution:</p>
         
         <div class="arch-diagram">
           <div class="arch-nodes">
             <div class="arch-node active-mobile">
-              <h4>Kotlin UI Layer</h4>
-              <span>Compose / ViewModel</span>
+              <div>
+                <h4>Kotlin UI Layer</h4>
+                <span>Compose / ViewModel</span>
+              </div>
             </div>
             <div class="arch-arrow">&rarr;</div>
             <div class="arch-node">
-              <h4>MediaSession Service</h4>
-              <span>Foreground Audio Lifecycle</span>
+              <div>
+                <h4>MediaSession Service</h4>
+                <span>Foreground Audio Lifecycle</span>
+              </div>
             </div>
             <div class="arch-arrow">&rarr;</div>
             <div class="arch-node active-mobile">
-              <h4>Jetpack Media3</h4>
-              <span>ExoPlayer 320kbps Decoder</span>
+              <div>
+                <h4>Jetpack Media3</h4>
+                <span>ExoPlayer 320kbps Decoder</span>
+              </div>
             </div>
             <div class="arch-arrow">&rarr;</div>
             <div class="arch-node">
-              <h4>Room SQLite</h4>
-              <span>Encrypted Offline DAOs</span>
+              <div>
+                <h4>Room SQLite</h4>
+                <span>Encrypted Offline DAOs</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1082,53 +1650,58 @@
 
       <div class="card">
         <h3 style="margin-bottom: 1rem;">Core Android Architecture Components</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Component</th>
-              <th>Layer</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>MuzisoAudioService</code></td>
-              <td>Foreground Service</td>
-              <td>Manages Jetpack Media3 ExoPlayer lifecycle, notification bar controls, and lockscreen media session.</td>
-            </tr>
-            <tr>
-              <td><code>JioSaavnResolver</code></td>
-              <td>Repository / Network</td>
-              <td>Direct 320 kbps sub-30ms audio URL resolution using OkHttp client.</td>
-            </tr>
-            <tr>
-              <td><code>MuzisoRoomDatabase</code></td>
-              <td>Persistence (Room)</td>
-              <td>Local Android SQLite database storing offline audio files, history, and playlists.</td>
-            </tr>
-            <tr>
-              <td><code>HeadsetReceiver</code></td>
-              <td>BroadcastReceiver</td>
-              <td>Handles noisy audio intent (auto-pause on headphone disconnect / resume on Bluetooth).</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Layer</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>MuzisoAudioService</code></td>
+                <td>Foreground Service</td>
+                <td>Manages Jetpack Media3 ExoPlayer lifecycle, notification bar controls, and lockscreen media session.</td>
+              </tr>
+              <tr>
+                <td><code>JioSaavnResolver</code></td>
+                <td>Repository / Network</td>
+                <td>Direct 320 kbps sub-30ms audio URL resolution using OkHttp client.</td>
+              </tr>
+              <tr>
+                <td><code>MuzisoRoomDatabase</code></td>
+                <td>Persistence (Room)</td>
+                <td>Local Android SQLite database storing offline audio files, history, and playlists.</td>
+              </tr>
+              <tr>
+                <td><code>HeadsetReceiver</code></td>
+                <td>BroadcastReceiver</td>
+                <td>Handles noisy audio intent (auto-pause on headphone disconnect / resume on Bluetooth).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
     <!-- TAB 6: BUILD GUIDE -->
     <section id="build" class="doc-section">
       <div class="card">
-        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; color: #fff;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <h2 style="font-family: var(--font-heading); font-size: clamp(1.35rem, 4.5vw, 1.8rem); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem; color: #fff;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Developer Build Instructions (Android Gradle)
         </h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Prerequisites: JDK 17+ and Android SDK Platform 34 (Android 14/15).</p>
+        <p style="color: var(--text-muted); margin-bottom: 1.25rem; font-size: 0.92rem;">Prerequisites: JDK 17+ and Android SDK Platform 34 (Android 14/15).</p>
 
         <div class="code-block">
           <div class="code-header">
             <span>Terminal (Clone &amp; Build APK)</span>
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <button class="copy-btn" onclick="copyCode(this)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span>Copy</span>
+            </button>
           </div>
           <pre><code># 1. Clone repository
 git clone https://github.com/xtros/MuzisoAndroid.git
@@ -1145,28 +1718,28 @@ cd MuzisoAndroid
 
     <!-- TAB 7: PRIVACY -->
     <section id="privacy" class="doc-section">
-      <div class="card" style="margin-bottom: 2rem;">
-        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; color: #fff;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <h2 style="font-family: var(--font-heading); font-size: clamp(1.35rem, 4.5vw, 1.8rem); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem; color: #fff;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Muziso Android Privacy Policy
         </h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Effective Date: February 19, 2026 &bull; 100% Offline-First Architecture</p>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Effective Date: February 19, 2026 &bull; 100% Offline-First Architecture</p>
       </div>
 
       <div class="card" style="margin-bottom: 1.5rem;">
-        <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.3rem; margin-bottom: 0.75rem;">🛡️ Privacy Commitment</h3>
-        <p style="color: var(--text-muted); line-height: 1.7;">
+        <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.25rem; margin-bottom: 0.75rem;">🛡️ Privacy Commitment</h3>
+        <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.92rem;">
           <strong>Muziso Android</strong> is an open-source application created by <strong>Webs By JTS</strong>. We respect your privacy and operate under a <strong>100% local, offline-first privacy architecture</strong>. Muziso does <strong>not</strong> collect, track, store, or transmit your personal data, audio files, search queries, or listening habits.
         </p>
       </div>
 
       <div class="card">
-        <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.3rem; margin-bottom: 1rem;">📊 Android Permissions &amp; Data Handling</h3>
-        <div style="color: var(--text-muted); line-height: 1.8;">
-          <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 0.25rem;">1. Local Storage Only</h4>
+        <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.25rem; margin-bottom: 1rem;">📊 Android Permissions &amp; Data Handling</h3>
+        <div style="color: var(--text-muted); line-height: 1.8; font-size: 0.92rem;">
+          <h4 style="color: #fff; font-size: 1rem; margin-bottom: 0.25rem;">1. Local Storage Only</h4>
           <p style="margin-bottom: 1.25rem;">All playlist entries, liked tracks, offline download indexation, and settings are saved strictly on your local Android device via Room SQLite. None of this data is uploaded to cloud servers.</p>
           
-          <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 0.25rem;">2. Anonymous Streaming Requests</h4>
+          <h4 style="color: #fff; font-size: 1rem; margin-bottom: 0.25rem;">2. Anonymous Streaming Requests</h4>
           <p style="margin-bottom: 1.25rem;">When streaming online tracks, Muziso queries official CDN endpoints (JioSaavn / Spotify Web API). Requests contain strictly anonymous song/artist IDs with zero user identifying cookies or tracking tokens.</p>
         </div>
       </div>
@@ -1177,22 +1750,25 @@ cd MuzisoAndroid
   <!-- Footer -->
   <footer>
     <div class="container">
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 1rem;">
-        <a href="#privacy" onclick="switchTab('privacy', event)">Privacy Policy</a>
+      <div class="footer-links">
+        <a href="#overview" onclick="switchTab('overview', event)">Overview</a>
+        <a href="#gallery" onclick="switchTab('gallery', event)">Showcase</a>
+        <a href="#features" onclick="switchTab('features', event)">Features</a>
         <a href="#installation" onclick="switchTab('installation', event)">Download APKs</a>
+        <a href="#privacy" onclick="switchTab('privacy', event)">Privacy Policy</a>
         <a href="https://github.com/xtros/Muziso-Android/blob/main/LICENSE" target="_blank">MIT License</a>
-        <a href="https://github.com/xtros/Muziso-Android/issues" target="_blank">Report an Issue</a>
-        <a href="https://github.com/xtros/Muziso-Android" target="_blank">GitHub Repository</a>
+        <a href="https://github.com/xtros/Muziso-Android/issues" target="_blank">Report Issue</a>
+        <a href="https://github.com/xtros/Muziso-Android" target="_blank">GitHub</a>
       </div>
-      <p>Muziso Android is open-source software licensed under the <a href="https://github.com/xtros/Muziso-Android/blob/main/LICENSE">MIT License</a>.</p>
-      <p style="margin-top: 0.5rem;">Built with ❤️ by <a href="https://github.com/xtros">Webs By JTS</a> exclusively for Native Android Mobile.</p>
+      <p>Muziso Android is open-source software licensed under the <a href="https://github.com/xtros/Muziso-Android/blob/main/LICENSE" target="_blank">MIT License</a>.</p>
+      <p style="margin-top: 0.5rem; font-size: 0.82rem; color: var(--text-dim);">Built with ❤️ by <a href="https://github.com/xtros" target="_blank">Webs By JTS</a> exclusively for Native Android Mobile.</p>
     </div>
   </footer>
 
   <!-- Lightbox Modal -->
   <div id="lightbox-modal" class="lightbox-modal" onclick="if(event.target === this) closeLightbox()">
     <div class="lightbox-content">
-      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <button class="lightbox-close" aria-label="Close Lightbox" onclick="closeLightbox()">&times;</button>
       <img id="lightbox-img" src="" alt="Enlarged screenshot" class="lightbox-img" />
       <div id="lightbox-caption" class="lightbox-caption"></div>
     </div>
@@ -1200,7 +1776,7 @@ cd MuzisoAndroid
 
   <script>
     // =========================================================================
-    // 🌌 Black & White WebGL Domain-Warped Fluid Canvas Shader (iuno.lol B&W)
+    // 🌌 High-Contrast Black & White WebGL Domain-Warped Fluid Canvas Shader
     // =========================================================================
     (function initColorBends() {
       const canvas = document.getElementById('shader-canvas');
@@ -1215,17 +1791,17 @@ cd MuzisoAndroid
         }
       `;
 
-      // GLSL domain-warping fluid shader in pure high-contrast Black & White
+      // Optimized Dark Monochrome Fluid Shader with High Legibility & Touch Tracking
       const fragmentShaderSource = `
         precision highp float;
         uniform vec2 uResolution;
         uniform float uTime;
         uniform vec2 uPointer;
 
-        // Pure Monochrome / Black and White palette
-        const vec3 cPitchDark = vec3(0.0, 0.0, 0.0);       // Pure Black (#000000)
-        const vec3 cPureWhite = vec3(1.0, 1.0, 1.0);       // Pure White (#ffffff)
-        const vec3 cSilver    = vec3(0.72, 0.74, 0.78);    // Silver / Smoke (#b8bcc7)
+        // Dark Atmospheric Palette (Deep Obsidian / Black with subtle Silver-White glows)
+        const vec3 cPitchDark = vec3(0.008, 0.008, 0.012);   // Pitch Dark (#020203)
+        const vec3 cPureWhite = vec3(0.28, 0.28, 0.32);       // Subtle Silver Highlight
+        const vec3 cSilver    = vec3(0.14, 0.15, 0.18);       // Dark Graphite Smoke
 
         float hash(vec2 p) {
           return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -1238,7 +1814,7 @@ cd MuzisoAndroid
           // Smooth pointer tracking influence
           p += uPointer * 0.35;
 
-          float t = uTime * 0.18;
+          float t = uTime * 0.15;
 
           // Domain warping fluid sine iterations
           for (int i = 1; i < 4; i++) {
@@ -1250,16 +1826,16 @@ cd MuzisoAndroid
           float wave = sin(p.x * 2.2 + p.y * 1.8 + t);
           float pattern = smoothstep(-0.85, 0.85, wave);
 
-          vec3 col = mix(cPitchDark, cPureWhite * 0.85, pattern);
+          vec3 col = mix(cPitchDark, cPureWhite * 0.45, pattern);
 
           float detail = cos(p.y * 3.8 - t * 0.7);
-          col = mix(col, cSilver, smoothstep(-0.15, 0.9, detail) * 0.55);
+          col = mix(col, cSilver, smoothstep(-0.15, 0.9, detail) * 0.35);
 
           // Subtle analog film grain texture
-          float noise = hash(gl_FragCoord.xy + fract(uTime) * 100.0) * 0.03;
+          float noise = hash(gl_FragCoord.xy + fract(uTime) * 100.0) * 0.02;
           col += noise;
 
-          gl_FragColor = vec4(col, 0.92);
+          gl_FragColor = vec4(col, 0.85);
         }
       `;
 
@@ -1309,13 +1885,25 @@ cd MuzisoAndroid
       let currentPointer = { x: 0, y: 0 };
       let targetPointer = { x: 0, y: 0 };
 
+      // Mouse tracking
       window.addEventListener('mousemove', (e) => {
         targetPointer.x = (e.clientX / window.innerWidth) * 2 - 1;
         targetPointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
       });
 
+      // Mobile Touch tracking
+      function handleTouch(e) {
+        if (e.touches && e.touches.length > 0) {
+          const touch = e.touches[0];
+          targetPointer.x = (touch.clientX / window.innerWidth) * 2 - 1;
+          targetPointer.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+        }
+      }
+      window.addEventListener('touchstart', handleTouch, { passive: true });
+      window.addEventListener('touchmove', handleTouch, { passive: true });
+
       function resize() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         const width = Math.floor(window.innerWidth * dpr);
         const height = Math.floor(window.innerHeight * dpr);
         if (canvas.width !== width || canvas.height !== height) {
@@ -1350,7 +1938,7 @@ cd MuzisoAndroid
     })();
 
     // =========================================================================
-    // 🔤 Hero Rotating Text Loop (Exact iuno.lol 2600ms slide + blur transition)
+    // 🔤 Hero Rotating Text Loop
     // =========================================================================
     (function initRotatingText() {
       const words = [
@@ -1366,28 +1954,56 @@ cd MuzisoAndroid
       if (!textEl) return;
 
       setInterval(() => {
-        // Exit: slide up & blur
         textEl.className = 'rotating-text exit';
         setTimeout(() => {
           currentIndex = (currentIndex + 1) % words.length;
           textEl.innerText = words[currentIndex];
-          // Initial: position down & blur
           textEl.className = 'rotating-text initial';
-          // Trigger browser layout reflow
-          void textEl.offsetWidth;
-          // Enter: slide to center & clear blur
+          void textEl.offsetWidth; // force reflow
           textEl.className = 'rotating-text enter';
         }, 450);
       }, 2600);
     })();
 
-    // Tab Navigation
+    // =========================================================================
+    // 📱 Mobile Navigation Drawer
+    // =========================================================================
+    function toggleMobileMenu() {
+      const btn = document.getElementById('mobile-menu-btn');
+      const drawer = document.getElementById('mobile-drawer');
+      if (drawer.classList.contains('active')) {
+        closeMobileMenu();
+      } else {
+        btn.classList.add('open');
+        drawer.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeMobileMenu() {
+      const btn = document.getElementById('mobile-menu-btn');
+      const drawer = document.getElementById('mobile-drawer');
+      if (btn) btn.classList.remove('open');
+      if (drawer) drawer.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function selectMobileTab(tabId, e) {
+      closeMobileMenu();
+      switchTab(tabId, e);
+    }
+
+    // =========================================================================
+    // 📑 Tab Navigation with Auto-Centering Pill Scrolling
+    // =========================================================================
     function switchTab(tabId, e) {
       if (e && e.preventDefault) {
         e.preventDefault();
       }
       document.querySelectorAll('.doc-section').forEach(sec => sec.classList.remove('active'));
       document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      document.querySelectorAll('.tab-pill').forEach(pill => pill.classList.remove('active'));
+      document.querySelectorAll('.mobile-drawer-link').forEach(link => link.classList.remove('active'));
 
       const target = document.getElementById(tabId);
       if (target) {
@@ -1396,12 +2012,18 @@ cd MuzisoAndroid
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      if (e && e.currentTarget) {
-        e.currentTarget.classList.add('active');
-      } else {
-        const matchingLink = document.querySelector(`.nav-link[href="#${tabId}"]`);
-        if (matchingLink) matchingLink.classList.add('active');
+      // Sync active states across Desktop Nav, Sticky Tab Pills, and Mobile Drawer
+      const matchingDesktopLink = document.querySelector(`.nav-link[href="#${tabId}"]`);
+      if (matchingDesktopLink) matchingDesktopLink.classList.add('active');
+
+      const matchingPill = document.querySelector(`.tab-pill[href="#${tabId}"]`);
+      if (matchingPill) {
+        matchingPill.classList.add('active');
+        matchingPill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
+
+      const matchingDrawerLink = document.querySelector(`.mobile-drawer-link[href="#${tabId}"]`);
+      if (matchingDrawerLink) matchingDrawerLink.classList.add('active');
     }
 
     // Lightbox Modal
@@ -1412,14 +2034,20 @@ cd MuzisoAndroid
       img.src = imgSrc;
       cap.innerText = caption;
       modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
-      document.getElementById('lightbox-modal').classList.remove('active');
+      const modal = document.getElementById('lightbox-modal');
+      if (modal) modal.classList.remove('active');
+      document.body.style.overflow = '';
     }
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeMobileMenu();
+      }
     });
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -1432,31 +2060,19 @@ cd MuzisoAndroid
     function copyCode(btn) {
       const codeBlock = btn.closest('.code-block').querySelector('code').innerText;
       navigator.clipboard.writeText(codeBlock).then(() => {
-        const originalText = btn.innerText;
-        btn.innerText = 'Copied!';
+        const span = btn.querySelector('span');
+        const origText = span ? span.innerText : btn.innerText;
+        if (span) span.innerText = 'Copied!';
+        else btn.innerText = 'Copied!';
         btn.style.color = '#ffffff';
+        btn.style.borderColor = '#ffffff';
         setTimeout(() => {
-          btn.innerText = originalText;
+          if (span) span.innerText = origText;
+          else btn.innerText = origText;
           btn.style.color = '';
+          btn.style.borderColor = '';
         }, 2000);
       });
-    }
-
-    // Android Direct APK Downloader (No GitHub Redirect)
-    function downloadAsset(targetType) {
-      let fileName = 'Muziso-arm64.apk';
-      if (targetType === 'universal' || targetType === 'foss') fileName = 'Muziso.apk';
-      if (targetType === 'cast') fileName = 'Muziso-with-Google-Cast.apk';
-      if (targetType === 'armeabi') fileName = 'Muziso-armeabi.apk';
-      if (targetType === 'x86_64') fileName = 'Muziso-x86_64.apk';
-
-      const fileUrl = 'downloads/' + fileName;
-      const link = document.createElement('a');
-      link.href = fileUrl;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
     }
   </script>
 
