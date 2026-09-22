@@ -13,20 +13,18 @@
   
   <style>
     :root {
-      --bg-base: #06070a;
-      --bg-surface: #0a0c12;
-      --bg-card: rgba(255, 255, 255, 0.025);
-      --bg-card-hover: rgba(255, 255, 255, 0.055);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(91, 108, 245, 0.45);
-      --accent-indigo: #5b6cf5;
-      --accent-indigo-glow: rgba(91, 108, 245, 0.35);
-      --accent-periwinkle: #8b93e8;
-      --accent-green: #ccff00;
-      --accent-green-glow: rgba(204, 255, 0, 0.28);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dark: #07080d;
+      --bg-base: #000000;
+      --bg-surface: #0a0a0a;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --bg-card-hover: rgba(255, 255, 255, 0.065);
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-glow: rgba(255, 255, 255, 0.4);
+      --accent-white: #ffffff;
+      --accent-white-glow: rgba(255, 255, 255, 0.35);
+      --accent-silver: #d4d4d8;
+      --text-main: #ffffff;
+      --text-muted: #a1a1aa;
+      --text-dark: #000000;
       --font-comfortaa: 'Comfortaa', cursive, sans-serif;
       --font-heading: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', system-ui, sans-serif;
@@ -39,24 +37,24 @@
       padding: 0;
     }
 
-    /* Custom Minimal Scrollbar */
+    /* Sleek Monochrome Scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: rgba(6, 7, 10, 0.95);
+      background: #000000;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(91, 108, 245, 0.35);
+      background: rgba(255, 255, 255, 0.25);
       border-radius: 999px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-indigo);
+      background: #ffffff;
     }
     html {
       scrollbar-width: thin;
-      scrollbar-color: rgba(91, 108, 245, 0.35) rgba(6, 7, 10, 0.95);
+      scrollbar-color: rgba(255, 255, 255, 0.25) #000000;
       scroll-behavior: smooth;
     }
 
@@ -71,7 +69,7 @@
     }
 
     /* ==========================================================================
-       WebGL 3D Domain-Warped Fluid Canvas (Exact iuno.lol ColorBends Background)
+       Black & White WebGL 3D Domain-Warped Fluid Canvas (iuno.lol Monochrome)
        ========================================================================== */
     .color-bends-bg {
       position: fixed;
@@ -107,7 +105,7 @@
       z-index: 100;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: rgba(8, 10, 16, 0.75);
+      background: rgba(0, 0, 0, 0.75);
       border-bottom: 1px solid var(--border-subtle);
     }
     .nav-inner {
@@ -127,7 +125,7 @@
       width: 42px;
       height: 42px;
       object-fit: contain;
-      filter: drop-shadow(0 0 12px var(--accent-indigo-glow));
+      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.35));
       transition: transform 0.25s ease;
     }
     .brand-logo-img:hover {
@@ -144,16 +142,16 @@
       gap: 0.45rem;
     }
     .brand-title span {
-      color: var(--accent-indigo);
+      color: #a1a1aa;
     }
     .brand-tag {
       font-family: var(--font-code);
       font-size: 0.72rem;
       padding: 0.2rem 0.55rem;
       border-radius: 999px;
-      background: rgba(91, 108, 245, 0.15);
-      border: 1px solid rgba(91, 108, 245, 0.35);
-      color: var(--accent-periwinkle);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
       font-weight: 600;
     }
 
@@ -175,30 +173,27 @@
     }
     .nav-link:hover, .nav-link.active {
       color: #fff;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
     .nav-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(91, 108, 245, 0.18);
-      border: 1px solid rgba(91, 108, 245, 0.45);
-      color: #fff;
+      background: #ffffff;
+      color: #000000;
       padding: 0.55rem 1.25rem;
       border-radius: 999px;
       font-weight: 700;
       font-size: 0.88rem;
       text-decoration: none;
       transition: all 0.25s ease;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 0 20px rgba(91, 108, 245, 0.2);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
     }
     .nav-btn:hover {
-      background: var(--accent-indigo);
-      color: #fff;
+      background: #e4e4e7;
       transform: translateY(-1px);
-      box-shadow: 0 0 30px var(--accent-indigo-glow);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.45);
     }
 
     /* Hero Section */
@@ -218,7 +213,7 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.35rem 0.9rem;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border-subtle);
       border-radius: 999px;
       font-size: 0.82rem;
@@ -228,13 +223,9 @@
     .hero-badge-dot {
       width: 8px;
       height: 8px;
-      background: var(--accent-indigo);
+      background: #ffffff;
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-indigo);
-    }
-    .hero-badge-dot.green {
-      background: var(--accent-green);
-      box-shadow: 0 0 8px var(--accent-green);
+      box-shadow: 0 0 8px #ffffff;
     }
     .hero h1 {
       font-family: var(--font-heading);
@@ -246,7 +237,7 @@
       color: #ffffff;
     }
     .hero h1 span {
-      background: linear-gradient(135deg, #ffffff 0%, #8b93e8 60%, #5b6cf5 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -268,7 +259,7 @@
       font-family: var(--font-comfortaa);
       font-size: 2.2rem;
       font-weight: 400;
-      color: #cbd5e1;
+      color: #e4e4e7;
       letter-spacing: -0.02em;
       position: absolute;
       white-space: nowrap;
@@ -299,17 +290,17 @@
       line-height: 1.7;
     }
 
-    /* Glassmorphism Hub Card (from iuno.lol style) */
+    /* Black & White Glassmorphism Hub Card */
     .android-hero-hub {
       max-width: 880px;
       margin: 0 auto 3rem;
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 1.75rem;
       padding: 2.5rem;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 35px rgba(91, 108, 245, 0.15);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 255, 255, 0.08);
       position: relative;
       overflow: hidden;
       text-align: left;
@@ -321,7 +312,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent-indigo), transparent);
+      background: linear-gradient(90deg, transparent, #ffffff, transparent);
     }
     .hub-grid-layout {
       display: grid;
@@ -355,14 +346,14 @@
       align-items: center;
       gap: 0.4rem;
       font-size: 0.84rem;
-      color: #e2e8f0;
-      background: rgba(255, 255, 255, 0.035);
+      color: #f4f4f5;
+      background: rgba(255, 255, 255, 0.04);
       padding: 0.35rem 0.85rem;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .spec-item svg {
-      color: var(--accent-indigo);
+      color: #ffffff;
     }
     .hub-action-buttons {
       display: flex;
@@ -373,8 +364,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.65rem;
-      background: var(--accent-indigo);
-      color: #fff;
+      background: #ffffff;
+      color: #000000;
       padding: 0.85rem 1.65rem;
       border-radius: 12px;
       font-size: 1.05rem;
@@ -382,18 +373,18 @@
       text-decoration: none;
       transition: all 0.25s ease;
       cursor: pointer;
-      box-shadow: 0 0 25px var(--accent-indigo-glow);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
     }
     .btn-apk-main:hover {
-      background: #4f60f4;
+      background: #e4e4e7;
       transform: translateY(-2px);
-      box-shadow: 0 0 35px rgba(91, 108, 245, 0.6);
+      box-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
     }
     .btn-apk-secondary {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
       color: #fff;
       padding: 0.85rem 1.35rem;
       border-radius: 12px;
@@ -405,9 +396,9 @@
       cursor: pointer;
     }
     .btn-apk-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(91, 108, 245, 0.45);
-      color: var(--accent-periwinkle);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: #ffffff;
       transform: translateY(-2px);
     }
 
@@ -438,18 +429,18 @@
       background: var(--bg-card-hover);
       border-color: var(--border-glow);
       transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(91, 108, 245, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.08);
     }
     .card-icon {
       width: 44px;
       height: 44px;
       border-radius: 12px;
-      background: rgba(91, 108, 245, 0.12);
-      border: 1px solid rgba(91, 108, 245, 0.3);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--accent-periwinkle);
+      color: #ffffff;
       margin-bottom: 1.25rem;
     }
     .card h3 {
@@ -475,9 +466,9 @@
       transition: all 0.3s ease;
     }
     .hero-dashboard-preview:hover {
-      border-color: var(--accent-indigo);
+      border-color: #ffffff;
       transform: scale(1.02);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-indigo-glow);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.25);
     }
     .dashboard-img {
       width: 100%;
@@ -501,7 +492,7 @@
 
     /* Code Blocks */
     .code-block {
-      background: #05070a;
+      background: #050505;
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
       overflow: hidden;
@@ -529,9 +520,9 @@
       transition: all 0.2s ease;
     }
     .copy-btn:hover {
-      background: rgba(91, 108, 245, 0.15);
-      border-color: var(--accent-indigo);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #ffffff;
+      color: #ffffff;
     }
     pre {
       padding: 1rem;
@@ -539,12 +530,12 @@
       font-family: var(--font-code);
       font-size: 0.88rem;
       line-height: 1.6;
-      color: #e2e8f0;
+      color: #e4e4e7;
     }
     code {
       font-family: var(--font-code);
-      color: var(--accent-periwinkle);
-      background: rgba(91, 108, 245, 0.12);
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
       padding: 0.15rem 0.35rem;
       border-radius: 4px;
       font-size: 0.88em;
@@ -568,7 +559,7 @@
       border-bottom: 1px solid var(--border-subtle);
     }
     th {
-      background: rgba(91, 108, 245, 0.08);
+      background: rgba(255, 255, 255, 0.05);
       color: #fff;
       font-family: var(--font-heading);
       font-weight: 600;
@@ -579,7 +570,7 @@
 
     /* Architecture Flow Diagram */
     .arch-diagram {
-      background: #05070a;
+      background: #050505;
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
       padding: 1.75rem;
@@ -593,17 +584,17 @@
       gap: 1rem;
     }
     .arch-node {
-      background: rgba(91, 108, 245, 0.08);
-      border: 1px solid rgba(91, 108, 245, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
       padding: 0.85rem 1.25rem;
       text-align: center;
       min-width: 160px;
     }
     .arch-node.active-mobile {
-      background: rgba(91, 108, 245, 0.2);
-      border-color: var(--accent-indigo);
-      box-shadow: 0 0 20px var(--accent-indigo-glow);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: #ffffff;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
     .arch-node h4 {
       color: #fff;
@@ -615,7 +606,7 @@
       color: var(--text-muted);
     }
     .arch-arrow {
-      color: var(--accent-indigo);
+      color: #ffffff;
       font-weight: 800;
       font-size: 1.2rem;
     }
@@ -623,7 +614,7 @@
     /* Footer */
     footer {
       border-top: 1px solid var(--border-subtle);
-      background: rgba(6, 7, 10, 0.92);
+      background: #000000;
       padding: 3rem 0;
       margin-top: 5rem;
       text-align: center;
@@ -636,7 +627,7 @@
       transition: color 0.2s ease;
     }
     footer a:hover {
-      color: var(--accent-periwinkle);
+      color: #ffffff;
     }
 
     /* Lightbox Modal */
@@ -644,7 +635,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(0, 0, 0, 0.94);
       z-index: 1000;
       align-items: center;
       justify-content: center;
@@ -664,7 +655,7 @@
       max-height: 85vh;
       border-radius: 12px;
       border: 1px solid var(--border-glow);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px var(--accent-indigo-glow);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 255, 255, 0.25);
     }
     .lightbox-close {
       position: absolute;
@@ -695,7 +686,7 @@
 <body>
 
   <!-- ==========================================================================
-       Full-Screen WebGL Domain-Warped Fluid Canvas (iuno.lol ColorBends Effect)
+       Black & White WebGL Domain-Warped Fluid Canvas (iuno.lol B&W Shader)
        ========================================================================== -->
   <div class="color-bends-bg">
     <canvas id="shader-canvas"></canvas>
@@ -738,7 +729,7 @@
             Native Android Kotlin
           </div>
           <div class="hero-badge">
-            <span class="hero-badge-dot green"></span>
+            <span class="hero-badge-dot"></span>
             Jetpack Media3 &amp; ExoPlayer
           </div>
           <div class="hero-badge">
@@ -746,7 +737,7 @@
             Sub-30ms 320 kbps Streaming
           </div>
           <div class="hero-badge">
-            <span class="hero-badge-dot green"></span>
+            <span class="hero-badge-dot"></span>
             Android 8.0 to Android 15
           </div>
         </div>
@@ -767,7 +758,7 @@
           <div class="hub-grid-layout">
             <div class="hub-info">
               <h2>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-indigo);"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #ffffff;"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 Muziso Android Mobile (v0.1.8)
               </h2>
               <p>Install the standalone APK directly or explore Google Play distribution. Optimized for low battery consumption with hardware audio offload.</p>
@@ -944,7 +935,7 @@
       </div>
 
       <div class="grid-2" style="margin-bottom: 2rem;">
-        <div class="card" style="background: rgba(91, 108, 245, 0.08); border: 1px solid rgba(91, 108, 245, 0.35);">
+        <div class="card" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.2);">
           <h3 style="color: #fff; margin-bottom: 0.5rem;">📦 Direct APK Sideload (v0.1.8)</h3>
           <p style="margin-bottom: 1.25rem;">Download the standalone Android APK binary directly to your Android device.</p>
           <a href="https://github.com/xtros/Muziso/releases/latest/download/Muziso_v0.1.8.apk" onclick="event.preventDefault(); downloadAsset('android');" class="btn-apk-main">
@@ -984,7 +975,7 @@
       </div>
 
       <div class="card" style="margin-bottom: 1.5rem;">
-        <h3 style="color: var(--accent-indigo); margin-bottom: 0.5rem;">Android Audio Engine Pipeline</h3>
+        <h3 style="color: #ffffff; margin-bottom: 0.5rem;">Android Audio Engine Pipeline</h3>
         <p style="margin-bottom: 1.5rem;">Continuous foreground lifecycle orchestration with hardware audio offload and low-latency bitstream resolution:</p>
         
         <div class="arch-diagram">
@@ -1132,7 +1123,7 @@ cd MuzisoAndroid
 
   <script>
     // =========================================================================
-    // 🌌 WebGL 3D Domain-Warped Fluid Canvas Shader (iuno.lol ColorBends Engine)
+    // 🌌 Black & White WebGL Domain-Warped Fluid Canvas Shader (iuno.lol B&W)
     // =========================================================================
     (function initColorBends() {
       const canvas = document.getElementById('shader-canvas');
@@ -1147,17 +1138,17 @@ cd MuzisoAndroid
         }
       `;
 
-      // GLSL domain-warping fluid shader with mouse pointer interaction & noise
+      // GLSL domain-warping fluid shader in pure high-contrast Black & White
       const fragmentShaderSource = `
         precision highp float;
         uniform vec2 uResolution;
         uniform float uTime;
         uniform vec2 uPointer;
 
-        // Colors extracted from iuno.lol: Electric Indigo, Obsidian Base, Soft Periwinkle
-        const vec3 cIndigo = vec3(0.357, 0.424, 0.961);     // #5b6cf5
-        const vec3 cDark = vec3(0.024, 0.027, 0.039);       // #06070a
-        const vec3 cPeriwinkle = vec3(0.545, 0.576, 0.910); // #8b93e8
+        // Pure Monochrome / Black and White palette
+        const vec3 cPitchDark = vec3(0.0, 0.0, 0.0);       // Pure Black (#000000)
+        const vec3 cPureWhite = vec3(1.0, 1.0, 1.0);       // Pure White (#ffffff)
+        const vec3 cSilver    = vec3(0.72, 0.74, 0.78);    // Silver / Smoke (#b8bcc7)
 
         float hash(vec2 p) {
           return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -1167,7 +1158,7 @@ cd MuzisoAndroid
           vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / min(uResolution.x, uResolution.y);
           vec2 p = uv * 1.5;
 
-          // Lerped smooth mouse pointer displacement
+          // Smooth pointer tracking influence
           p += uPointer * 0.35;
 
           float t = uTime * 0.18;
@@ -1182,13 +1173,13 @@ cd MuzisoAndroid
           float wave = sin(p.x * 2.2 + p.y * 1.8 + t);
           float pattern = smoothstep(-0.85, 0.85, wave);
 
-          vec3 col = mix(cDark, cIndigo, pattern * 0.85);
+          vec3 col = mix(cPitchDark, cPureWhite * 0.85, pattern);
 
           float detail = cos(p.y * 3.8 - t * 0.7);
-          col = mix(col, cPeriwinkle, smoothstep(-0.15, 0.9, detail) * 0.55);
+          col = mix(col, cSilver, smoothstep(-0.15, 0.9, detail) * 0.55);
 
           // Subtle analog film grain texture
-          float noise = hash(gl_FragCoord.xy + fract(uTime) * 100.0) * 0.035;
+          float noise = hash(gl_FragCoord.xy + fract(uTime) * 100.0) * 0.03;
           col += noise;
 
           gl_FragColor = vec4(col, 0.92);
@@ -1282,7 +1273,7 @@ cd MuzisoAndroid
     })();
 
     // =========================================================================
-    // 🔤 Hero Rotating Text Loop (Exact iuno.lol 2500ms slide + blur transition)
+    // 🔤 Hero Rotating Text Loop (Exact iuno.lol 2600ms slide + blur transition)
     // =========================================================================
     (function initRotatingText() {
       const words = [
@@ -1366,7 +1357,7 @@ cd MuzisoAndroid
       navigator.clipboard.writeText(codeBlock).then(() => {
         const originalText = btn.innerText;
         btn.innerText = 'Copied!';
-        btn.style.color = 'var(--accent-periwinkle)';
+        btn.style.color = '#ffffff';
         setTimeout(() => {
           btn.innerText = originalText;
           btn.style.color = '';
