@@ -1,60 +1,47 @@
-# 🎵 Muziso
+# 🤖 Muziso Android
 
 <p align="center">
   <img src="assets/logo.png" alt="Muziso Official Logo" width="160" />
 </p>
 
 <p align="center">
-  <img src="assets/dashboard.png" alt="Muziso Dashboard" width="70%" />
+  <img src="assets/dashboard.png" alt="Muziso Android Dashboard" width="70%" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Documentation-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Documentation Site" />
+  <img src="https://img.shields.io/badge/Platform-Android%208.0+-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android 8.0+" />
+  <img src="https://img.shields.io/badge/Architecture-Kotlin%20%7C%20Jetpack%20Media3-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin Android" />
   <a href="https://github.com/xtros/Muziso/releases"><img src="https://img.shields.io/github/v/release/xtros/Muziso?color=ccff00&label=Release%20v0.1.8&style=for-the-badge" alt="Latest Release v0.1.8" /></a>
-  <a href="https://github.com/xtros/Muziso/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-ccff00?style=for-the-badge" alt="MIT License" /></a>
-  <img src="https://img.shields.io/badge/Platforms-Desktop%20%7C%20Android%20Mobile-181825?style=for-the-badge&logo=android" alt="Platforms" />
-  <img src="https://img.shields.io/badge/Desktop-Tauri%20v2%20%2B%20Rust-FFC107?style=for-the-badge&logo=tauri&logoColor=black" alt="Tauri v2" />
-  <img src="https://img.shields.io/badge/Mobile-Native%20Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin Android" />
+  <a href="https://github.com/xtros/MuzisoAndroid/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-ccff00?style=for-the-badge" alt="MIT License" /></a>
 </p>
 
 <p align="center">
-  <b>Muziso</b> is a premium, dark-themed music player ecosystem engineered for both <b>Desktop (Windows, macOS, Linux)</b> and <b>Mobile (Android)</b>. Powered by high-performance <b>React 19 + Tauri v2 (Rust)</b> on Desktop and <b>Native Kotlin + Jetpack Media3</b> on Android Mobile, Muziso delivers sub-30ms 320 kbps JioSaavn streaming, smart version-preserving deduplication, official Spotify 640x640 artwork resolution, local library playback, and 100% offline caching.
+  <b>Muziso Android</b> is a high-performance native music player engineered for <b>Android 8.0 (Oreo) to Android 15</b>. Built with <b>Native Kotlin</b> and <b>Jetpack Media3 ExoPlayer</b>, Muziso delivers sub-30ms 320 kbps JioSaavn streaming, system-wide lockscreen playback controls, official Spotify 640x640 artwork resolution, local library playback, and 100% offline caching.
 </p>
 
 ---
 
-## 📚 Documentation & Legal Links
+## 📚 Documentation & Guides
 
-- 🌐 **Interactive Documentation Site**: Interactive documentation, dual download hubs, architecture diagrams, and release notes.
-- 🏗️ **[Architecture Guide](docs/ARCHITECTURE.md)**: Deep dive into Desktop (Tauri IPC, GStreamer, Rust FFI) and Mobile (Kotlin, MediaSessionCompat, Jetpack Media3, Room SQLite).
-- ⚡ **[Installation & Build Guide](docs/INSTALLATION.md)**: Step-by-step installation guides for Windows, macOS, Linux, and Android APK sideloading.
-- 🤝 **[Contributing & Bug Hunter Program](docs/CONTRIBUTING.md)**: Contribution standards and bounty rewards.
-- 🔒 **[Privacy Policy](docs/PRIVACY.md)**: Privacy-first commitment, zero telemetry disclosure, local SQLite encryption.
+- 🏗️ **[Architecture Guide](docs/ARCHITECTURE.md)**: Deep dive into Android Audio Service, MediaSessionCompat, ExoPlayer, and Room SQLite database.
+- ⚡ **[Installation & Sideload Guide](docs/INSTALLATION.md)**: Step-by-step APK sideloading instructions and Gradle compilation.
+- 🤝 **[Contributing & Bug Hunter Program](docs/CONTRIBUTING.md)**: Android contribution standards and issue templates.
+- 🔒 **[Privacy Policy](docs/PRIVACY.md)**: 100% offline-first privacy architecture, zero telemetry.
 - ⚖️ **[Terms & Conditions](docs/TERMS.md)**: Open-source licensing terms and third-party media disclaimers.
 
 ---
 
 ## 🌟 Key Features (v0.1.8)
 
-### ⚡ Universal & Streaming Capabilities
 - 🚀 **JioSaavn Direct 320 kbps Streaming**: Sub-30ms instant CDN audio resolution (`song.getDetails&pids={id}`) for tracks, albums, search queries, and playlists.
+- 🔔 **Background Playback & Lockscreen Controls**: Android `MediaSessionCompat` foreground audio service with persistent notification tray controls and WearOS / Android Auto support.
+- 🎧 **Smart Audio Focus & Bluetooth**: Auto-pause on headphone disconnect / incoming calls; auto-resume on Bluetooth reconnect (`ACTION_AUDIO_BECOMING_NOISY`).
 - 🔄 **Smart Version-Preserving Deduplication**: Automatically collapses identical song re-releases across compilation albums while preserving legitimate alternate versions & language dubs (`Remix`, `Unplugged`, `Acoustic`, `Lofi`, `Tamil`, `Telugu`, `Hindi`, `Malayalam`, `Kannada`).
-- 🎨 **Guaranteed Official High-Res Artwork Engine**: Deep artwork metadata extraction paired with an automatic Spotify **640x640 official cover resolver** for every track.
-- 👨‍🎤 **Official Artist Discography Sourcing**: Queries official studio albums and singles exclusively (`include_groups=album,single`), filtering out third-party playlists and compilations.
-- 📥 **Offline Download & Local Caching**: Save tracks locally for immediate offline playback with custom metadata and artwork indexing.
-- 🔒 **100% Local Privacy**: Zero telemetry, zero analytics scripts. All library data and playlists remain sandboxed on your device.
-
-### 💻 Desktop-Specific Features (Windows, macOS, Linux)
-- 🎚️ **10-Band Graphic Equalizer & Studio DSP**: 31Hz–16kHz faders with live frequency DSP curve and genre presets.
-- 🎮 **Discord Rich Presence**: Real-time display of currently playing track, artist name, duration, and cover art on your Discord profile.
-- ⌨️ **Global Hotkeys**: Control playback (Play/Pause, Next, Previous) system-wide even when minimized.
-- 🎧 **Hybrid Audio Engine**: Scan and play local music folders (`.mp3`, `.m4a`, `.wav`, `.opus`, `.flac`) alongside dynamic streams.
-
-### 📱 Mobile-Specific Features (Android)
-- 🔔 **Background Playback & Lockscreen Controls**: Android `MediaSessionCompat` foreground audio service with persistent notification tray scrubbing.
-- 🎧 **Smart Audio Focus & Bluetooth**: Auto-pause on headphone disconnect / incoming calls; auto-resume on Bluetooth reconnect.
+- 🎨 **Official 640x640 Spotify Cover Resolver**: Automatic high-resolution album cover fetching across search results, discographies, and local music storage.
+- 🎚️ **10-Band Graphic Equalizer**: 31Hz–16kHz frequency faders with live frequency curve and genre acoustic presets.
+- 📥 **Offline Download & Local Caching**: Save streaming tracks locally for immediate offline playback with custom metadata and artwork indexing.
 - 🔋 **Battery-Optimized Kotlin Engine**: Hardware audio decoding and low-power coroutine dispatchers for all-day listening.
-- 📂 **Local Device Storage Indexing**: Scan SD cards and internal storage for local audio tracks.
+- 🔒 **100% Local Privacy**: Zero telemetry, zero analytics scripts. All library data and playlists remain sandboxed on your device inside an encrypted Room SQLite database.
 
 ---
 
@@ -70,7 +57,7 @@
   </tr>
   <tr>
     <td align="center" width="50%">
-      <b>🎧 Immersive Fullscreen Audio Player</b><br/>
+      <b>🎧 Fullscreen Audio Player</b><br/>
       <sub>Ambient artwork blur &amp; 3D vinyl disc animation</sub><br/><br/>
       <img src="assets/player.png" alt="Muziso Audio Player" width="100%" />
     </td>
@@ -82,7 +69,7 @@
   </tr>
   <tr>
     <td align="center" width="50%">
-      <b>🎚️ 10-Band Graphic Equalizer &amp; Studio DSP</b><br/>
+      <b>🎚️ 10-Band Graphic Equalizer</b><br/>
       <sub>31Hz–16kHz faders, live frequency curve &amp; genre presets</sub><br/><br/>
       <img src="assets/equalizer.png" alt="Muziso Graphic Equalizer" width="100%" />
     </td>
@@ -98,77 +85,55 @@
 
 ## ⚡ Download & Installation
 
-Visit the **[Muziso Releases Page](https://github.com/xtros/Muziso/releases)** to download the latest installer or APK (`v0.1.8`):
+Visit the **[Muziso Releases Page](https://github.com/xtros/Muziso/releases)** to download the latest Android APK (`v0.1.8`):
 
-### 💻 Desktop Packages
-| Platform | Package Format | Direct Download |
+### 📱 Android Packages
+| Package Format | Target Architecture | Direct Download |
 | :--- | :--- | :--- |
-| **Windows** | `.exe` / `.msi` / `.zip` | [Download Setup.exe](https://github.com/xtros/Muziso/releases/latest/download/Muziso_0.1.8_x64-setup.exe) • [.msi](https://github.com/xtros/Muziso/releases/latest/download/Muziso_0.1.8_x64_en-US.msi) • [.zip](https://github.com/xtros/Muziso/releases/latest/download/Muziso_0.1.8_x64.zip) |
-| **macOS** | `.dmg` / `.app` | [Download .dmg (Universal)](https://github.com/xtros/Muziso/releases/latest/download/Muziso_0.1.8_x64.dmg) • [Bundle](https://github.com/xtros/Muziso/releases/latest/download/Muziso_0.1.8_universal.app.tar.gz) |
-| **Linux** | `.AppImage` / `.deb` | [Download .AppImage](https://github.com/xtros/Muziso/releases/latest/download/Muziso_0.1.8_amd64.AppImage) • [.deb](https://github.com/xtros/Muziso/releases/latest/download/muziso_0.1.8_amd64.deb) |
+| **Android APK** (Direct Sideload) | Universal (ARM64, ARMv7, x86_64) | [Download Muziso_v0.1.8.apk](https://github.com/xtros/Muziso/releases/latest/download/Muziso_v0.1.8.apk) |
+| **Google Play Store** | Play Store Release | [Muziso on Google Play](https://github.com/xtros/Muziso/releases) |
 
-### 📱 Mobile Packages
-| Platform | Package Format | Direct Download |
-| :--- | :--- | :--- |
-| **Android** | `.apk` (Direct Sideload) | [Download Muziso_v0.1.8.apk](https://github.com/xtros/Muziso/releases/latest/download/Muziso_v0.1.8.apk) |
-| **Google Play** | App Store Listing | [Muziso on Google Play](https://github.com/xtros/Muziso/releases) |
-
-> [!NOTE]
-> **Windows SmartScreen Notice**: Because Muziso is an open-source binary without a paid commercial certificate, Windows Defender SmartScreen may display an *"Unknown Publisher"* prompt on first launch. Click **"More info"** &rarr; **"Run anyway"** to continue.
+### 📱 How to Sideload APK:
+1. Download `Muziso_v0.1.8.apk` to your phone or tablet.
+2. Tap the downloaded file. When prompted, go to **Settings** &rarr; toggle on **"Allow from this source"**.
+3. Tap **Install** and launch Muziso!
 
 ---
 
-## 🛠️ Technology Stack
+## 🛠️ Android Technology Stack
 
-### 💻 Desktop Architecture
-- **Frontend Core**: React 19, TypeScript, Framer Motion, Lucide Icons
-- **Desktop Runtime**: Tauri v2, Rust FFI
-- **Audio Pipeline**: JioSaavn 320kbps CDN Resolver + GStreamer (Rust Bindings) + Rodio
-- **Artwork Engine**: Spotify Official 640x640 Web API Resolver
-- **Database**: SQLite (`rusqlite`)
-
-### 📱 Mobile Architecture (Android)
 - **Application Core**: Native Android (Kotlin), Coroutines, ViewModel, Flow
 - **Audio Pipeline**: Jetpack Media3, ExoPlayer, MediaSessionCompat Foreground Service
 - **Network & CDN**: OkHttp, Retrofit 320kbps Stream Decoder
+- **Artwork Engine**: Spotify Official 640x640 Web API Resolver
 - **Database**: Room SQLite Database (Encrypted DAOs)
 
 ---
 
-## 🚀 Development Setup
+## 🚀 Developer Build Instructions
 
-### 1. Desktop Development (Tauri v2 + React 19)
 ```bash
-# Clone the repository
-git clone https://github.com/xtros/Muziso.git
-cd Muziso
+# 1. Clone the repository
+git clone https://github.com/xtros/MuzisoAndroid.git
+cd MuzisoAndroid
 
-# Install Node dependencies
-npm install
-
-# Run Desktop app in development mode
-npm run tauri dev
-```
-
-### 2. Android Mobile Development (Kotlin + Gradle)
-```bash
-# Navigate to Android directory
-cd android
-
-# Compile debug build APK
+# 2. Compile debug APK
 ./gradlew assembleDebug
+
+# 3. Compile release APK
+./gradlew assembleRelease
 ```
 
 ---
 
 ## 🎯 Bug Hunter Reward Program
 
-Found a functional bug, stream error, or UI glitch in **Muziso** Desktop or Mobile? Help improve the platform and get rewarded! See **[CONTRIBUTING.md](docs/CONTRIBUTING.md)** for issue templates and guidelines.
+Found a functional bug, stream error, or UI glitch in **Muziso Android**? Help improve the platform and get rewarded! See **[CONTRIBUTING.md](docs/CONTRIBUTING.md)** for issue templates and guidelines.
 
 ---
 
 ## 📜 License & Legal
 
-- **Software License**: Distributed under the MIT License. See [`LICENSE`](https://github.com/xtros/Muziso/blob/main/LICENSE) for details.
+- **Software License**: Distributed under the MIT License. See [`LICENSE`](https://github.com/xtros/MuzisoAndroid/blob/main/LICENSE) for details.
 - **Privacy Policy**: See **[Privacy Policy](docs/PRIVACY.md)** for data handling details.
 - **Terms & Conditions**: See **[Terms & Conditions](docs/TERMS.md)** for user agreements and media disclaimers.

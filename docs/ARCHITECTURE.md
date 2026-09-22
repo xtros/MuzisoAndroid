@@ -1,39 +1,19 @@
-# 🏗️ Muziso Architecture Documentation
+# 🏗️ Muziso Android Architecture Documentation
 
 **Current Version:** v0.1.8  
-**Supported Ecosystems:** Desktop (Windows, macOS, Linux) &amp; Mobile (Android)
+**Target Platform:** Android 8.0 (API 26) to Android 15 (API 35)  
+**Primary Language:** Kotlin  
 
 ---
 
-## 🌟 Ecosystem Overview
+## 🌟 Architecture Overview
 
-Muziso is engineered across two dedicated native architectures tailored for high-fidelity audio playback:
-1. **Desktop Engine**: Built with **React 19 (TypeScript)** + **Tauri v2 (Rust)** + **GStreamer FFI** + **SQLite (`rusqlite`)**.
-2. **Mobile Engine**: Built with **Native Android (Kotlin)** + **Jetpack Media3 / ExoPlayer** + **MediaSessionCompat Foreground Service** + **Room SQLite Database**.
+Muziso Android is engineered as a pure native Android application prioritizing low-latency 320 kbps audio streaming, background lifecycle resilience, hardware audio offload, and battery conservation.
 
 ---
 
 ## 🏛️ High-Level System Architecture
 
-### 💻 Desktop Architecture (Tauri v2 + Rust)
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                       React 19 Frontend                         │
-│         (TypeScript, Framer Motion, Cyber-Minimal UI)           │
-└────────────────────────────────┬────────────────────────────────┘
-                                 │  Tauri v2 IPC (Events/Commands)
-┌────────────────────────────────▼────────────────────────────────┐
-│                        Rust Desktop Core                        │
-│                   (Tauri v2, Async Tokio)                       │
-├─────────────────────┬──────────────────┬────────────────────────┤
-│ Audio & Resolvers   │ Database         │ Sidecars & Art Engine  │
-│ - JioSaavn 320kbps  │ - SQLite         │ - yt-dlp sidecar       │
-│ - GStreamer (FFI)   │   (rusqlite)     │ - Spotify Cover API    │
-│ - Rodio Engine      │                  │ - spotiflac-cli        │
-└─────────────────────┴──────────────────┴────────────────────────┘
-```
-
-### 📱 Mobile Architecture (Android Kotlin)
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Native Kotlin UI Layer                      │
@@ -55,26 +35,26 @@ Muziso is engineered across two dedicated native architectures tailored for high
 
 ## 🎧 Audio Engine & Stream Resolvers
 
-Muziso implements a multi-tier hybrid audio resolution pipeline across Desktop and Mobile:
+Muziso implements a dedicated Android audio resolution pipeline:
 
 1. **JioSaavn 320 kbps Direct CDN Resolver**:
    - Audio URLs are resolved in **<30ms** via Strategy 0 direct API lookup (`song.getDetails&pids={id}`).
-   - Streams are fetched directly from high-speed 320 kbps CDN endpoints without intermediary transcoding delay.
+   - Bitstreams are fetched directly from high-speed 320 kbps CDN endpoints without transcoding delay.
 
-2. **Native GStreamer Audio Pipeline (Desktop)**:
-   - Decodes high-bitrate network streams (`.mp3`, `.flac`, `.opus`, `.m4a`, `.wav`) using native Rust GStreamer FFI bindings.
-   - Dynamically injects bundled GStreamer dynamic libraries (`.dll`) at runtime on Windows.
-
-3. **Jetpack Media3 & ExoPlayer Pipeline (Android Mobile)**:
+2. **Jetpack Media3 & ExoPlayer Pipeline**:
    - Leverages hardware audio offloading and gapless buffer preloading.
-   - Coordinates with `MediaSessionCompat` to keep background music active while device is locked.
+   - Coordinates with `MediaSessionCompat` to keep background music active when screen is locked or other apps are open.
+
+3. **Audio Focus & Noisy Audio Intent**:
+   - Listens for `ACTION_AUDIO_BECOMING_NOISY` to automatically pause when wired headphones or Bluetooth devices disconnect.
+   - Automatically handles incoming phone calls and transient audio focus shifts.
 
 ---
 
 ## 🎨 Guaranteed Official Cover Image Engine
 
 1. **Deep Metadata Extraction**:
-   - Parses `item["image"]`, `item["more_info"]["image"]`, `item["more_info"]["album_image"]`, and `item["album_image"]`, scaling thumbnails up to **500x500 official high-res album covers**.
+   - Parses `item["image"]`, `item["more_info"]["image"]`, and `item["album_image"]`, scaling thumbnails up to **500x500 official high-res album covers**.
 
 2. **Spotify Cover Enrichment Resolver**:
    - Any track lacking a verified cover image is enriched asynchronously via Spotify's official Web API, returning verified **640x640 album artwork**.
@@ -88,11 +68,10 @@ Muziso implements a multi-tier hybrid audio resolution pipeline across Desktop a
 
 ---
 
-## 💾 Local Storage & Database Schema
+## 💾 Local Storage & Database Schema (Room SQLite)
 
-All user data is stored strictly on the local client:
-- **Desktop**: SQLite database (`muziso.db`) managed via `rusqlite`.
-- **Mobile**: Room SQLite database with typed DAOs and Kotlin Flow observers.
+All user data is stored strictly on the local device:
+- **Database**: Room SQLite database with typed DAOs and Kotlin Flow observers.
 
 ### Key Entities:
 - **Tracks**: Title, artist, album, duration, file path / stream URL, bitrate, cover art blob reference, and local checksum.
