@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://xtros.github.io/MuzisoAndroid/"><img src="https://img.shields.io/badge/Documentation-GitHub%20Pages-ccff00?style=for-the-badge&logo=githubpages&logoColor=black" alt="Documentation Site" /></a>
+  <img src="https://img.shields.io/badge/Documentation-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Documentation Site" />
   <a href="https://github.com/xtros/Muziso/releases"><img src="https://img.shields.io/github/v/release/xtros/Muziso?color=ccff00&label=Release%20v0.1.8&style=for-the-badge" alt="Latest Release v0.1.8" /></a>
   <a href="https://github.com/xtros/Muziso/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-ccff00?style=for-the-badge" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/Platforms-Desktop%20%7C%20Android%20Mobile-181825?style=for-the-badge&logo=android" alt="Platforms" />
@@ -21,20 +21,16 @@
   <b>Muziso</b> is a premium, dark-themed music player ecosystem engineered for both <b>Desktop (Windows, macOS, Linux)</b> and <b>Mobile (Android)</b>. Powered by high-performance <b>React 19 + Tauri v2 (Rust)</b> on Desktop and <b>Native Kotlin + Jetpack Media3</b> on Android Mobile, Muziso delivers sub-30ms 320 kbps JioSaavn streaming, smart version-preserving deduplication, official Spotify 640x640 artwork resolution, local library playback, and 100% offline caching.
 </p>
 
-<p align="center">
-  📖 <b><a href="https://xtros.github.io/MuzisoAndroid/">Visit the Live Interactive Documentation Web Site</a></b>
-</p>
-
 ---
 
 ## 📚 Documentation & Legal Links
 
-- 🌐 **[GitHub Pages Documentation Site](https://xtros.github.io/MuzisoAndroid/)**: Interactive documentation, dual download hubs, architecture diagrams, and release notes.
+- 🌐 **Interactive Documentation Site**: Interactive documentation, dual download hubs, architecture diagrams, and release notes.
 - 🏗️ **[Architecture Guide](docs/ARCHITECTURE.md)**: Deep dive into Desktop (Tauri IPC, GStreamer, Rust FFI) and Mobile (Kotlin, MediaSessionCompat, Jetpack Media3, Room SQLite).
 - ⚡ **[Installation & Build Guide](docs/INSTALLATION.md)**: Step-by-step installation guides for Windows, macOS, Linux, and Android APK sideloading.
 - 🤝 **[Contributing & Bug Hunter Program](docs/CONTRIBUTING.md)**: Contribution standards and bounty rewards.
-- 🔒 **[Privacy Policy](https://xtros.github.io/MuzisoAndroid/#privacy)**: Privacy-first commitment, zero telemetry disclosure, local SQLite encryption.
-- ⚖️ **[Terms & Conditions](https://xtros.github.io/MuzisoAndroid/#terms)**: Open-source licensing terms and third-party media disclaimers.
+- 🔒 **[Privacy Policy](docs/PRIVACY.md)**: Privacy-first commitment, zero telemetry disclosure, local SQLite encryption.
+- ⚖️ **[Terms & Conditions](docs/TERMS.md)**: Open-source licensing terms and third-party media disclaimers.
 
 ---
 
@@ -174,5 +170,5 @@ Found a functional bug, stream error, or UI glitch in **Muziso** Desktop or Mobi
 ## 📜 License & Legal
 
 - **Software License**: Distributed under the MIT License. See [`LICENSE`](https://github.com/xtros/Muziso/blob/main/LICENSE) for details.
-- **Privacy Policy**: See **[Privacy Policy](https://xtros.github.io/MuzisoAndroid/#privacy)** for data handling details.
-- **Terms & Conditions**: See **[Terms & Conditions](https://xtros.github.io/MuzisoAndroid/#terms)** for user agreements and media disclaimers.
+- **Privacy Policy**: See **[Privacy Policy](docs/PRIVACY.md)** for data handling details.
+- **Terms & Conditions**: See **[Terms & Conditions](docs/TERMS.md)** for user agreements and media disclaimers.
