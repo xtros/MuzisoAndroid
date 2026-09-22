@@ -698,18 +698,18 @@
       <a href="#" class="brand">
         <img src="assets/logo.png" alt="Muziso Android Logo" class="brand-logo-img" />
         <div class="brand-title">Muziso <span>Android</span></div>
-        <span class="brand-tag" id="app-version">v0.1.8</span>
+        <span class="brand-tag" id="app-version">v1.0.1</span>
       </a>
       <ul class="nav-links">
         <li><a href="#overview" class="nav-link active" onclick="switchTab('overview', event)">Overview</a></li>
         <li><a href="#gallery" class="nav-link" onclick="switchTab('gallery', event)">Gallery</a></li>
         <li><a href="#features" class="nav-link" onclick="switchTab('features', event)">Features</a></li>
-        <li><a href="#installation" class="nav-link" onclick="switchTab('installation', event)">Download APK</a></li>
+        <li><a href="#installation" class="nav-link" onclick="switchTab('installation', event)">Download APKs</a></li>
         <li><a href="#architecture" class="nav-link" onclick="switchTab('architecture', event)">Architecture</a></li>
         <li><a href="#build" class="nav-link" onclick="switchTab('build', event)">Build Guide</a></li>
         <li><a href="#privacy" class="nav-link" onclick="switchTab('privacy', event)">Privacy</a></li>
       </ul>
-      <a href="https://github.com/xtros/MuzisoAndroid" target="_blank" class="nav-btn">
+      <a href="https://github.com/xtros/Muziso-Android" target="_blank" class="nav-btn">
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
@@ -730,7 +730,7 @@
           </div>
           <div class="hero-badge">
             <span class="hero-badge-dot"></span>
-            Jetpack Media3 &amp; ExoPlayer
+            Build #20 (Commit 4126588)
           </div>
           <div class="hero-badge">
             <span class="hero-badge-dot"></span>
@@ -759,25 +759,29 @@
             <div class="hub-info">
               <h2>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #ffffff;"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                Muziso Android Mobile (v0.1.8)
+                Muziso Android v1.0.1 (Build #20)
               </h2>
-              <p>Install the standalone APK directly or explore Google Play distribution. Optimized for low battery consumption with hardware audio offload.</p>
+              <p>Official release compiled from commit <a href="https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190" target="_blank" style="color: #ffffff; text-decoration: underline;">4126588</a>. Standalone APK binaries available for ARM64, Universal FOSS, Google Cast, and Emulators.</p>
               
               <div class="hub-specs">
-                <div class="spec-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Direct APK (ARM64 &amp; x86_64)</div>
+                <div class="spec-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> ARM64 &amp; Universal APKs</div>
                 <div class="spec-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Room SQLite Local DB</div>
-                <div class="spec-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Zero Telemetry</div>
+                <div class="spec-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Zero Telemetry • 100% Offline</div>
               </div>
 
               <div class="hub-action-buttons">
-                <a href="https://github.com/xtros/Muziso/releases/latest/download/Muziso_v0.1.8.apk" onclick="event.preventDefault(); downloadAsset('android');" class="btn-apk-main" id="btn-hero-apk">
+                <a href="https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-arm64.apk" class="btn-apk-main" id="btn-hero-apk">
                   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                  Download Muziso.apk
+                  Download Muziso-arm64.apk
+                </a>
+                <a href="https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso.apk" class="btn-apk-secondary">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  Universal APK
                 </a>
                 <a href="#installation" onclick="switchTab('installation', event)" class="btn-apk-secondary">
-                  📱 Sideload Instructions
+                  📱 All APK Variants
                 </a>
-                <a href="https://github.com/xtros/MuzisoAndroid" target="_blank" class="btn-apk-secondary">
+                <a href="https://github.com/xtros/Muziso-Android" target="_blank" class="btn-apk-secondary">
                   Source Code
                 </a>
               </div>
@@ -929,38 +933,112 @@
       <div class="card" style="margin-bottom: 2rem;">
         <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; color: #fff;">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Muziso Android Download &amp; Sideload Guide
+          Muziso Android APK Downloads (Build #20)
         </h2>
-        <p style="color: var(--text-muted); font-size: 1rem;">Direct APK binary downloads and step-by-step sideloading installation instructions.</p>
+        <p style="color: var(--text-muted); font-size: 1rem;">Official APK binaries generated from CI Build #20 (<a href="https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190" target="_blank" style="color: #fff; text-decoration: underline;">Commit 4126588</a>) on <a href="https://github.com/xtros/Muziso-Android" target="_blank" style="color: #fff; text-decoration: underline;">xtros/Muziso-Android</a>.</p>
       </div>
 
-      <div class="grid-2" style="margin-bottom: 2rem;">
-        <div class="card" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.2);">
-          <h3 style="color: #fff; margin-bottom: 0.5rem;">📦 Direct APK Sideload (v0.1.8)</h3>
-          <p style="margin-bottom: 1.25rem;">Download the standalone Android APK binary directly to your Android device.</p>
-          <a href="https://github.com/xtros/Muziso/releases/latest/download/Muziso_v0.1.8.apk" onclick="event.preventDefault(); downloadAsset('android');" class="btn-apk-main">
+      <!-- APK Matrix Grid -->
+      <div class="grid-3" style="margin-bottom: 2rem;">
+        <!-- 1. ARM64 (Recommended) -->
+        <div class="card" style="border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.05);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+            <div class="card-icon" style="background: #ffffff; color: #000000; border-color: #ffffff;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <span style="background: #ffffff; color: #000000; font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;">★ Recommended</span>
+          </div>
+          <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-arm64.apk</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">Standalone release for modern 64-bit ARM devices (Pixel, Samsung Galaxy, OnePlus, Xiaomi, Nothing Phone).</p>
+          <a href="https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-arm64.apk" class="btn-apk-main" style="width: 100%; justify-content: center;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            Download Muziso_v0.1.8.apk
+            Download ARM64 APK
           </a>
         </div>
 
+        <!-- 2. Universal FOSS -->
         <div class="card">
-          <h3 style="color: #fff; margin-bottom: 0.5rem;">🛍️ Google Play Store</h3>
-          <p style="margin-bottom: 1.25rem;">Automatic background updates, Google Play Protect verification, and cloud sync.</p>
-          <a href="https://github.com/xtros/Muziso/releases" target="_blank" class="btn-apk-secondary">
-            View Release Listing &rarr;
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso.apk (Universal FOSS)</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">All-architecture universal APK built with 100% Free &amp; Open Source Software dependencies.</p>
+          <a href="https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download Universal APK
+          </a>
+        </div>
+
+        <!-- 3. Google Cast GMS -->
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
+          </div>
+          <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-with-Google-Cast.apk</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">Universal release with Google Play Services (GMS) and Chromecast / Google Home audio casting.</p>
+          <a href="https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-with-Google-Cast.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download Cast APK
+          </a>
+        </div>
+
+        <!-- 4. ARMv7 / armeabi -->
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-armeabi.apk</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">Standalone build for 32-bit ARMv7 legacy Android devices and budget hardware.</p>
+          <a href="https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-armeabi.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download ARMv7 APK
+          </a>
+        </div>
+
+        <!-- 5. x86_64 -->
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-x86_64.apk</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">64-bit x86 build for Android Studio Emulator, Windows Subsystem for Android (WSA), and ChromeOS.</p>
+          <a href="https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-x86_64.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download x86_64 APK
+          </a>
+        </div>
+
+        <!-- 6. x86 32-bit -->
+        <div class="card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-x86.apk</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">32-bit x86 binary for legacy Android emulation environments.</p>
+          <a href="https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-x86.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download x86 APK
           </a>
         </div>
       </div>
 
-      <div class="card">
+      <!-- Sideload Guide Card -->
+      <div class="card" style="margin-bottom: 2rem;">
         <h3 style="color: #fff; margin-bottom: 1rem; font-family: var(--font-heading);">📱 Step-by-Step APK Sideloading Instructions:</h3>
         <ol style="margin-left: 1.5rem; color: var(--text-muted); line-height: 1.9; font-size: 0.95rem;">
-          <li>Tap the <strong>Download Muziso.apk</strong> button above on your Android phone or tablet.</li>
-          <li>Once downloaded, open the <code>Muziso_v0.1.8.apk</code> file from your notification bar or Downloads folder.</li>
+          <li>Tap the <strong>Download ARM64 APK</strong> (or your target architecture) button above on your Android phone or tablet.</li>
+          <li>Once downloaded, open the downloaded <code>.apk</code> file from your notification bar or Downloads folder.</li>
           <li>If your browser prompts <em>"For your security, your phone is not allowed to install unknown apps"</em>, tap <strong>Settings</strong> &rarr; toggle on <strong>"Allow from this source"</strong>.</li>
-          <li>Tap <strong>Install</strong>. Once installation completes, open Muziso and start streaming high-fidelity 320 kbps music!</li>
+          <li>Tap <strong>Install</strong>. Once installation completes, open Muziso and enjoy high-fidelity 320 kbps streaming!</li>
         </ol>
+      </div>
+
+      <!-- Build Info & Git Reference -->
+      <div class="card">
+        <h3 style="color: #fff; margin-bottom: 0.75rem; font-family: var(--font-heading);">🔗 CI Build &amp; Source Verification:</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.7;">
+          Every APK binary is built automatically through GitHub Actions CI pipeline in the <a href="https://github.com/xtros/Muziso-Android" target="_blank" style="color: #fff; text-decoration: underline;">xtros/Muziso-Android</a> repository. You can verify the build logs, commit hash <a href="https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190" target="_blank" style="color: #fff; text-decoration: underline;"><code>4126588</code></a>, and sha256 checksums in the <a href="https://github.com/xtros/Muziso-Android/actions" target="_blank" style="color: #fff; text-decoration: underline;">GitHub Actions Build #20</a> run.
+        </p>
       </div>
     </section>
 
@@ -1102,12 +1180,12 @@ cd MuzisoAndroid
     <div class="container">
       <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 1rem;">
         <a href="#privacy" onclick="switchTab('privacy', event)">Privacy Policy</a>
-        <a href="#installation" onclick="switchTab('installation', event)">Download APK</a>
-        <a href="https://github.com/xtros/MuzisoAndroid/blob/main/LICENSE" target="_blank">MIT License</a>
-        <a href="https://github.com/xtros/MuzisoAndroid/issues" target="_blank">Report an Issue</a>
-        <a href="https://github.com/xtros/MuzisoAndroid" target="_blank">GitHub Repository</a>
+        <a href="#installation" onclick="switchTab('installation', event)">Download APKs</a>
+        <a href="https://github.com/xtros/Muziso-Android/blob/main/LICENSE" target="_blank">MIT License</a>
+        <a href="https://github.com/xtros/Muziso-Android/issues" target="_blank">Report an Issue</a>
+        <a href="https://github.com/xtros/Muziso-Android" target="_blank">GitHub Repository</a>
       </div>
-      <p>Muziso Android is open-source software licensed under the <a href="https://github.com/xtros/MuzisoAndroid/blob/main/LICENSE">MIT License</a>.</p>
+      <p>Muziso Android is open-source software licensed under the <a href="https://github.com/xtros/Muziso-Android/blob/main/LICENSE">MIT License</a>.</p>
       <p style="margin-top: 0.5rem;">Built with ❤️ by <a href="https://github.com/xtros">Webs By JTS</a> exclusively for Native Android Mobile.</p>
     </div>
   </footer>
@@ -1369,26 +1447,21 @@ cd MuzisoAndroid
     let latestReleaseData = null;
 
     function downloadAsset(targetType) {
-      let targetUrl = '';
-      const fallbackUrl = 'https://github.com/xtros/Muziso/releases/latest/download/Muziso_v0.1.8.apk';
+      let targetUrl = 'https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-arm64.apk';
 
       if (latestReleaseData && Array.isArray(latestReleaseData.assets) && latestReleaseData.assets.length > 0) {
-        const apkAsset = latestReleaseData.assets.find(a => a.name.endsWith('.apk'));
+        const apkAsset = latestReleaseData.assets.find(a => a.name.includes('arm64') || a.name.endsWith('.apk'));
         if (apkAsset && apkAsset.browser_download_url) {
           targetUrl = apkAsset.browser_download_url;
         }
-      }
-
-      if (!targetUrl) {
-        targetUrl = fallbackUrl;
       }
 
       // Automatically trigger file download
       window.location.href = targetUrl;
     }
 
-    // Fetch latest release tag from GitHub
-    fetch('https://api.github.com/repos/xtros/Muziso/releases/latest')
+    // Fetch latest release tag from GitHub xtros/Muziso-Android
+    fetch('https://api.github.com/repos/xtros/Muziso-Android/releases/latest')
       .then(res => res.json())
       .then(data => {
         if (data && data.tag_name) {

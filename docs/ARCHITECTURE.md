@@ -1,14 +1,15 @@
 # 🏗️ Muziso Android Architecture Documentation
 
-**Current Version:** v0.1.8  
+**Current Version:** v1.0.1 (CI Build #20, Commit [`4126588`](https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190))  
+**Repository:** [`xtros/Muziso-Android`](https://github.com/xtros/Muziso-Android)  
 **Target Platform:** Android 8.0 (API 26) to Android 15 (API 35)  
-**Primary Language:** Kotlin  
+**Primary Language:** Kotlin (Coroutines, StateFlow, Jetpack Media3, Room SQLite)
 
 ---
 
 ## 🌟 Architecture Overview
 
-Muziso Android is engineered as a pure native Android application prioritizing low-latency 320 kbps audio streaming, background lifecycle resilience, hardware audio offload, and battery conservation.
+Muziso Android is engineered as a pure native Android application prioritizing low-latency 320 kbps audio streaming, background lifecycle resilience, hardware audio offload, synchronized multi-source lyrics, and battery conservation.
 
 ---
 
@@ -24,47 +25,45 @@ Muziso Android is engineered as a pure native Android application prioritizing l
 │                   Foreground Audio Service                      │
 │            (MediaSessionCompat, Audio Focus Manager)            │
 ├─────────────────────┬──────────────────┬────────────────────────┤
-│ Playback Engine     │ Persistence      │ Network & CDN          │
-│ - Jetpack Media3    │ - Room Database  │ - OkHttp Client        │
-│ - ExoPlayer 320kbps │ - Encrypted DAO  │ - JioSaavn API Engine  │
-│ - Hardware Offload  │ - Offline Cache  │ - Spotify Art Resolver │
+│ Playback Engine     │ Persistence      │ Network & Stream Hub   │
+│ - Jetpack Media3    │ - Room Database  │ - JioSaavn 320kbps CDN │
+│ - ExoPlayer 320kbps │ - Encrypted DAO  │ - Innertube / YouTube  │
+│ - Hardware Offload  │ - Offline Cache  │ - KuGou / LrcLib Lyric │
+│ - 10-Band EQ DSP    │ - DataStore Pref │ - Spotify 640x640 Art  │
 └─────────────────────┴──────────────────┴────────────────────────┘
 ```
 
 ---
 
-## 🎧 Audio Engine & Stream Resolvers
+## 🎧 Audio Engine & Multi-Source Stream Resolvers
 
-Muziso implements a dedicated Android audio resolution pipeline:
+Muziso implements a robust, modular audio resolution pipeline:
 
-1. **JioSaavn 320 kbps Direct CDN Resolver**:
-   - Audio URLs are resolved in **<30ms** via Strategy 0 direct API lookup (`song.getDetails&pids={id}`).
+1. **JioSaavn 320 kbps Direct CDN Resolver (`JioSaavnPlaybackResolver`)**:
+   - Audio URLs are resolved in **<30ms** via direct API lookup.
    - Bitstreams are fetched directly from high-speed 320 kbps CDN endpoints without transcoding delay.
 
-2. **Jetpack Media3 & ExoPlayer Pipeline**:
+2. **Innertube & YouTube Streaming Engine with PO Token**:
+   - Resilient stream resolution utilizing guest clients (`IPADOS`, `ANDROID_NO_SDK`, `ANDROID_VR_NO_AUTH`).
+   - Integrated Proof-of-Origin (PO) token support for reliable bitstream retrieval.
+
+3. **Jetpack Media3 & ExoPlayer Pipeline**:
    - Leverages hardware audio offloading and gapless buffer preloading.
    - Coordinates with `MediaSessionCompat` to keep background music active when screen is locked or other apps are open.
 
-3. **Audio Focus & Noisy Audio Intent**:
+4. **Audio Focus & Noisy Audio Intent**:
    - Listens for `ACTION_AUDIO_BECOMING_NOISY` to automatically pause when wired headphones or Bluetooth devices disconnect.
    - Automatically handles incoming phone calls and transient audio focus shifts.
 
 ---
 
-## 🎨 Guaranteed Official Cover Image Engine
+## 📜 Lyrics & Metadata Recognition Engines
 
-1. **Deep Metadata Extraction**:
-   - Parses `item["image"]`, `item["more_info"]["image"]`, and `item["album_image"]`, scaling thumbnails up to **500x500 official high-res album covers**.
-
-2. **Spotify Cover Enrichment Resolver**:
-   - Any track lacking a verified cover image is enriched asynchronously via Spotify's official Web API, returning verified **640x640 album artwork**.
-
----
-
-## 🔄 Smart Version-Preserving Deduplication Engine
-
-- **Compilation Collapse**: Strips redundant album compilation prefixes to collapse duplicate entries of the same song across compilation albums into 1 clean listing.
-- **Version Protection**: Preserves version descriptor keywords (`Remix`, `Reprise`, `Unplugged`, `Acoustic`, `Lofi`, `Extended`, `Instrumental`, `Tamil`, `Telugu`, `Hindi`, `Malayalam`, `Kannada`) so alternate studio recordings remain distinct.
+- **LrcLib & KuGou**: Synchronized line-by-line and syllable-by-syllable timed lyrics parser (`TTMLParser`).
+- **Musixmatch & SimpMusic**: Extended crowdsourced lyrics fallback.
+- **ShazamKit**: In-app acoustic fingerprinting and audio song recognition.
+- **LastFM**: Real-time scrobbling and playback statistics sync.
+- **Spotify Cover Enrichment**: Resolves verified **640x640 album artwork** automatically.
 
 ---
 
