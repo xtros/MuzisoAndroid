@@ -81,7 +81,7 @@
       padding-right: var(--safe-right);
     }
 
-    /* WebGL Background Canvas with Dark Vignette Overlay */
+    /* WebGL Background Canvas - Crystal Clear & Sharp */
     .color-bends-bg {
       position: fixed;
       top: 0;
@@ -90,9 +90,9 @@
       height: 100%;
       z-index: 0;
       pointer-events: none;
-      filter: blur(4px);
-      -webkit-filter: blur(4px);
-      opacity: 0.55;
+      filter: none;
+      -webkit-filter: none;
+      opacity: 0.88;
     }
     #shader-canvas {
       display: block;
@@ -104,7 +104,7 @@
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background: radial-gradient(circle at 50% 20%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.88) 70%, #000000 100%);
+      background: radial-gradient(circle at 50% 25%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, rgba(0, 0, 0, 0.85) 100%);
     }
 
     /* Layout Container */
@@ -2104,21 +2104,17 @@ cd MuzisoAndroid
         }
       `;
 
-      // GLSL domain-warping fluid shader in pure high-contrast Black & White
+      // GLSL domain-warping fluid shader in pure high-contrast crisp Black & White
       const fragmentShaderSource = `
         precision highp float;
         uniform vec2 uResolution;
         uniform float uTime;
         uniform vec2 uPointer;
 
-        // Pure Monochrome / Black and White palette
-        const vec3 cPitchDark = vec3(0.0, 0.0, 0.0);       // Pure Black (#000000)
-        const vec3 cPureWhite = vec3(1.0, 1.0, 1.0);       // Pure White (#ffffff)
-        const vec3 cSilver    = vec3(0.72, 0.74, 0.78);    // Silver / Smoke (#b8bcc7)
-
-        float hash(vec2 p) {
-          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-        }
+        // Pure Monochrome / Black and White palette with crisp silver metallic highlights
+        const vec3 cPitchDark = vec3(0.01, 0.01, 0.02);      // Pure Deep Black (#000000)
+        const vec3 cPureWhite = vec3(1.0, 1.0, 1.0);         // Pure Crisp White (#ffffff)
+        const vec3 cSilver    = vec3(0.82, 0.84, 0.88);      // Sharp Silver / Smoke (#d1d5db)
 
         void main() {
           vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / min(uResolution.x, uResolution.y);
@@ -2129,7 +2125,7 @@ cd MuzisoAndroid
 
           float t = uTime * 0.18;
 
-          // Domain warping fluid sine iterations
+          // Domain warping fluid sine iterations for rich organic waves
           for (int i = 1; i < 4; i++) {
             float fi = float(i);
             p.x += 0.38 / fi * sin(fi * 2.6 * p.y + t + uPointer.x * 0.8);
@@ -2137,18 +2133,14 @@ cd MuzisoAndroid
           }
 
           float wave = sin(p.x * 2.2 + p.y * 1.8 + t);
-          float pattern = smoothstep(-0.85, 0.85, wave);
+          float pattern = smoothstep(-0.8, 0.8, wave);
 
-          vec3 col = mix(cPitchDark, cPureWhite * 0.85, pattern);
+          vec3 col = mix(cPitchDark, cPureWhite * 0.9, pattern);
 
           float detail = cos(p.y * 3.8 - t * 0.7);
-          col = mix(col, cSilver, smoothstep(-0.15, 0.9, detail) * 0.55);
+          col = mix(col, cSilver, smoothstep(-0.1, 0.85, detail) * 0.6);
 
-          // Subtle analog film grain texture
-          float noise = hash(gl_FragCoord.xy + fract(uTime) * 100.0) * 0.03;
-          col += noise;
-
-          gl_FragColor = vec4(col, 0.92);
+          gl_FragColor = vec4(col, 1.0);
         }
       `;
 
@@ -2202,6 +2194,13 @@ cd MuzisoAndroid
         targetPointer.x = (e.clientX / window.innerWidth) * 2 - 1;
         targetPointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
       });
+
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          targetPointer.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+          targetPointer.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+        }
+      }, { passive: true });
 
       function resize() {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
