@@ -81,7 +81,9 @@
       padding-right: var(--safe-right);
     }
 
-    /* WebGL Background Canvas - Crystal Clear & Sharp */
+    /* ==========================================================================
+       Exact iuno.lol ColorBends Background (Black & White Edition)
+       ========================================================================== */
     .color-bends-bg {
       position: fixed;
       top: 0;
@@ -90,21 +92,15 @@
       height: 100%;
       z-index: 0;
       pointer-events: none;
-      filter: none;
-      -webkit-filter: none;
-      opacity: 0.88;
+      filter: blur(3px);
+      -webkit-filter: blur(3px);
+      opacity: 0.95;
+      background: #080808;
     }
     #shader-canvas {
       display: block;
       width: 100%;
       height: 100%;
-    }
-    .bg-vignette {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background: radial-gradient(circle at 50% 25%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, rgba(0, 0, 0, 0.85) 100%);
     }
 
     /* Layout Container */
@@ -1053,11 +1049,10 @@
 </head>
 <body>
 
-  <!-- WebGL Fluid Canvas with Dark Monochrome Shader -->
+  <!-- Exact iuno.lol ColorBends WebGL Fluid Canvas (Black & White Edition) -->
   <div class="color-bends-bg">
     <canvas id="shader-canvas"></canvas>
   </div>
-  <div class="bg-vignette"></div>
 
   <!-- Header -->
   <header>
@@ -2089,7 +2084,7 @@ cd MuzisoAndroid
     }
 
     // =========================================================================
-    // 🌌 Black & White WebGL Domain-Warped Fluid Canvas Shader (iuno.lol B&W)
+    // 🌌 Exact iuno.lol ColorBends WebGL Fluid Shader (Black & White Edition)
     // =========================================================================
     (function initColorBends() {
       const canvas = document.getElementById('shader-canvas');
@@ -2104,41 +2099,76 @@ cd MuzisoAndroid
         }
       `;
 
-      // GLSL domain-warping fluid shader in pure high-contrast crisp Black & White
+      // GLSL ColorBends shader adapted from iuno.lol to high-contrast Black & White
       const fragmentShaderSource = `
         precision highp float;
         uniform vec2 uResolution;
         uniform float uTime;
         uniform vec2 uPointer;
 
-        // Pure Monochrome / Black and White palette with crisp silver metallic highlights
-        const vec3 cPitchDark = vec3(0.01, 0.01, 0.02);      // Pure Deep Black (#000000)
-        const vec3 cPureWhite = vec3(1.0, 1.0, 1.0);         // Pure Crisp White (#ffffff)
-        const vec3 cSilver    = vec3(0.82, 0.84, 0.88);      // Sharp Silver / Smoke (#d1d5db)
+        // Exact iuno ColorBends 3-color palette in Monochrome:
+        // Color 1: #ffffff (White ribbons)
+        // Color 2: #080808 (Deep pitch canvas)
+        // Color 3: #9ca3af (Silver-grey midtones)
+        const vec3 cColor1 = vec3(1.0, 1.0, 1.0);
+        const vec3 cColor2 = vec3(0.03, 0.03, 0.035);
+        const vec3 cColor3 = vec3(0.60, 0.63, 0.68);
+
+        mat2 rot(float a) {
+          float s = sin(a);
+          float c = cos(a);
+          return mat2(c, -s, s, c);
+        }
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(
+            mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+            mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+            u.y
+          );
+        }
 
         void main() {
           vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / min(uResolution.x, uResolution.y);
-          vec2 p = uv * 1.5;
 
-          // Smooth pointer tracking influence
-          p += uPointer * 0.35;
+          // 1. Rotation: 90 degrees (slanted vertical light streams)
+          uv = rot(1.5707963) * uv;
 
-          float t = uTime * 0.18;
+          // 2. Mouse Influence & Parallax (mouseInfluence = 0.8, parallax = 0.5)
+          uv += uPointer * 0.18;
 
-          // Domain warping fluid sine iterations for rich organic waves
-          for (int i = 1; i < 4; i++) {
-            float fi = float(i);
-            p.x += 0.38 / fi * sin(fi * 2.6 * p.y + t + uPointer.x * 0.8);
-            p.y += 0.38 / fi * cos(fi * 2.6 * p.x - t + uPointer.y * 0.8);
-          }
+          // 3. Speed & Time progression (speed = 0.15)
+          float t = uTime * 0.15;
 
-          float wave = sin(p.x * 2.2 + p.y * 1.8 + t);
-          float pattern = smoothstep(-0.8, 0.8, wave);
+          // 4. Scale & Frequency coordinates (scale = 1.0, frequency = 1.0)
+          vec2 p = uv * 1.6;
 
-          vec3 col = mix(cPitchDark, cPureWhite * 0.9, pattern);
+          // 5. Domain Warping with Simplex/Noise (warpStrength = 1.0)
+          float n1 = noise(p * 1.2 + vec2(t * 0.35, -t * 0.25));
+          float n2 = noise(p * 1.4 + n1 * 1.5 + vec2(-t * 0.2, t * 0.3));
 
-          float detail = cos(p.y * 3.8 - t * 0.7);
-          col = mix(col, cSilver, smoothstep(-0.1, 0.85, detail) * 0.6);
+          // 6. Multi-Frequency Wave Generation (bandWidth = 6, intensity = 0.4)
+          float w1 = sin(p.y * 3.2 + n2 * 2.8 + t);
+          float w2 = cos(p.x * 2.1 - n1 * 2.4 - t * 0.75);
+          float wave = (w1 + w2) * 0.5;
+
+          // Smooth band distribution
+          float band = smoothstep(-0.55, 0.55, wave);
+          float highlight = smoothstep(0.15, 0.9, w1 * w2);
+
+          // 7. 3-Color Blend: Black Base -> Silver Midtone -> White Ribbon Ribs
+          vec3 col = mix(cColor2, cColor3 * 0.85, band);
+          col = mix(col, cColor1, highlight * 0.9);
+
+          // Ambient vignetted lighting from center
+          col += cColor1 * (0.05 * (1.0 - length(uv * 0.4)));
 
           gl_FragColor = vec4(col, 1.0);
         }
