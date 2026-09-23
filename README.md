@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android%208.0+-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android 8.0+" />
   <img src="https://img.shields.io/badge/Architecture-Kotlin%20%7C%20Jetpack%20Media3-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin Android" />
-  <a href="https://github.com/xtros/Muziso-Android/releases"><img src="https://img.shields.io/github/v/release/xtros/Muziso-Android?color=ffffff&label=Release%20v1.0.1&style=for-the-badge" alt="Latest Release v1.0.1" /></a>
+  <a href="https://github.com/xtros/Muziso-Android/releases"><img src="https://img.shields.io/github/v/release/xtros/Muziso-Android?color=ffffff&label=Release%20v1.0.0&style=for-the-badge" alt="Latest Release v1.0.0" /></a>
   <a href="https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870"><img src="https://img.shields.io/badge/Build%20%2327-9f38a40-ffffff?style=for-the-badge&logo=githubactions&logoColor=black" alt="Build 27" /></a>
   <a href="https://github.com/xtros/Muziso-Android/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-ffffff?style=for-the-badge" alt="MIT License" /></a>
 </p>
@@ -32,7 +32,7 @@
 
 ---
 
-## 🌟 Key Features (v1.0.1)
+## 🌟 Key Features (v1.0.0)
 
 - 🚀 **Sub-30ms 320 kbps Streaming**: Direct JioSaavn bitstream resolution with zero buffering delay.
 - 📺 **Innertube & YouTube Engine**: Seamless background stream resolution with fallback client profiles (`IPADOS`, `ANDROID_NO_SDK`) and PO tokens.
@@ -54,12 +54,12 @@ Compiled from commit **[`9f38a40`](https://github.com/xtros/Muziso-Android/commi
 
 | Variant | Target Architecture | Description | Download |
 | :--- | :--- | :--- | :--- |
-| **`Muziso-arm64.apk`** | ARM64-v8a | **Recommended for all modern phones** | [Download ARM64](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-arm64.apk) |
-| **`Muziso.apk`** | Universal FOSS | All devices, 100% open source dependencies | [Download Universal](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso.apk) |
-| **`Muziso-with-Google-Cast.apk`** | Universal GMS | Universal build with Google Cast support | [Download Google Cast](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-with-Google-Cast.apk) |
-| **`Muziso-armeabi.apk`** | ARMv7 (32-bit) | Older 32-bit ARM Android devices | [Download ARMv7](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-armeabi.apk) |
-| **`Muziso-x86_64.apk`** | x86_64 | Android Studio Emulators, WSA, ChromeOS | [Download x86_64](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-x86_64.apk) |
-| **`Muziso-x86.apk`** | x86 (32-bit) | Legacy 32-bit x86 emulators | [Download x86](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-x86.apk) |
+| **`Muziso-arm64.apk`** | ARM64-v8a | **Recommended for all modern phones** | [Download ARM64](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-arm64.apk) |
+| **`Muziso.apk`** | Universal FOSS | All devices, 100% open source dependencies | [Download Universal](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso.apk) |
+| **`Muziso-with-Google-Cast.apk`** | Universal GMS | Universal build with Google Cast support | [Download Google Cast](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-with-Google-Cast.apk) |
+| **`Muziso-armeabi.apk`** | ARMv7 (32-bit) | Older 32-bit ARM Android devices | [Download ARMv7](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-armeabi.apk) |
+| **`Muziso-x86_64.apk`** | x86_64 | Android Studio Emulators, WSA, ChromeOS | [Download x86_64](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-x86_64.apk) |
+| **`Muziso-x86.apk`** | x86 (32-bit) | Legacy 32-bit x86 emulators | [Download x86](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-x86.apk) |
 
 ---
 

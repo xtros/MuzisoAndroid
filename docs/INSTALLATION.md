@@ -1,6 +1,6 @@
 # ⚡ Muziso Android Installation & Build Guide
 
-Official installation and developer build guide for **Muziso Android** (v1.0.1, CI Build #27).
+Official installation and developer build guide for **Muziso Android** (v1.0.0, CI Build #27).
 
 Source & Release repository: **[`xtros/Muziso-Android`](https://github.com/xtros/Muziso-Android)**  
 Build #27 Commit Reference: **[`9f38a40`](https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870)**
@@ -11,12 +11,12 @@ Build #27 Commit Reference: **[`9f38a40`](https://github.com/xtros/Muziso-Androi
 
 | Package Name | Architecture / Flavor | Recommended For | Download Link |
 | :--- | :--- | :--- | :--- |
-| **`Muziso-arm64.apk`** | ARM64-v8a (Standalone) | **All modern Android devices** (Pixel, Galaxy, OnePlus, Xiaomi) | [Download ARM64](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-arm64.apk) |
-| **`Muziso.apk`** | Universal FOSS | All devices, 100% Free & Open Source build | [Download Universal FOSS](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso.apk) |
-| **`Muziso-with-Google-Cast.apk`** | Universal GMS + Google Cast | Devices with Google Cast / Chromecast audio | [Download Google Cast APK](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-with-Google-Cast.apk) |
-| **`Muziso-armeabi.apk`** | ARMv7 (32-bit Standalone) | Legacy 32-bit Android phones | [Download ARMv7](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-armeabi.apk) |
-| **`Muziso-x86_64.apk`** | x86_64 Standalone | Android Studio Emulator, WSA, ChromeOS | [Download x86_64](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-x86_64.apk) |
-| **`Muziso-x86.apk`** | x86 (32-bit Standalone) | Legacy 32-bit x86 emulators | [Download x86](https://github.com/xtros/Muziso-Android/releases/download/v1.0.1/Muziso-x86.apk) |
+| **`Muziso-arm64.apk`** | ARM64-v8a (Standalone) | **All modern Android devices** (Pixel, Galaxy, OnePlus, Xiaomi) | [Download ARM64](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-arm64.apk) |
+| **`Muziso.apk`** | Universal FOSS | All devices, 100% Free & Open Source build | [Download Universal FOSS](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso.apk) |
+| **`Muziso-with-Google-Cast.apk`** | Universal GMS + Google Cast | Devices with Google Cast / Chromecast audio | [Download Google Cast APK](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-with-Google-Cast.apk) |
+| **`Muziso-armeabi.apk`** | ARMv7 (32-bit Standalone) | Legacy 32-bit Android phones | [Download ARMv7](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-armeabi.apk) |
+| **`Muziso-x86_64.apk`** | x86_64 Standalone | Android Studio Emulator, WSA, ChromeOS | [Download x86_64](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-x86_64.apk) |
+| **`Muziso-x86.apk`** | x86 (32-bit Standalone) | Legacy 32-bit x86 emulators | [Download x86](https://github.com/xtros/Muziso-Android/releases/download/v1.0.0/Muziso-x86.apk) |
 
 ---
 
