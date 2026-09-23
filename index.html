@@ -240,26 +240,6 @@
       align-items: center;
       gap: 0.5rem;
     }
-    .nav-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      border: 1px solid var(--border-subtle);
-      padding: 0.45rem 0.85rem;
-      border-radius: 8px;
-      font-size: 0.84rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      min-height: 40px;
-    }
-    .nav-btn:hover {
-      background: rgba(255, 255, 255, 0.16);
-      border-color: rgba(255, 255, 255, 0.4);
-      color: #fff;
-    }
 
     /* Mobile Header Action / Quick Install Button */
     .mobile-header-download {
@@ -286,55 +266,29 @@
       }
     }
 
-    /* Mobile Top Menu Toggle Button */
-    .mobile-menu-btn {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      width: 44px;
-      height: 44px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.2s;
-    }
-    @media (min-width: 1024px) {
-      .mobile-menu-btn {
-        display: none;
-      }
-    }
-    .mobile-menu-btn span {
-      display: block;
-      width: 18px;
-      height: 2px;
-      background-color: #ffffff;
-      transition: all 0.3s ease;
-      border-radius: 2px;
-    }
-
     /* ==========================================================================
-       Native App Mobile Bottom Navigation Bar (Thumb Zone)
+       Native App Mobile Bottom Navigation Bar (Thumb Zone) - 5 Equal Grid Columns
        ========================================================================== */
     .mobile-bottom-nav {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
+      width: 100vw;
+      max-width: 100%;
       z-index: 200;
       height: calc(var(--bottom-nav-height) + var(--safe-bottom));
-      padding-bottom: var(--safe-bottom);
-      background: rgba(10, 10, 14, 0.92);
+      padding: 0 0.15rem var(--safe-bottom);
+      box-sizing: border-box;
+      background: rgba(10, 10, 14, 0.94);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border-top: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.85);
       align-items: center;
-      justify-content: space-around;
+      justify-items: center;
     }
     @media (min-width: 1024px) {
       .mobile-bottom-nav {
@@ -347,20 +301,35 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex: 1;
+      width: 100%;
+      min-width: 0;
       height: 100%;
       color: #8e8e93;
       text-decoration: none;
-      font-size: 0.68rem;
+      font-size: clamp(0.58rem, 2.3vw, 0.68rem);
       font-weight: 500;
-      gap: 3px;
+      gap: 2px;
       cursor: pointer;
       position: relative;
       transition: color 0.18s ease;
       user-select: none;
       touch-action: manipulation;
+      box-sizing: border-box;
+      padding: 2px 1px;
+    }
+    .b-nav-item span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      display: block;
+      line-height: 1.2;
+      text-align: center;
     }
     .b-nav-item svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
       transition: transform 0.18s ease, stroke 0.18s ease;
     }
     .b-nav-item:active {
@@ -372,17 +341,17 @@
     }
     .b-nav-item.active svg {
       stroke: #ffffff;
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
     .b-nav-item.active::after {
       content: '';
       position: absolute;
-      top: 6px;
-      width: 16px;
-      height: 3px;
+      top: 4px;
+      width: 12px;
+      height: 2.5px;
       background: #ffffff;
       border-radius: 999px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
     }
 
     /* Highlighted Download Action Tab in Bottom Bar */
@@ -390,19 +359,20 @@
       color: #ffffff;
     }
     .b-nav-item.download-tab .b-nav-icon-wrap {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       background: #ffffff;
       color: #000000;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-      margin-top: -4px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      margin-top: -3px;
+      flex-shrink: 0;
     }
     .b-nav-item.download-tab.active .b-nav-icon-wrap {
-      box-shadow: 0 0 18px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
     }
 
     /* ==========================================================================
@@ -1465,17 +1435,6 @@
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           <span>Get APK</span>
         </a>
-
-        <a href="https://github.com/xtros/Muziso-Android" target="_blank" class="nav-btn" aria-label="GitHub Repository">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        </a>
-
-        <!-- Mobile More / Menu Button -->
-        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle Navigation Drawer" onclick="toggleBottomSheet()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </div>
   </header>
