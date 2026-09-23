@@ -18,14 +18,14 @@
 </p>
 
 <p align="center">
-  <b>Muziso Android</b> is a modern, powerful, and privacy-friendly Android music player engineered for <b>Android 6.0 to Android 15</b>. Built with <b>Native Kotlin 2.1</b>, <b>Jetpack Compose Material 3</b>, <b>Jetpack Media3 ExoPlayer</b>, and a dual streaming engine (YouTube Music &amp; JioSaavn 320 kbps), Muziso delivers synchronized word-by-word lyrics, offline "Hey Aura" voice control, real-time Listen Together rooms, Google Cast, SponsorBlock, 10-band hardware DSP Equalizer, and 100% offline encrypted privacy.
+  <b>Muziso Android</b> is a modern, powerful, and privacy-friendly Android music player engineered for <b>Android 6.0 to Android 15</b>. Built with <b>Native Kotlin 2.1</b>, <b>Jetpack Compose Material 3</b>, <b>Jetpack Media3 ExoPlayer</b>, and a dual streaming engine (YouTube Music &amp; JioSaavn 320 kbps), Muziso delivers synchronized word-by-word lyrics, real-time Listen Together rooms, Google Cast, SponsorBlock, 10-band hardware DSP Equalizer, and 100% offline encrypted privacy.
 </p>
 
 ---
 
 ## 📚 Documentation & Guides
 
-- 🏗️ **[Architecture Guide](docs/ARCHITECTURE.md)**: Deep dive into Android Audio Service, ExoPlayer Media3, VOSK Voice AI, and Room SQLite database.
+- 🏗️ **[Architecture Guide](docs/ARCHITECTURE.md)**: Deep dive into Android Audio Service, ExoPlayer Media3, and Room SQLite database.
 - ⚡ **[Installation & Sideload Guide](docs/INSTALLATION.md)**: Step-by-step APK sideloading instructions and Gradle compilation.
 - 🤝 **[Contributing & Bug Hunter Program](docs/CONTRIBUTING.md)**: Android contribution standards and issue templates.
 - 🔒 **[Privacy Policy](docs/PRIVACY.md)**: 100% offline-first privacy architecture, zero telemetry.
@@ -47,10 +47,9 @@
 - **6-Provider Aggregation Network**: Aggregates lyrics from **BetterLyrics**, **Musixmatch**, **LRCLib**, **KuGou**, **RushLyrics**, and **SimpMusic**.
 - **Romanization & Live Translations**: Phonetic romanization for non-Latin scripts (Japanese, Korean, Chinese, Hindi) and real-time multi-language translation.
 
-### 🎙️ Offline Voice Control AI ("Hey Aura")
-- **VOSK On-Device Speech Engine**: 100% private, on-device wake-word detection (*"Hey Aura"*) and natural voice command parser.
-- **Acoustic Echo Cancellation (AEC)**: Hardware noise suppression and echo cancellation for reliable voice detection even while loud music is playing.
-- **Text-to-Speech (TTS) Voice Feedback**: Spoken feedback confirmations for track selection, queue management, and volume changes.
+### 🖼️ Spotify 640x640 Artwork & Discovery
+- **Official Spotify 640x640 Artwork Engine**: Automatic high-resolution album cover resolver fetching official artwork across search results and discographies.
+- **Offline Download & Local Caching**: Save streaming tracks locally for immediate offline playback with custom metadata and artwork indexing.
 
 ### 🎛️ Audio Engine & Hardware DSP
 - **10-Band Graphic Equalizer**: 31Hz–16kHz frequency faders with live visual EQ curve, bass boost, and acoustic presets.

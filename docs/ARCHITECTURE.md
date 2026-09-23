@@ -9,7 +9,7 @@
 
 ## 🌟 Architecture Overview
 
-Muziso Android is engineered as a pure native Android application prioritizing low-latency 320 kbps audio streaming, background lifecycle resilience, hardware audio offload, synchronized multi-source lyrics, on-device AI voice control, real-time social listening, and battery conservation.
+Muziso Android is engineered as a pure native Android application prioritizing low-latency 320 kbps audio streaming, background lifecycle resilience, hardware audio offload, synchronized multi-source lyrics, real-time social listening, and battery conservation.
 
 ---
 
@@ -30,7 +30,7 @@ Muziso Android is engineered as a pure native Android application prioritizing l
 │ - ExoPlayer 320kbps │ - Encrypted DAOs │ - JioSaavn 320kbps Bitstream  │
 │ - 10-Band Graphic EQ│ - Offline Cache  │ - 6 Lyrics Providers (Sync)   │
 │ - ReplayGain / LUFS │ - DataStore Pref │ - SponsorBlock & ShazamKit    │
-│ - VOSK Voice AI     │ - Sandboxed Storage│ - MuzisoServer (WebSocket) │
+│ - Hardware Offload  │ - Sandboxed Storage│ - MuzisoServer (WebSocket) │
 └─────────────────────┴──────────────────┴───────────────────────────────┘
 ```
 
@@ -40,7 +40,7 @@ Muziso Android is engineered as a pure native Android application prioritizing l
 
 | Submodule / Directory | Layer | Purpose & Responsibilities |
 | :--- | :--- | :--- |
-| **`:app`** | Core Android | Jetpack Compose UI, MediaSessionService, Navigation, Equalizer DSP, and VOSK Voice AI integration. |
+| **`:app`** | Core Android | Jetpack Compose UI, MediaSessionService, Navigation, Equalizer DSP, and Material 3 design system. |
 | **`:innertube`** | Streaming Engine | YouTube Music API client with PO Token generation, account login sync, and client profile fallback (`IPADOS`, `ANDROID_NO_SDK`). |
 | **`:flow`** | Stream Extractor | High-speed YouTube audio stream URL and format extraction. |
 | **`:betterlyrics`** | Synced Lyrics | Syllable-by-syllable and word-level synchronized karaoke lyrics parser. |
@@ -71,14 +71,6 @@ Muziso implements a dual-engine audio pipeline:
    - Hardware audio offloading and gapless buffer preloading.
    - Background playback managed via `MediaSessionCompat` foreground service.
    - Audio focus handling (`ACTION_AUDIO_BECOMING_NOISY` auto-pause on headphone disconnect).
-
----
-
-## 🎙️ Offline Voice Control AI ("Hey Aura")
-
-- **VOSK On-Device Speech Recognizer**: Runs completely offline with no network dependencies.
-- **Acoustic Echo Cancellation (AEC)**: Hardware noise suppression enables hands-free wake word recognition even while music is blasting.
-- **Spoken TTS Feedback**: Native Text-to-Speech confirmations for track changes, queue updates, and volume controls.
 
 ---
 
