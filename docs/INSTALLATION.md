@@ -1,13 +1,13 @@
 # ⚡ Muziso Android Installation & Build Guide
 
-Official installation and developer build guide for **Muziso Android** (v1.0.1, CI Build #20).
+Official installation and developer build guide for **Muziso Android** (v1.0.1, CI Build #27).
 
 Source & Release repository: **[`xtros/Muziso-Android`](https://github.com/xtros/Muziso-Android)**  
-Build #20 Commit Reference: **[`4126588`](https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190)**
+Build #27 Commit Reference: **[`9f38a40`](https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870)**
 
 ---
 
-## 📥 End-User APK Installation Matrix (Build #20)
+## 📥 End-User APK Installation Matrix (Build #27)
 
 | Package Name | Architecture / Flavor | Recommended For | Download Link |
 | :--- | :--- | :--- | :--- |

@@ -1,6 +1,6 @@
 # 🏗️ Muziso Android Architecture Documentation
 
-**Current Version:** v1.0.1 (CI Build #20, Commit [`4126588`](https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190))  
+**Current Version:** v1.0.1 (CI Build #27, Commit [`9f38a40`](https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870))  
 **Repository:** [`xtros/Muziso-Android`](https://github.com/xtros/Muziso-Android)  
 **Target Platform:** Android 8.0 (API 26) to Android 15 (API 35)  
 **Primary Language:** Kotlin (Coroutines, StateFlow, Jetpack Media3, Room SQLite)

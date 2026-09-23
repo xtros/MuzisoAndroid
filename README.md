@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/badge/Platform-Android%208.0+-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android 8.0+" />
   <img src="https://img.shields.io/badge/Architecture-Kotlin%20%7C%20Jetpack%20Media3-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin Android" />
   <a href="https://github.com/xtros/Muziso-Android/releases"><img src="https://img.shields.io/github/v/release/xtros/Muziso-Android?color=ffffff&label=Release%20v1.0.1&style=for-the-badge" alt="Latest Release v1.0.1" /></a>
-  <a href="https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190"><img src="https://img.shields.io/badge/Build%20%2320-4126588-ffffff?style=for-the-badge&logo=githubactions&logoColor=black" alt="Build 20" /></a>
+  <a href="https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870"><img src="https://img.shields.io/badge/Build%20%2327-9f38a40-ffffff?style=for-the-badge&logo=githubactions&logoColor=black" alt="Build 27" /></a>
   <a href="https://github.com/xtros/Muziso-Android/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-ffffff?style=for-the-badge" alt="MIT License" /></a>
 </p>
 
@@ -48,9 +48,9 @@
 
 ---
 
-## ⚡ APK Downloads Matrix (Build #20)
+## ⚡ APK Downloads Matrix (Build #27)
 
-Compiled from commit **[`4126588`](https://github.com/xtros/Muziso-Android/commit/4126588c43d27bc1a1865584b934931a0ef53190)** in [`xtros/Muziso-Android`](https://github.com/xtros/Muziso-Android):
+Compiled from commit **[`9f38a40`](https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870)** in [`xtros/Muziso-Android`](https://github.com/xtros/Muziso-Android):
 
 | Variant | Target Architecture | Description | Download |
 | :--- | :--- | :--- | :--- |
