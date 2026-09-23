@@ -111,3 +111,10 @@ cd Muziso-Android
 - **Software License**: Distributed under the **GNU General Public License v3.0 (GPL-3.0)**. See [`LICENSE`](https://github.com/xtros/Muziso-Android/blob/main/LICENSE) for details.
 - **Privacy Policy**: See **[Privacy Policy](docs/PRIVACY.md)** for data handling details.
 - **Terms & Conditions**: See **[Terms & Conditions](docs/TERMS.md)** for user agreements and media disclaimers.
+
+<br/>
+
+<div align="center">
+  <strong>Developed with ❤️ by <a href="https://github.com/xtros">Webs by JTS</a> for Muziso</strong>
+</div>
+
