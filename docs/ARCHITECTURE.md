@@ -1,4 +1,4 @@
-# 🏗️ Muziso Android Architecture Documentation
+# Muziso Android Architecture Documentation
 
 **Current Version:** v1.0.0 (CI Build #27, Commit [`9f38a40`](https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870))  
 **Repository:** [`xtros/Muziso-Android`](https://github.com/xtros/Muziso-Android)  
@@ -7,13 +7,13 @@
 
 ---
 
-## 🌟 Architecture Overview
+## Architecture Overview
 
 Muziso Android is engineered as a pure native Android application prioritizing low-latency 320 kbps audio streaming, background lifecycle resilience, hardware audio offload, synchronized multi-source lyrics, real-time social listening, and battery conservation.
 
 ---
 
-## 🏛️ High-Level System Architecture
+## High-Level System Architecture
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -36,7 +36,7 @@ Muziso Android is engineered as a pure native Android application prioritizing l
 
 ---
 
-## 📦 Submodules & Multi-Project Structure
+## Submodules & Multi-Project Structure
 
 | Submodule / Directory | Layer | Purpose & Responsibilities |
 | :--- | :--- | :--- |
@@ -54,7 +54,7 @@ Muziso Android is engineered as a pure native Android application prioritizing l
 
 ---
 
-## 🎧 Dual-Engine Streaming Pipeline
+## Dual-Engine Streaming Pipeline
 
 Muziso implements a dual-engine audio pipeline:
 
@@ -74,7 +74,7 @@ Muziso implements a dual-engine audio pipeline:
 
 ---
 
-## 🎛️ Audio DSP Engine
+## Audio DSP Engine
 
 - **10-Band Graphic Equalizer**: Custom frequency faders from 31Hz to 16kHz with live visual curve.
 - **Loudness Normalization**: ReplayGain & LUFS standard normalization.
@@ -83,7 +83,7 @@ Muziso implements a dual-engine audio pipeline:
 
 ---
 
-## 👥 Real-Time "Listen Together" & Social
+## Real-Time "Listen Together" & Social
 
 - **MuzisoServer WebSocket Client**: Sub-second synchronized group listening rooms with shared queue management.
 - **Discord Rich Presence**: Live playback status, album art, and progress bar broadcasted to Discord.
@@ -91,7 +91,7 @@ Muziso implements a dual-engine audio pipeline:
 
 ---
 
-## 💾 Local Persistence & Database Schema (Room SQLite)
+## Local Persistence & Database Schema (Room SQLite)
 
 All user data is stored strictly on the local device:
 - **Database**: Room SQLite database with typed DAOs and Kotlin Flow observers.

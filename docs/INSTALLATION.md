@@ -1,4 +1,4 @@
-# ⚡ Muziso Android Installation & Build Guide
+# Muziso Android Installation & Build Guide
 
 Official installation and developer build guide for **Muziso Android** (v1.0.0, CI Build #27).
 
@@ -7,7 +7,7 @@ Build #27 Commit Reference: **[`9f38a40`](https://github.com/xtros/Muziso-Androi
 
 ---
 
-## 📥 End-User APK Installation Matrix (Build #27)
+## End-User APK Installation Matrix (Build #27)
 
 | Package Name | Architecture / Flavor | Recommended For | Download Link |
 | :--- | :--- | :--- | :--- |
@@ -20,7 +20,7 @@ Build #27 Commit Reference: **[`9f38a40`](https://github.com/xtros/Muziso-Androi
 
 ---
 
-### 📱 Sideloading Instructions:
+### Sideloading Instructions:
 1. Download **`Muziso-arm64.apk`** (or your target architecture) on your Android phone or tablet.
 2. Open the downloaded `.apk` file from your notification tray or Downloads folder.
 3. If prompted with *"Install unknown apps"*, navigate to **Settings** &rarr; toggle on **"Allow from this source"**.
@@ -28,7 +28,7 @@ Build #27 Commit Reference: **[`9f38a40`](https://github.com/xtros/Muziso-Androi
 
 ---
 
-## 🛠️ Developer Build Instructions (Kotlin + Gradle)
+## Developer Build Instructions (Kotlin + Gradle)
 
 ### Prerequisites:
 - **JDK**: Java Development Kit 21 (`openjdk-21`)

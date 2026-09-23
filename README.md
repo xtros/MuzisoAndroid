@@ -1,4 +1,4 @@
-# 🤖 Muziso Android
+# Muziso Android
 
 <p align="center">
   <img src="assets/logo.png" alt="Muziso Official Logo" width="160" />
@@ -23,42 +23,42 @@
 
 ---
 
-## 📚 Documentation & Guides
+## Documentation & Guides
 
-- 🏗️ **[Architecture Guide](docs/ARCHITECTURE.md)**: Deep dive into Android Audio Service, ExoPlayer Media3, and Room SQLite database.
-- ⚡ **[Installation & Sideload Guide](docs/INSTALLATION.md)**: Step-by-step APK sideloading instructions and Gradle compilation.
-- 🤝 **[Contributing & Bug Hunter Program](docs/CONTRIBUTING.md)**: Android contribution standards and issue templates.
-- 🔒 **[Privacy Policy](docs/PRIVACY.md)**: 100% offline-first privacy architecture, zero telemetry.
-- ⚖️ **[Terms & Conditions](docs/TERMS.md)**: Open-source licensing terms and third-party media disclaimers.
+-  **[Architecture Guide](docs/ARCHITECTURE.md)**: Deep dive into Android Audio Service, ExoPlayer Media3, and Room SQLite database.
+-  **[Installation & Sideload Guide](docs/INSTALLATION.md)**: Step-by-step APK sideloading instructions and Gradle compilation.
+-  **[Contributing & Bug Hunter Program](docs/CONTRIBUTING.md)**: Android contribution standards and issue templates.
+-  **[Privacy Policy](docs/PRIVACY.md)**: 100% offline-first privacy architecture, zero telemetry.
+-  **[Terms & Conditions](docs/TERMS.md)**: Open-source licensing terms and third-party media disclaimers.
 
 ---
 
-## 🌟 Comprehensive Native App Features (v1.0.0)
+## Comprehensive Native App Features (v1.0.0)
 
-### 🎵 Playback & Dual Streaming
+### Playback & Dual Streaming
 - **YouTube Music & JioSaavn Dual Engine**: Stream any track, album, artist, or playlist with direct 320 kbps bitstream resolution.
 - **YouTube Music Account Sync**: Log in with your YouTube Music account to sync your personal library, liked songs, albums, and custom playlists.
 - **Innertube PO Token Engine**: Automatic PO Token generation and iOS/Android fallback client profiles (`IPADOS`, `ANDROID_NO_SDK`) to bypass throttling.
 - **SponsorBlock Integration**: Crowdsourced segment skipping to automatically bypass non-music intros, dialogue interludes, and sponsor segments.
 - **Smart Deduplication**: Collapses duplicate compilation albums while strictly preserving legitimate alternate studio recordings (Acoustic, Lofi, Tamil, Telugu, Hindi, etc.).
 
-### 📜 Synchronized Word-by-Word Lyrics
+### Synchronized Word-by-Word Lyrics
 - **Word & Syllable Highlighting**: Real-time karaoke-style syllable highlighting accurate to the millisecond.
 - **6-Provider Aggregation Network**: Aggregates lyrics from **BetterLyrics**, **Musixmatch**, **LRCLib**, **KuGou**, **RushLyrics**, and **SimpMusic**.
 - **Romanization & Live Translations**: Phonetic romanization for non-Latin scripts (Japanese, Korean, Chinese, Hindi) and real-time multi-language translation.
 
-### 🖼️ Spotify 640x640 Artwork & Discovery
+### Spotify 640x640 Artwork & Discovery
 - **Official Spotify 640x640 Artwork Engine**: Automatic high-resolution album cover resolver fetching official artwork across search results and discographies.
 - **Offline Download & Local Caching**: Save streaming tracks locally for immediate offline playback with custom metadata and artwork indexing.
 
-### 🎛️ Audio Engine & Hardware DSP
+### Audio Engine & Hardware DSP
 - **10-Band Graphic Equalizer**: 31Hz–16kHz frequency faders with live visual EQ curve, bass boost, and acoustic presets.
 - **ReplayGain & Volume Normalization**: Consistent LUFS loudness normalization across diverse audio sources.
 - **Silence Skipping**: Seamless gapless transitions by trimming silent intros and outros.
 - **Real-Time Pitch & Tempo Shifter**: Adjust playback speed (0.5x to 2.0x) and pitch on the fly without distortion.
 - **Sleep Timer with Fadeout**: Schedule playback shutdown with smooth audio fadeout.
 
-### 📡 Casting, Social & Tools
+### Casting, Social & Tools
 - **Real-Time "Listen Together"**: Synchronized group listening rooms with friends over WebSocket powered by **MuzisoServer**.
 - **Discord Rich Presence**: Live playback status, album art, and progress bar broadcasted directly to your Discord profile.
 - **Last.fm Scrobbling**: Automatic scrobbler integration for listening history and scrobble tracking.
@@ -66,13 +66,13 @@
 - **ShazamKit / ACRCloud Song Identifier**: Acoustic fingerprint recognition to identify songs playing nearby in the room.
 - **Muziso Wrapped**: Interactive monthly and annual listening statistics recap.
 
-### 🎨 Material 3 UI & Privacy
+### Material 3 UI & Privacy
 - **Dynamic Material You**: Wallpaper-driven dynamic color adaptation, Pure Black AMOLED mode, and customizable player canvases.
 - **100% Local Privacy**: Encrypted local Room SQLite database with zero telemetry, zero analytics scripts, and sandboxed offline caching.
 
 ---
 
-## ⚡ APK Downloads Matrix (Build #27)
+## APK Downloads Matrix (Build #27)
 
 Compiled from commit **[`9f38a40`](https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870)** in [`xtros/Muziso-Android`](https://github.com/xtros/Muziso-Android):
 
@@ -87,7 +87,7 @@ Compiled from commit **[`9f38a40`](https://github.com/xtros/Muziso-Android/commi
 
 ---
 
-## 🛠️ Developer Build Instructions
+## Developer Build Instructions
 
 ```bash
 # 1. Clone the repository
@@ -106,7 +106,7 @@ cd Muziso-Android
 
 ---
 
-## 📜 License & Legal
+## License & Legal
 
 - **Software License**: Distributed under the **GNU General Public License v3.0 (GPL-3.0)**. See [`LICENSE`](https://github.com/xtros/Muziso-Android/blob/main/LICENSE) for details.
 - **Privacy Policy**: See **[Privacy Policy](docs/PRIVACY.md)** for data handling details.
@@ -115,6 +115,6 @@ cd Muziso-Android
 <br/>
 
 <div align="center">
-  <strong>Developed with ❤️ by <a href="https://github.com/xtros">Webs by JTS</a> for Muziso</strong>
+  <strong>Developed with  by <a href="https://github.com/xtros">Webs by JTS</a> for Muziso</strong>
 </div>
 

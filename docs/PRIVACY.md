@@ -1,11 +1,11 @@
-# 🔒 Muziso Privacy Policy
+# Muziso Privacy Policy
 
 **Effective Date:** February 19, 2026  
 **App Version:** v0.1.8  
 
 ---
 
-## 🛡️ Overview & Privacy Commitment
+## Overview & Privacy Commitment
 
 **Muziso** ("the Application") is an open-source desktop music player created by **Webs By JTS**. We respect your privacy and are committed to protecting your personal data. 
 
@@ -13,7 +13,7 @@ Muziso is designed around a **privacy-first, offline-capable architecture**. The
 
 ---
 
-## 📊 Data Collection & Usage
+## Data Collection & Usage
 
 ### 1. Local Storage & Database (`muziso.db`)
 - All user data—including liked songs, playlists, play counts, history, and app preferences—is stored **100% locally** on your device inside an encrypted/sandboxed SQLite database (`muziso.db`).
@@ -34,25 +34,25 @@ Muziso checks GitHub Releases for software updates using Tauri's updater plugin.
 
 ---
 
-## 🚫 Third-Party Analytics & Tracking
+## Third-Party Analytics & Tracking
 
 - Muziso contains **zero telemetry**, **zero analytics scripts**, and **zero tracking pixels**.
 - We do not use Google Analytics, Mixpanel, Sentry, or any telemetry services.
 
 ---
 
-## 🔐 Children's Privacy
+## Children's Privacy
 
 Muziso is suitable for users of all ages. Because we do not collect any personal data, we do not knowingly request or store data from children under 13.
 
 ---
 
-## 📜 Changes to This Policy
+## Changes to This Policy
 
 We may update this Privacy Policy to reflect future software enhancements. Any modifications will be documented in official release notes and updated on the [GitHub Documentation Site](https://xtros.github.io/MuzisoAndroid/).
 
 ---
 
-## 📬 Contact Information
+## Contact Information
 
 For questions regarding this Privacy Policy or app security, please open an issue on the [GitHub Repository](https://github.com/xtros/Muziso/issues) or contact **Webs By JTS**.

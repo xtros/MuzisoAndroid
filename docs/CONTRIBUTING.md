@@ -1,10 +1,10 @@
-# 🤝 Contributing to Muziso & Bug Hunter Program
+# Contributing to Muziso & Bug Hunter Program
 
 Thank you for your interest in contributing to **Muziso**! We welcome open-source contributions, bug reports, feature proposals, and code improvements.
 
 ---
 
-## 🎯 Bug Hunter Reward Program
+## Bug Hunter Reward Program
 
 Found a functional playback bug, stream resolution failure, or UI glitch in **Muziso**? Help us keep the app stable and get recognized!
 
@@ -18,7 +18,7 @@ Found a functional playback bug, stream resolution failure, or UI glitch in **Mu
 
 ---
 
-## 🛠️ Pull Request Workflow
+## Pull Request Workflow
 
 1. **Fork the Repository**:
    Create your own fork of [Muziso on GitHub](https://github.com/xtros/Muziso).
@@ -39,7 +39,7 @@ Found a functional playback bug, stream resolution failure, or UI glitch in **Mu
 
 ---
 
-## 📜 Legal Policies & License
+## Legal Policies & License
 
 - **License**: By contributing to Muziso, you agree that your contributions will be licensed under the project's [MIT License](https://github.com/xtros/Muziso/blob/main/LICENSE).
 - **Privacy Policy**: Review our data protection policy in **[PRIVACY.md](PRIVACY.md)**.
