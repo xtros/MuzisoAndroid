@@ -2175,7 +2175,7 @@
           </div>
           <div class="hero-badge">
             <span class="hero-badge-dot"></span>
-            v1.0.0 Release (Build #27)
+            v1.0.0 Release
           </div>
           <div class="hero-badge">
             <span class="hero-badge-dot"></span>
@@ -2420,9 +2420,9 @@
       <div class="card" style="margin-bottom: 1.25rem;">
         <h2 style="font-family: var(--font-heading); font-size: clamp(1.3rem, 4.2vw, 1.8rem); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.65rem; color: #fff;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Muziso Android APK Downloads (Build #27)
+          Muziso Android APK Downloads
         </h2>
-        <p style="color: var(--text-muted); font-size: clamp(0.85rem, 2.7vw, 0.98rem);">Direct standalone APK binaries compiled from CI Build #27 (<a href="https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870" target="_blank" style="color: #fff; text-decoration: underline;">Commit 9f38a40</a>). Tap any button to download directly.</p>
+        <p style="color: var(--text-muted); font-size: clamp(0.85rem, 2.7vw, 0.98rem);">Direct standalone APK binaries. Tap any button to download directly.</p>
       </div>
 
       <!-- APK Matrix Grid -->
@@ -2539,9 +2539,9 @@
 
       <!-- Build Info & Git Reference -->
       <div class="card">
-        <h3 style="color: #fff; margin-bottom: 0.75rem; font-family: var(--font-heading); display: flex; align-items: center; gap: 0.5rem;"><span class="c-emoji"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> CI Build &amp; Source Verification:</h3>
+        <h3 style="color: #fff; margin-bottom: 0.75rem; font-family: var(--font-heading); display: flex; align-items: center; gap: 0.5rem;"><span class="c-emoji"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span> Build &amp; Source Verification:</h3>
         <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7;">
-          Every APK binary is built automatically through GitHub Actions CI pipeline in the <a href="https://github.com/xtros/Muziso-Android" target="_blank" style="color: #fff; text-decoration: underline;">xtros/Muziso-Android</a> repository. You can verify the build logs, commit hash <a href="https://github.com/xtros/Muziso-Android/commit/9f38a405f7e8e002a3653ef7c604f29e2e5fa870" target="_blank" style="color: #fff; text-decoration: underline;"><code>9f38a40</code></a>, and sha256 checksums in the <a href="https://github.com/xtros/Muziso-Android/actions/runs/35739918298" target="_blank" style="color: #fff; text-decoration: underline;">GitHub Actions Build #27</a> run.
+          Every APK binary is built automatically through the GitHub Actions CI pipeline in the <a href="https://github.com/xtros/Muziso-Android" target="_blank" style="color: #fff; text-decoration: underline;">xtros/Muziso-Android</a> repository. You can verify the workflow and sha256 checksums in the <a href="https://github.com/xtros/Muziso-Android/actions" target="_blank" style="color: #fff; text-decoration: underline;">GitHub Actions</a> runs.
         </p>
       </div>
     </section>
@@ -3020,7 +3020,7 @@ cd Muziso-Android
           <div class="output-meta-row">
             <span class="output-build-badge">
               <span class="pulse-dot"></span>
-              v1.0.0 Release (Build #27)
+              v1.0.0 Release
             </span>
             <span class="output-ticket-id" id="output-ticket-id">#MZ-BUG-2026-8742</span>
           </div>
@@ -3391,7 +3391,7 @@ cd Muziso-Android
       // Format Markdown Output
       let markdown = `# [${currentFeedbackType.toUpperCase()}] ${title}\n\n`;
       markdown += `**Ticket ID**: \`${ticketId}\`\n`;
-      markdown += `**Target Release**: \`v1.0.0 (Build #27 - commit 9f38a40)\`\n`;
+      markdown += `**Target Release**: \`v1.0.0 Release\`\n`;
       markdown += `**Category**: \`${category}\`\n`;
       markdown += `**Generated**: \`${timestamp}\`\n\n`;
       markdown += `## Description & Steps\n${desc}\n\n`;
@@ -3408,8 +3408,7 @@ cd Muziso-Android
       const jsonObject = {
         ticketId,
         type: currentFeedbackType,
-        targetBuild: "v1.0.0 Release (Build #27)",
-        commit: "9f38a40",
+        targetBuild: "v1.0.0 Release",
         timestamp,
         title,
         category,
@@ -3496,12 +3495,12 @@ cd Muziso-Android
       if (diagGrid) {
         diagGrid.innerHTML = `
           <div class="ticket-diag-item">
-            <span>Target Build</span>
-            <span>v1.0.0 (Build #27)</span>
+            <span>Target Release</span>
+            <span>v1.0.0 Release</span>
           </div>
           <div class="ticket-diag-item">
-            <span>Commit Ref</span>
-            <span>9f38a40</span>
+            <span>Engine</span>
+            <span>Native Kotlin 2.1</span>
           </div>
           <div class="ticket-diag-item">
             <span>Platform</span>
@@ -3622,7 +3621,7 @@ cd Muziso-Android
       let text = `*${icon} MUZISO ANDROID - ${typeLabel}*\n`;
       text += `━━━━━━━━━━━━━━━━━━━━━\n`;
       text += `*Ticket ID:* \`${ticket.id}\`\n`;
-      text += `*Target Build:* • v1.0.0 Release (Build #27)\n`;
+      text += `*Target Release:* • v1.0.0 Release\n`;
       text += `*Category:* ${ticket.category}\n`;
       text += `*Summary:* *${ticket.title}*\n\n`;
       text += `*Description & Steps:*\n${ticket.desc}\n\n`;
@@ -3749,12 +3748,12 @@ cd Muziso-Android
         if (diagGrid) {
           diagGrid.innerHTML = `
             <div class="ticket-diag-item">
-              <span>Target Build</span>
-              <span>v1.0.0 (Build #27)</span>
+              <span>Target Release</span>
+              <span>v1.0.0 Release</span>
             </div>
             <div class="ticket-diag-item">
-              <span>Commit Ref</span>
-              <span>9f38a40</span>
+              <span>Engine</span>
+              <span>Native Kotlin 2.1</span>
             </div>
             <div class="ticket-diag-item">
               <span>Platform</span>
