@@ -477,6 +477,7 @@
       right: 0;
       bottom: 0;
       max-height: 85vh;
+      max-height: 85dvh;
       background: #0d0d12;
       border-top: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 20px 20px 0 0;
@@ -488,18 +489,36 @@
       transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
       overflow-y: auto;
       box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.95);
+      overscroll-behavior-y: contain;
+      touch-action: pan-y;
     }
     .bottom-sheet.active {
       transform: translateY(0);
     }
 
     .bottom-sheet-handle {
-      width: 40px;
+      width: 44px;
       height: 5px;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.35);
       border-radius: 999px;
       margin: 0 auto 1.25rem;
-      cursor: pointer;
+      cursor: grab;
+      touch-action: none;
+      position: relative;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+    .bottom-sheet-handle::before {
+      content: '';
+      position: absolute;
+      top: -14px;
+      bottom: -14px;
+      left: -24px;
+      right: -24px;
+    }
+    .bottom-sheet-handle:active {
+      cursor: grabbing;
+      background: rgba(255, 255, 255, 0.65);
     }
     .bottom-sheet-header {
       display: flex;
@@ -3240,6 +3259,140 @@ cd Muziso-Android
     }
 
     // =========================================================================
+    // [GESTURES] Fluid Slide-Down-To-Close Touch & Drag Controller
+    // =========================================================================
+    function attachSlideDownToClose(sheetId, backdropId, closeFn) {
+      const sheet = document.getElementById(sheetId);
+      const backdrop = document.getElementById(backdropId);
+      if (!sheet) return;
+
+      let startY = 0;
+      let startX = 0;
+      let currentTranslateY = 0;
+      let isDragging = false;
+      let isFromHandleOrHeader = false;
+      let startTime = 0;
+
+      function onStart(clientY, clientX, target) {
+        if (!sheet.classList.contains('active')) return;
+        startY = clientY;
+        startX = clientX;
+        startTime = Date.now();
+        currentTranslateY = 0;
+        
+        isFromHandleOrHeader = !!(target.closest('.bottom-sheet-handle') || target.closest('.bottom-sheet-header'));
+        // Allow dragging down if starting from handle/header or at top of sheet scroll
+        if (sheet.scrollTop <= 0 || isFromHandleOrHeader) {
+          isDragging = true;
+        }
+      }
+
+      function onMove(clientY, clientX, e) {
+        if (!isDragging) return;
+        const deltaY = clientY - startY;
+        const deltaX = clientX - startX;
+
+        // Downwards drag
+        if (deltaY > 0 && Math.abs(deltaY) > Math.abs(deltaX)) {
+          if (!isFromHandleOrHeader && sheet.scrollTop > 0) {
+            isDragging = false;
+            return;
+          }
+          if (e && e.cancelable) e.preventDefault();
+          currentTranslateY = deltaY;
+          sheet.style.transition = 'none';
+          sheet.style.transform = `translateY(${deltaY}px)`;
+          if (backdrop) {
+            const opacity = Math.max(0, 1 - deltaY / 380);
+            backdrop.style.opacity = opacity;
+          }
+        } else if (deltaY < 0 && !isFromHandleOrHeader) {
+          isDragging = false;
+          sheet.style.transform = '';
+          sheet.style.transition = '';
+        }
+      }
+
+      function onEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        sheet.style.transition = 'transform 0.26s cubic-bezier(0.16, 1, 0.3, 1)';
+        if (backdrop) backdrop.style.transition = 'opacity 0.26s ease';
+
+        const deltaY = currentTranslateY;
+        const elapsed = Date.now() - startTime;
+        const velocity = deltaY / Math.max(1, elapsed);
+
+        // Threshold: 70px drag or fast flick downwards
+        if (deltaY > 70 || (deltaY > 30 && velocity > 0.4)) {
+          sheet.style.transform = 'translateY(100%)';
+          if (backdrop) backdrop.style.opacity = '0';
+          setTimeout(() => {
+            sheet.style.transform = '';
+            sheet.style.transition = '';
+            if (backdrop) backdrop.style.opacity = '';
+            closeFn();
+          }, 220);
+        } else {
+          // Snap back open
+          sheet.style.transform = 'translateY(0)';
+          if (backdrop) backdrop.style.opacity = '1';
+          setTimeout(() => {
+            sheet.style.transform = '';
+            sheet.style.transition = '';
+            if (backdrop) backdrop.style.opacity = '';
+          }, 260);
+        }
+      }
+
+      // Touch listener on sheet
+      sheet.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          onStart(e.touches[0].clientY, e.touches[0].clientX, e.target);
+        }
+      }, { passive: true });
+
+      sheet.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1 && isDragging) {
+          onMove(e.touches[0].clientY, e.touches[0].clientX, e);
+        }
+      }, { passive: false });
+
+      sheet.addEventListener('touchend', (e) => {
+        if (e.changedTouches.length === 1) {
+          onEnd();
+        }
+      }, { passive: true });
+
+      sheet.addEventListener('touchcancel', () => {
+        if (isDragging) {
+          isDragging = false;
+          sheet.style.transform = '';
+          sheet.style.transition = '';
+          if (backdrop) backdrop.style.opacity = '';
+        }
+      }, { passive: true });
+
+      // Mouse drag for handle
+      const handle = sheet.querySelector('.bottom-sheet-handle');
+      if (handle) {
+        handle.addEventListener('mousedown', (e) => {
+          onStart(e.clientY, e.clientX, handle);
+          function onMouseMove(me) {
+            onMove(me.clientY, me.clientX, me);
+          }
+          function onMouseUp() {
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseup', onMouseUp);
+            onEnd();
+          }
+          window.addEventListener('mousemove', onMouseMove);
+          window.addEventListener('mouseup', onMouseUp);
+        });
+      }
+    }
+
+    // =========================================================================
     // [FEEDBACK & BUG REPORTING] Advanced Output Generator & Storage System
     // =========================================================================
     let currentFeedbackType = 'bug';
@@ -3903,8 +4056,12 @@ cd Muziso-Android
       }
     });
 
-    // Deep Link Navigation Init
+    // Deep Link & Gesture Navigation Init
     window.addEventListener('DOMContentLoaded', () => {
+      attachSlideDownToClose('bottom-sheet', 'bottom-sheet-backdrop', closeBottomSheet);
+      attachSlideDownToClose('sideload-sheet', 'sideload-sheet-backdrop', closeSideloadGuide);
+      attachSlideDownToClose('feedback-sheet', 'feedback-sheet-backdrop', closeFeedbackModal);
+
       const hash = window.location.hash.replace('#', '');
       if (hash && document.getElementById(hash)) {
         switchTab(hash);
