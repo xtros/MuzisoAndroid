@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="overview-mode">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
@@ -82,11 +82,18 @@
       line-height: 1.6;
       overflow-x: hidden;
       min-height: 100vh;
+      min-height: 100dvh;
       position: relative;
+      padding-top: 60px;
       padding-left: var(--safe-left);
       padding-right: var(--safe-right);
       /* Extra padding at bottom on mobile to accommodate bottom nav */
       padding-bottom: calc(var(--bottom-nav-height) + var(--safe-bottom) + 1.5rem);
+    }
+    @media (min-width: 768px) {
+      body {
+        padding-top: 72px;
+      }
     }
     @media (min-width: 1024px) {
       body {
@@ -194,14 +201,17 @@
       }
     }
 
-    /* Header Navigation */
+    /* Header Navigation - Fixed Top */
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 100;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 150;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: rgba(0, 0, 0, 0.88);
+      background: rgba(0, 0, 0, 0.92);
       border-bottom: 1px solid var(--border-subtle);
       padding-top: var(--safe-top);
     }
@@ -1638,49 +1648,26 @@
       display: block;
     }
 
-    /* Non-Scrollable Full-Viewport Overview Mode */
-    html.overview-mode, body.overview-mode {
-      overflow: hidden !important;
-      height: 100vh !important;
-      height: 100dvh !important;
-      max-height: 100dvh !important;
-    }
-    body.overview-mode {
-      padding-bottom: 0 !important;
-    }
-    body.overview-mode footer {
-      display: none !important;
-    }
-    body.overview-mode main.container {
-      height: calc(100dvh - 60px - var(--bottom-nav-height) - var(--safe-bottom));
+    /* Overview Full Screen Hero */
+    section#overview.doc-section.active {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding-top: 0;
-      padding-bottom: 0;
-      overflow: hidden;
+      justify-content: center;
+      min-height: calc(100dvh - 60px - var(--bottom-nav-height) - var(--safe-bottom) - 1.5rem);
+      padding: 0.5rem 0;
+      box-sizing: border-box;
     }
-    @media (min-width: 1024px) {
-      body.overview-mode main.container {
-        height: calc(100dvh - 72px);
+    @media (min-width: 768px) {
+      section#overview.doc-section.active {
+        min-height: calc(100dvh - 72px - var(--bottom-nav-height) - var(--safe-bottom) - 1.5rem);
       }
     }
-    body.overview-mode section#overview {
-      height: 100%;
-      width: 100%;
-      min-height: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-    body.overview-mode .hero {
-      padding: 0;
-      margin: 0 auto;
-      max-height: 100%;
+    @media (min-width: 1024px) {
+      section#overview.doc-section.active {
+        min-height: calc(100dvh - 72px - 2rem);
+        padding: 1rem 0;
+      }
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
@@ -2110,7 +2097,7 @@
     }
   </style>
 </head>
-<body class="overview-mode">
+<body>
 
   <!-- Static Monochrome Liquid Grains Background -->
   <div class="liquid-grains-bg" aria-hidden="true">
@@ -3802,20 +3789,11 @@ cd Muziso-Android
       document.querySelectorAll('.b-nav-item').forEach(bNav => bNav.classList.remove('active'));
       document.querySelectorAll('.sheet-menu-item').forEach(item => item.classList.remove('active'));
 
-      // Toggle overview non-scrollable mode
-      if (tabId === 'overview') {
-        document.documentElement.classList.add('overview-mode');
-        document.body.classList.add('overview-mode');
-      } else {
-        document.documentElement.classList.remove('overview-mode');
-        document.body.classList.remove('overview-mode');
-      }
-
       const target = document.getElementById(tabId);
       if (target) {
         target.classList.add('active');
         window.history.pushState(null, null, '#' + tabId);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'instant' });
       }
 
       // Sync active state in Desktop Nav
