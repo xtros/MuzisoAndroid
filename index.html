@@ -562,6 +562,593 @@
       gap: 0.75rem;
     }
 
+    /* Feedback & Bug Reporting Styles */
+    .sheet-feedback-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, rgba(255, 77, 109, 0.12) 0%, rgba(255, 209, 102, 0.08) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #fff;
+    }
+    .sheet-feedback-banner:hover {
+      background: linear-gradient(135deg, rgba(255, 77, 109, 0.18) 0%, rgba(255, 209, 102, 0.14) 100%);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-1px);
+    }
+    .sheet-feedback-banner:active {
+      transform: scale(0.98);
+    }
+    .sheet-feedback-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .sheet-feedback-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .sheet-feedback-title {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #ffffff;
+      font-family: var(--font-heading);
+    }
+    .sheet-feedback-desc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .sheet-menu-item.sheet-menu-bug:hover,
+    .sheet-menu-item.sheet-menu-bug:active {
+      border-color: rgba(255, 77, 109, 0.5);
+      background: rgba(255, 77, 109, 0.08);
+      color: #fff;
+    }
+    .sheet-menu-item.sheet-menu-suggestion:hover,
+    .sheet-menu-item.sheet-menu-suggestion:active {
+      border-color: rgba(255, 209, 102, 0.5);
+      background: rgba(255, 209, 102, 0.08);
+      color: #fff;
+    }
+
+    /* Feedback Modal Sheet Styles */
+    @media (min-width: 640px) {
+      .bottom-sheet.feedback-sheet-modal {
+        left: 50%;
+        right: auto;
+        width: 100%;
+        max-width: 540px;
+        transform: translate(-50%, 100%);
+        border-radius: 20px 20px 0 0;
+      }
+      .bottom-sheet.feedback-sheet-modal.active {
+        transform: translate(-50%, 0);
+      }
+    }
+
+    .feedback-type-selector {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 1.15rem;
+    }
+    .feedback-type-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.55rem 0.45rem;
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-body);
+    }
+    .feedback-type-btn:hover {
+      color: #ffffff;
+    }
+    .feedback-type-btn.active#btn-type-bug {
+      background: #ff4d6d;
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(255, 77, 109, 0.35);
+    }
+    .feedback-type-btn.active#btn-type-suggestion {
+      background: #ffd166;
+      color: #000000;
+      box-shadow: 0 2px 10px rgba(255, 209, 102, 0.35);
+    }
+    .feedback-type-btn.active#btn-type-feedback {
+      background: #60a5fa;
+      color: #000000;
+      box-shadow: 0 2px 10px rgba(96, 165, 250, 0.35);
+    }
+
+    .feedback-form-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .feedback-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .feedback-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .required-star {
+      color: #ff4d6d;
+    }
+    .feedback-input, .feedback-select, .feedback-textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 0.65rem 0.85rem;
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+    .feedback-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.85rem center;
+      padding-right: 2rem;
+    }
+    .feedback-select option {
+      background: #111116;
+      color: #ffffff;
+    }
+    .feedback-textarea {
+      resize: vertical;
+      min-height: 85px;
+      max-height: 220px;
+      line-height: 1.45;
+    }
+    .feedback-input:focus, .feedback-select:focus, .feedback-textarea:focus {
+      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    }
+    .feedback-diag-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.55rem 0.75rem;
+    }
+    .feedback-diag-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      user-select: none;
+    }
+    .feedback-diag-toggle input {
+      accent-color: #ffffff;
+      width: 14px;
+      height: 14px;
+      cursor: pointer;
+    }
+    .feedback-diag-text span {
+      color: var(--text-muted);
+      font-family: var(--font-code);
+    }
+    .feedback-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.35rem;
+    }
+    .feedback-submit-btn, .feedback-copy-btn, .feedback-btn-secondary {
+      width: 100%;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Live Output Preview Accordion */
+    .live-preview-accordion {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .live-preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.85rem;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      user-select: none;
+    }
+    .live-preview-header:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .live-preview-toggle-icon {
+      transition: transform 0.2s ease;
+    }
+    .live-preview-accordion.open .live-preview-toggle-icon {
+      transform: rotate(180deg);
+    }
+    .live-preview-body {
+      display: none;
+      padding: 0 0.85rem 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .live-preview-accordion.open .live-preview-body {
+      display: block;
+    }
+    .live-preview-tabs {
+      display: flex;
+      gap: 0.35rem;
+      margin: 0.65rem 0 0.5rem;
+    }
+    .live-preview-tab-btn {
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-dim);
+      cursor: pointer;
+    }
+    .live-preview-tab-btn.active {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .live-preview-content {
+      background: #060608;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-family: var(--font-code);
+      font-size: 0.76rem;
+      color: #a1a1aa;
+      max-height: 180px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.45;
+    }
+
+    /* Output View Screen */
+    .output-view-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .output-header-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      padding: 1rem;
+    }
+    .output-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .output-build-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      font-size: 0.78rem;
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    }
+    .output-build-badge .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 8px #ffffff;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+    .output-ticket-id {
+      font-family: var(--font-code);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #60a5fa;
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+    }
+    .output-title-text {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+    .output-subtitle-meta {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    /* Output Format Tabs */
+    .output-tabs {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 3px;
+    }
+    .output-tab-btn {
+      flex: 1;
+      padding: 0.5rem 0.4rem;
+      border-radius: 7px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+    }
+    .output-tab-btn:hover {
+      color: #fff;
+    }
+    .output-tab-btn.active {
+      background: #ffffff;
+      color: #000000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .output-box-container {
+      background: #07070a;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 1rem;
+      max-height: 240px;
+      overflow-y: auto;
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      color: #e4e4e7;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .output-visual-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-family: var(--font-body);
+    }
+    .ticket-diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 8px;
+      padding: 0.65rem;
+      font-size: 0.76rem;
+    }
+    @media (max-width: 480px) {
+      .ticket-diag-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .ticket-diag-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .ticket-diag-item span:first-child {
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .ticket-diag-item span:last-child {
+      color: #fff;
+      font-family: var(--font-code);
+    }
+
+    /* Output Actions Grid */
+    .output-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+    }
+    @media (max-width: 400px) {
+      .output-actions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .btn-action-full {
+      grid-column: 1 / -1;
+    }
+
+    /* WhatsApp Action Button */
+    .btn-whatsapp-action {
+      background: #25d366 !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.38) !important;
+    }
+    .btn-whatsapp-action:hover {
+      background: #22bf5b !important;
+      box-shadow: 0 6px 22px rgba(37, 211, 102, 0.55) !important;
+      transform: translateY(-1px);
+    }
+
+    /* History Log View */
+    .history-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .history-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .history-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 0.75rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .history-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+    .history-item-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .history-item-title {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .history-item-meta {
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .history-empty-card {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    .modal-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-header-action {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--text-muted);
+      border-radius: 8px;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.2s ease;
+    }
+    .btn-header-action:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .btn-header-badge {
+      background: #ffffff;
+      color: #000;
+      border-radius: 999px;
+      padding: 1px 5px;
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+
+    .feedback-footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-top: 0.2rem;
+    }
+    .feedback-footer-links a {
+      color: var(--accent-silver);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .feedback-footer-links a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
     /* Sticky Tab Pills on Desktop / Tablet */
     .tab-bar-wrap {
       display: none;
@@ -1566,6 +2153,10 @@
           <span class="c-emoji"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
           <span>Privacy</span>
         </a>
+        <a href="#feedback" class="tab-pill" onclick="openFeedbackModal('bug'); return false;">
+          <span class="c-emoji"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff4d6d" stroke-width="2"><path d="m8 2 1.88 1.88M14.12 3.88 16 2M9 7.13v-1a3.003 3.003 0 1 1 6 0v1M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6M12 20v-9M6.53 9C4.6 8.8 3 7.1 3 5M6 13H2M3 21c0-2.1 1.7-3.9 3.7-4M20.97 5c0 2.1-1.6 3.8-3.5 4M22 13h-4M17.3 17c2 0.1 3.7 1.9 3.7 4"/></svg></span>
+          <span>Report &amp; Suggestions</span>
+        </a>
       </nav>
     </div>
   </div>
@@ -2209,7 +2800,7 @@ cd Muziso-Android
         <a href="#architecture" onclick="switchTab('architecture', event)">Architecture</a>
         <a href="#privacy" onclick="switchTab('privacy', event)">Privacy Policy</a>
         <a href="https://github.com/xtros/Muziso-Android/blob/main/LICENSE" target="_blank">GPL-3.0 License</a>
-        <a href="https://github.com/xtros/Muziso-Android/issues" target="_blank">Report Issue</a>
+        <a href="#feedback" onclick="openFeedbackModal('bug'); return false;">Report Bug / Suggestions</a>
         <a href="https://github.com/xtros/Muziso-Android" target="_blank">GitHub</a>
       </div>
       <p>Muziso Android is open-source software licensed under the <a href="https://github.com/xtros/Muziso-Android/blob/main/LICENSE" target="_blank">GPL-3.0 License</a>.</p>
@@ -2274,6 +2865,20 @@ cd Muziso-Android
       <button class="bottom-sheet-close" aria-label="Close" onclick="closeBottomSheet()">&times;</button>
     </div>
 
+    <!-- Quick Action Feedback Banner -->
+    <div class="sheet-feedback-banner" onclick="openFeedbackModal(); closeBottomSheet();">
+      <div class="sheet-feedback-left">
+        <span class="sheet-feedback-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </span>
+        <div>
+          <div class="sheet-feedback-title">Report Bug / Suggestions</div>
+          <div class="sheet-feedback-desc">Submit bugs, request features, or share feedback</div>
+        </div>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+
     <div class="sheet-menu-grid">
       <a href="#architecture" class="sheet-menu-item" onclick="selectSheetTab('architecture', event)">
         <span class="c-emoji"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="21" x2="21" y2="21"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="12 2 20 7 4 7 12 2"/><line x1="7" y1="10" x2="7" y2="21"/><line x1="12" y1="10" x2="12" y2="21"/><line x1="17" y1="10" x2="17" y2="21"/></svg></span>
@@ -2291,6 +2896,14 @@ cd Muziso-Android
         <span class="c-emoji"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
         <span>Install Help</span>
       </a>
+      <a href="#" class="sheet-menu-item sheet-menu-bug" onclick="openFeedbackModal('bug'); closeBottomSheet(); return false;">
+        <span class="c-emoji"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff4d6d" stroke-width="2"><path d="m8 2 1.88 1.88M14.12 3.88 16 2M9 7.13v-1a3.003 3.003 0 1 1 6 0v1M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6M12 20v-9M6.53 9C4.6 8.8 3 7.1 3 5M6 13H2M3 21c0-2.1 1.7-3.9 3.7-4M20.97 5c0 2.1-1.6 3.8-3.5 4M22 13h-4M17.3 17c2 0.1 3.7 1.9 3.7 4"/></svg></span>
+        <span>Report a Bug</span>
+      </a>
+      <a href="#" class="sheet-menu-item sheet-menu-suggestion" onclick="openFeedbackModal('suggestion'); closeBottomSheet(); return false;">
+        <span class="c-emoji"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></span>
+        <span>Suggestions</span>
+      </a>
     </div>
 
     <div class="sheet-cta-box">
@@ -2303,6 +2916,218 @@ cd Muziso-Android
         GitHub Repository
       </a>
     </div>
+  </div>
+
+  <!-- Feedback / Bug & Suggestions Dedicated Bottom Sheet Modal with Full Output Generator -->
+  <div id="feedback-sheet-backdrop" class="bottom-sheet-backdrop" onclick="closeFeedbackModal()"></div>
+  <div id="feedback-sheet" class="bottom-sheet feedback-sheet-modal" aria-modal="true" role="dialog">
+    <div class="bottom-sheet-handle" onclick="closeFeedbackModal()"></div>
+    
+    <div class="bottom-sheet-header">
+      <div class="bottom-sheet-title" id="feedback-sheet-title">Report Bug / Suggestions</div>
+      <div class="modal-header-actions">
+        <button type="button" class="btn-header-action" id="btn-history-toggle" onclick="toggleFeedbackHistory()" title="View submission history">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Logs</span>
+          <span class="btn-header-badge" id="feedback-history-badge">0</span>
+        </button>
+        <button class="bottom-sheet-close" aria-label="Close" onclick="closeFeedbackModal()">&times;</button>
+      </div>
+    </div>
+
+    <!-- VIEW 1: Input Form -->
+    <div id="feedback-view-form">
+      <!-- Mode Selector Pills -->
+      <div class="feedback-type-selector">
+        <button type="button" class="feedback-type-btn active" id="btn-type-bug" onclick="switchFeedbackType('bug')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 2 1.88 1.88M14.12 3.88 16 2M9 7.13v-1a3.003 3.003 0 1 1 6 0v1M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6M12 20v-9M6.53 9C4.6 8.8 3 7.1 3 5M6 13H2M3 21c0-2.1 1.7-3.9 3.7-4M20.97 5c0 2.1-1.6 3.8-3.5 4M22 13h-4M17.3 17c2 0.1 3.7 1.9 3.7 4"/></svg>
+          <span>Report Bug</span>
+        </button>
+        <button type="button" class="feedback-type-btn" id="btn-type-suggestion" onclick="switchFeedbackType('suggestion')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          <span>Suggestion</span>
+        </button>
+        <button type="button" class="feedback-type-btn" id="btn-type-feedback" onclick="switchFeedbackType('feedback')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>General</span>
+        </button>
+      </div>
+
+      <!-- Form Inputs -->
+      <div class="feedback-form-body">
+        <div class="feedback-form-group">
+          <label for="feedback-title-input" class="feedback-label">
+            <span id="feedback-label-title">Bug Summary</span>
+            <span class="required-star">*</span>
+          </label>
+          <input type="text" id="feedback-title-input" class="feedback-input" placeholder="e.g. Playback stops when changing equalizer preset..." oninput="updateLivePreview()" />
+        </div>
+
+        <div class="feedback-form-group">
+          <label for="feedback-category-select" class="feedback-label">Category / Feature Area</label>
+          <select id="feedback-category-select" class="feedback-select" onchange="updateLivePreview()">
+            <option value="Audio & Playback">🎵 Audio Playback &amp; Streaming</option>
+            <option value="Lyrics Engine">🎤 Synchronized Lyrics Engine</option>
+            <option value="Equalizer & DSP">🎛️ Equalizer &amp; DSP Effects</option>
+            <option value="Offline & Downloads">💾 Offline Downloads &amp; Caching</option>
+            <option value="UI & Animations">✨ User Interface &amp; Themes</option>
+            <option value="Listen Together & Cast">📡 Listen Together &amp; Google Cast</option>
+            <option value="Account & Sync">🔐 Account Sync &amp; Library</option>
+            <option value="Other">💡 Other / General</option>
+          </select>
+        </div>
+
+        <div class="feedback-form-group">
+          <label for="feedback-desc-input" class="feedback-label">
+            <span id="feedback-label-desc">Steps to Reproduce / Expected vs Actual</span>
+            <span class="required-star">*</span>
+          </label>
+          <textarea id="feedback-desc-input" class="feedback-textarea" rows="4" placeholder="1. Go to Equalizer&#10;2. Select Rock preset&#10;3. Audio pauses unexpectedly..." oninput="updateLivePreview()"></textarea>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="feedback-actions">
+          <!-- WhatsApp Primary Send Button -->
+          <button type="button" class="btn-apk-main btn-whatsapp-action" onclick="submitDirectWhatsApp()">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42 1.56 1.56 2.41 3.63 2.41 5.83s-.85 4.27-2.41 5.83c-1.56 1.56-3.62 2.41-5.82 2.41-1.5 0-2.97-.39-4.26-1.12l-.3-.18-3.12.82.83-3.04-.2-.31a8.188 8.188 0 01-1.26-4.41c0-2.2 0.85-4.27 2.41-5.83 1.56-1.56 3.63-2.42 5.84-2.42zm-2.9 4.39c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02s.87 2.34 1 2.51c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.29s-1.44-.71-1.66-.82c-.22-.12-.39-.17-.55.17-.16.33-.64.82-.78.99-.14.16-.29.18-.54.06-.25-.12-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.16-.25.25-.41.08-.16.04-.31-.02-.44-.06-.12-.55-1.33-.76-1.82-.2-.48-.41-.41-.56-.42l-.48-.01z"/></svg>
+            <span>📱 Submit &amp; Send to WhatsApp</span>
+          </button>
+
+          <button type="button" class="btn-apk-secondary feedback-submit-btn" onclick="generateAndShowOutput()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span id="feedback-submit-text">⚡ Generate Ticket Output</span>
+          </button>
+
+          <button type="button" class="btn-apk-secondary feedback-copy-btn" id="feedback-copy-btn" onclick="copyFeedbackReport()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="feedback-copy-text">Copy Output to Clipboard</span>
+          </button>
+        </div>
+
+        <!-- Quick Direct Issue Links -->
+        <div class="feedback-footer-links">
+          <span>Already have an issue?</span>
+          <a href="https://github.com/xtros/Muziso-Android/issues" target="_blank">View GitHub Tracker &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: Generated Output Result Screen -->
+    <div id="feedback-view-output" style="display: none;">
+      <div class="output-view-container">
+        <!-- Ticket Meta Header Card -->
+        <div class="output-header-card">
+          <div class="output-meta-row">
+            <span class="output-build-badge">
+              <span class="pulse-dot"></span>
+              v1.0.0 Release (Build #27)
+            </span>
+            <span class="output-ticket-id" id="output-ticket-id">#MZ-BUG-2026-8742</span>
+          </div>
+          <div class="output-title-text" id="output-rendered-title">Audio playback pauses when changing preset</div>
+          <div class="output-subtitle-meta">
+            <span id="output-rendered-type">🐞 BUG REPORT</span>
+            <span>&bull;</span>
+            <span id="output-rendered-cat">Audio &amp; Playback</span>
+            <span>&bull;</span>
+            <span id="output-rendered-time">Just now</span>
+          </div>
+        </div>
+
+        <!-- Output Format Tabs -->
+        <div class="output-tabs">
+          <button type="button" class="output-tab-btn active" id="btn-out-visual" onclick="switchOutputTab('visual')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            <span>Visual Ticket</span>
+          </button>
+          <button type="button" class="output-tab-btn" id="btn-out-markdown" onclick="switchOutputTab('markdown')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+            <span>Markdown</span>
+          </button>
+          <button type="button" class="output-tab-btn" id="btn-out-json" onclick="switchOutputTab('json')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+            <span>JSON</span>
+          </button>
+        </div>
+
+        <!-- Output Display Area -->
+        <div class="output-box-container">
+          <!-- Visual Format Container -->
+          <div id="output-visual-container" class="output-visual-card">
+            <div style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.6;" id="output-visual-desc">
+              Description / Steps content...
+            </div>
+            <div class="ticket-diag-grid" id="output-visual-diag">
+              <!-- Diagnostics fields populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Code Format Container (Markdown / JSON) -->
+          <pre id="output-code-container" style="display: none; margin: 0;"></pre>
+        </div>
+
+        <!-- Action Tools Grid -->
+        <div class="output-actions-grid">
+          <!-- WhatsApp Send Output Button -->
+          <button type="button" class="btn-apk-main btn-action-full btn-whatsapp-action" onclick="sendOutputWhatsApp()">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42 1.56 1.56 2.41 3.63 2.41 5.83s-.85 4.27-2.41 5.83c-1.56 1.56-3.62 2.41-5.82 2.41-1.5 0-2.97-.39-4.26-1.12l-.3-.18-3.12.82.83-3.04-.2-.31a8.188 8.188 0 01-1.26-4.41c0-2.2 0.85-4.27 2.41-5.83 1.56-1.56 3.63-2.42 5.84-2.42zm-2.9 4.39c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02s.87 2.34 1 2.51c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.29s-1.44-.71-1.66-.82c-.22-.12-.39-.17-.55.17-.16.33-.64.82-.78.99-.14.16-.29.18-.54.06-.25-.12-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.16-.25.25-.41.08-.16.04-.31-.02-.44-.06-.12-.55-1.33-.76-1.82-.2-.48-.41-.41-.56-.42l-.48-.01z"/></svg>
+            <span>🟢 Send Output to WhatsApp</span>
+          </button>
+
+          <button type="button" class="btn-apk-secondary btn-action-full" id="btn-output-copy" onclick="copyActiveOutputText()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="output-copy-btn-text">Copy Output to Clipboard</span>
+          </button>
+
+          <button type="button" class="btn-apk-secondary" onclick="downloadOutputAsFile('md')">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Download .MD</span>
+          </button>
+
+          <button type="button" class="btn-apk-secondary" onclick="downloadOutputAsFile('json')">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Download .JSON</span>
+          </button>
+
+          <button type="button" class="btn-apk-secondary" onclick="pushOutputToGitHub()">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>Open GitHub Issue</span>
+          </button>
+
+          <button type="button" class="btn-apk-secondary" onclick="sendOutputEmail()">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>Email Report</span>
+          </button>
+
+          <button type="button" class="btn-apk-secondary btn-action-full" style="background: rgba(255,255,255,0.06);" onclick="switchFeedbackView('form')">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span>Edit / Submit Another</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: History Logbook -->
+    <div id="feedback-view-history" style="display: none;">
+      <div class="history-container">
+        <div class="history-header-bar">
+          <span>Saved Submissions in Local Storage</span>
+          <div style="display:flex; gap:0.4rem;">
+            <button type="button" class="btn-header-action" onclick="exportAllFeedbackHistory()">Export All</button>
+            <button type="button" class="btn-header-action" style="color:#ff4d6d;" onclick="clearFeedbackHistory()">Clear</button>
+          </div>
+        </div>
+
+        <div class="history-list" id="feedback-history-list">
+          <!-- Dynamically populated from localStorage -->
+        </div>
+
+        <button type="button" class="btn-apk-secondary" onclick="switchFeedbackView('form')">
+          &larr; Back to Form
+        </button>
+      </div>
+    </div>
+
   </div>
 
   <!-- Sideload Guide Dedicated Bottom Sheet Modal -->
@@ -2433,6 +3258,544 @@ cd Muziso-Android
     }
 
     // =========================================================================
+    // [FEEDBACK & BUG REPORTING] Advanced Output Generator & Storage System
+    // =========================================================================
+    let currentFeedbackType = 'bug';
+    let currentActiveOutputTab = 'visual';
+    let currentLivePreviewTab = 'markdown';
+    let currentGeneratedTicket = null;
+
+    function openFeedbackModal(type = 'bug') {
+      const sheet = document.getElementById('feedback-sheet');
+      const backdrop = document.getElementById('feedback-sheet-backdrop');
+      if (sheet && backdrop) {
+        switchFeedbackView('form');
+        switchFeedbackType(type);
+        updateFeedbackDiagnostics();
+        updateLivePreview();
+        updateHistoryBadge();
+        sheet.classList.add('active');
+        backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeFeedbackModal() {
+      const sheet = document.getElementById('feedback-sheet');
+      const backdrop = document.getElementById('feedback-sheet-backdrop');
+      if (sheet) sheet.classList.remove('active');
+      if (backdrop) backdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function switchFeedbackView(viewName) {
+      const viewForm = document.getElementById('feedback-view-form');
+      const viewOutput = document.getElementById('feedback-view-output');
+      const viewHistory = document.getElementById('feedback-view-history');
+      const sheetTitle = document.getElementById('feedback-sheet-title');
+
+      if (viewForm) viewForm.style.display = viewName === 'form' ? 'block' : 'none';
+      if (viewOutput) viewOutput.style.display = viewName === 'output' ? 'block' : 'none';
+      if (viewHistory) viewHistory.style.display = viewName === 'history' ? 'block' : 'none';
+
+      if (viewName === 'form') {
+        switchFeedbackType(currentFeedbackType);
+      } else if (viewName === 'output') {
+        if (sheetTitle) sheetTitle.innerText = 'Generated Ticket Output';
+      } else if (viewName === 'history') {
+        if (sheetTitle) sheetTitle.innerText = 'Submission History Log';
+        renderFeedbackHistory();
+      }
+    }
+
+    function toggleFeedbackHistory() {
+      const viewHistory = document.getElementById('feedback-view-history');
+      if (viewHistory && viewHistory.style.display === 'block') {
+        switchFeedbackView('form');
+      } else {
+        switchFeedbackView('history');
+      }
+    }
+
+    function switchFeedbackType(type) {
+      currentFeedbackType = type;
+      const btnBug = document.getElementById('btn-type-bug');
+      const btnSug = document.getElementById('btn-type-suggestion');
+      const btnFdb = document.getElementById('btn-type-feedback');
+      const titleLabel = document.getElementById('feedback-label-title');
+      const descLabel = document.getElementById('feedback-label-desc');
+      const titleInput = document.getElementById('feedback-title-input');
+      const descInput = document.getElementById('feedback-desc-input');
+      const submitText = document.getElementById('feedback-submit-text');
+      const sheetTitle = document.getElementById('feedback-sheet-title');
+
+      [btnBug, btnSug, btnFdb].forEach(btn => btn && btn.classList.remove('active'));
+
+      if (type === 'bug') {
+        if (btnBug) btnBug.classList.add('active');
+        if (sheetTitle) sheetTitle.innerText = 'Report a Bug';
+        if (titleLabel) titleLabel.innerText = 'Bug Summary';
+        if (descLabel) descLabel.innerText = 'Steps to Reproduce / Expected vs Actual';
+        if (titleInput && !titleInput.value) titleInput.placeholder = 'e.g. Playback stops when changing equalizer preset...';
+        if (descInput && !descInput.value) descInput.placeholder = '1. Go to Equalizer\n2. Select Rock preset\n3. Audio pauses unexpectedly...';
+        if (submitText) submitText.innerText = '⚡ Generate Bug Ticket & Output';
+      } else if (type === 'suggestion') {
+        if (btnSug) btnSug.classList.add('active');
+        if (sheetTitle) sheetTitle.innerText = 'Suggest a Feature';
+        if (titleLabel) titleLabel.innerText = 'Feature Proposal';
+        if (descLabel) descLabel.innerText = 'Use Case & Proposed Behavior';
+        if (titleInput && !titleInput.value) titleInput.placeholder = 'e.g. Add custom timer intervals for Sleep Timer...';
+        if (descInput && !descInput.value) descInput.placeholder = 'Explain the proposed feature, why it is useful, and how you imagine it working...';
+        if (submitText) submitText.innerText = '⚡ Generate Suggestion Ticket & Output';
+      } else {
+        if (btnFdb) btnFdb.classList.add('active');
+        if (sheetTitle) sheetTitle.innerText = 'General Feedback';
+        if (titleLabel) titleLabel.innerText = 'Topic / Summary';
+        if (descLabel) descLabel.innerText = 'Your Feedback';
+        if (titleInput && !titleInput.value) titleInput.placeholder = 'e.g. Thoughts on UI, performance, or lyrics accuracy...';
+        if (descInput && !descInput.value) descInput.placeholder = 'Tell us what you like or how Muziso could be improved...';
+        if (submitText) submitText.innerText = '⚡ Generate Feedback Output';
+      }
+      updateLivePreview();
+    }
+
+    function updateFeedbackDiagnostics() {
+      const diagSummary = document.getElementById('feedback-diag-summary');
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      const os = isAndroid ? 'Android' : (navigator.userAgentData?.platform || navigator.platform || 'Client Device');
+      const screenRes = `${window.screen.width}x${window.screen.height}`;
+      if (diagSummary) {
+        diagSummary.innerText = `${os} (${screenRes}) • Build #27 (v1.0.0)`;
+      }
+    }
+
+    function generateTicketId(type) {
+      const prefix = type === 'bug' ? 'BUG' : (type === 'suggestion' ? 'SUGG' : 'FDB');
+      const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase();
+      return `MZ-${prefix}-2026-${randomPart}`;
+    }
+
+    function compileTicketData() {
+      const title = document.getElementById('feedback-title-input')?.value.trim() || 'Untitled Submission';
+      const category = document.getElementById('feedback-category-select')?.value || 'General';
+      const desc = document.getElementById('feedback-desc-input')?.value.trim() || 'No description provided.';
+      const includeDiag = true;
+      
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      const os = isAndroid ? 'Android' : (navigator.userAgentData?.platform || navigator.platform || 'Unknown OS');
+      const screenRes = `${window.screen.width}x${window.screen.height} (DPR: ${window.devicePixelRatio || 1})`;
+      const userAgent = navigator.userAgent;
+      const timestamp = new Date().toISOString();
+      const ticketId = currentGeneratedTicket?.id || generateTicketId(currentFeedbackType);
+
+      // Format Markdown Output
+      let markdown = `# [${currentFeedbackType.toUpperCase()}] ${title}\n\n`;
+      markdown += `**Ticket ID**: \`${ticketId}\`\n`;
+      markdown += `**Target Release**: \`v1.0.0 (Build #27 - commit 9f38a40)\`\n`;
+      markdown += `**Category**: \`${category}\`\n`;
+      markdown += `**Generated**: \`${timestamp}\`\n\n`;
+      markdown += `## Description & Steps\n${desc}\n\n`;
+
+      if (includeDiag) {
+        markdown += `---\n### Environment & Diagnostics\n`;
+        markdown += `- **Client Platform**: ${os}\n`;
+        markdown += `- **Screen Resolution**: ${screenRes}\n`;
+        markdown += `- **User Agent**: \`${userAgent}\`\n`;
+        markdown += `- **Muziso Engine**: Native Kotlin 2.1 • Media3 ExoPlayer • Room SQLite\n`;
+      }
+
+      // Format JSON Payload
+      const jsonObject = {
+        ticketId,
+        type: currentFeedbackType,
+        targetBuild: "v1.0.0 Release (Build #27)",
+        commit: "9f38a40",
+        timestamp,
+        title,
+        category,
+        description: desc,
+        diagnostics: includeDiag ? {
+          platform: os,
+          screen: screenRes,
+          userAgent: userAgent,
+          timestamp: timestamp
+        } : null
+      };
+
+      return {
+        id: ticketId,
+        type: currentFeedbackType,
+        title,
+        category,
+        desc,
+        includeDiag,
+        os,
+        screenRes,
+        timestamp,
+        markdown,
+        json: JSON.stringify(jsonObject, null, 2),
+        rawObj: jsonObject
+      };
+    }
+
+    // Live Preview
+    function toggleLivePreviewAccordion() {
+      const acc = document.getElementById('live-preview-accordion');
+      if (acc) acc.classList.toggle('open');
+    }
+
+    function switchLivePreviewTab(tab) {
+      currentLivePreviewTab = tab;
+      const btnMd = document.getElementById('btn-lp-markdown');
+      const btnJson = document.getElementById('btn-lp-json');
+      if (btnMd) btnMd.classList.toggle('active', tab === 'markdown');
+      if (btnJson) btnJson.classList.toggle('active', tab === 'json');
+      updateLivePreview();
+    }
+
+    function updateLivePreview() {
+      const previewText = document.getElementById('live-preview-text');
+      if (!previewText) return;
+      const data = compileTicketData();
+      if (currentLivePreviewTab === 'json') {
+        previewText.innerText = data.json;
+      } else {
+        previewText.innerText = data.markdown;
+      }
+    }
+
+    // Output Generation Execution
+    function generateAndShowOutput() {
+      const titleInput = document.getElementById('feedback-title-input');
+      const descInput = document.getElementById('feedback-desc-input');
+
+      if (!titleInput?.value.trim()) {
+        alert('Please enter a brief summary or title for your submission.');
+        titleInput?.focus();
+        return;
+      }
+      if (!descInput?.value.trim()) {
+        alert('Please enter details or steps for your submission.');
+        descInput?.focus();
+        return;
+      }
+
+      currentGeneratedTicket = compileTicketData();
+      saveTicketToHistory(currentGeneratedTicket);
+
+      // Populate Output Screen
+      document.getElementById('output-ticket-id').innerText = currentGeneratedTicket.id;
+      document.getElementById('output-rendered-title').innerText = currentGeneratedTicket.title;
+      document.getElementById('output-rendered-type').innerText = currentGeneratedTicket.type === 'bug' ? '🐞 BUG REPORT' : (currentGeneratedTicket.type === 'suggestion' ? '💡 FEATURE PROPOSAL' : '💬 GENERAL FEEDBACK');
+      document.getElementById('output-rendered-cat').innerText = currentGeneratedTicket.category;
+      document.getElementById('output-rendered-time').innerText = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('output-visual-desc').innerText = currentGeneratedTicket.desc;
+
+      // Diagnostics Grid
+      const diagGrid = document.getElementById('output-visual-diag');
+      if (diagGrid) {
+        diagGrid.innerHTML = `
+          <div class="ticket-diag-item">
+            <span>Target Build</span>
+            <span>v1.0.0 (Build #27)</span>
+          </div>
+          <div class="ticket-diag-item">
+            <span>Commit Ref</span>
+            <span>9f38a40</span>
+          </div>
+          <div class="ticket-diag-item">
+            <span>Platform</span>
+            <span>${currentGeneratedTicket.os}</span>
+          </div>
+          <div class="ticket-diag-item">
+            <span>Display Res</span>
+            <span>${currentGeneratedTicket.screenRes}</span>
+          </div>
+        `;
+      }
+
+      switchOutputTab('visual');
+      switchFeedbackView('output');
+    }
+
+    function switchOutputTab(tab) {
+      currentActiveOutputTab = tab;
+      const btnVisual = document.getElementById('btn-out-visual');
+      const btnMd = document.getElementById('btn-out-markdown');
+      const btnJson = document.getElementById('btn-out-json');
+      const visualContainer = document.getElementById('output-visual-container');
+      const codeContainer = document.getElementById('output-code-container');
+
+      [btnVisual, btnMd, btnJson].forEach(b => b && b.classList.remove('active'));
+
+      if (!currentGeneratedTicket) currentGeneratedTicket = compileTicketData();
+
+      if (tab === 'visual') {
+        if (btnVisual) btnVisual.classList.add('active');
+        if (visualContainer) visualContainer.style.display = 'flex';
+        if (codeContainer) codeContainer.style.display = 'none';
+      } else if (tab === 'markdown') {
+        if (btnMd) btnMd.classList.add('active');
+        if (visualContainer) visualContainer.style.display = 'none';
+        if (codeContainer) {
+          codeContainer.style.display = 'block';
+          codeContainer.innerText = currentGeneratedTicket.markdown;
+        }
+      } else if (tab === 'json') {
+        if (btnJson) btnJson.classList.add('active');
+        if (visualContainer) visualContainer.style.display = 'none';
+        if (codeContainer) {
+          codeContainer.style.display = 'block';
+          codeContainer.innerText = currentGeneratedTicket.json;
+        }
+      }
+    }
+
+    function copyActiveOutputText() {
+      if (!currentGeneratedTicket) currentGeneratedTicket = compileTicketData();
+      let textToCopy = currentGeneratedTicket.markdown;
+      if (currentActiveOutputTab === 'json') {
+        textToCopy = currentGeneratedTicket.json;
+      }
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const btnText = document.getElementById('output-copy-btn-text');
+        const orig = btnText ? btnText.innerText : 'Copy Output to Clipboard';
+        if (btnText) btnText.innerText = 'Copied to Clipboard! ✓';
+        setTimeout(() => {
+          if (btnText) btnText.innerText = orig;
+        }, 2200);
+      });
+    }
+
+    function copyFeedbackReport() {
+      const data = compileTicketData();
+      navigator.clipboard.writeText(data.markdown).then(() => {
+        const copyText = document.getElementById('feedback-copy-text');
+        const orig = copyText ? copyText.innerText : 'Copy Output to Clipboard';
+        if (copyText) copyText.innerText = 'Copied to Clipboard! ✓';
+        setTimeout(() => {
+          if (copyText) copyText.innerText = orig;
+        }, 2200);
+      });
+    }
+
+    function downloadOutputAsFile(ext) {
+      if (!currentGeneratedTicket) currentGeneratedTicket = compileTicketData();
+      const content = ext === 'json' ? currentGeneratedTicket.json : currentGeneratedTicket.markdown;
+      const mime = ext === 'json' ? 'application/json' : 'text/markdown';
+      const filename = `${currentGeneratedTicket.id}.${ext}`;
+
+      const blob = new Blob([content], { type: mime });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    }
+
+    function pushOutputToGitHub() {
+      if (!currentGeneratedTicket) currentGeneratedTicket = compileTicketData();
+      const labelParam = currentGeneratedTicket.type === 'bug' ? 'bug' : (currentGeneratedTicket.type === 'suggestion' ? 'enhancement' : 'feedback');
+      const titlePrefix = currentGeneratedTicket.type === 'bug' ? '[BUG]' : (currentGeneratedTicket.type === 'suggestion' ? '[FEATURE]' : '[FEEDBACK]');
+      const issueTitle = `${titlePrefix}: ${currentGeneratedTicket.title}`;
+      const url = `https://github.com/xtros/Muziso-Android/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(currentGeneratedTicket.markdown)}&labels=${encodeURIComponent(labelParam)}`;
+      window.open(url, '_blank');
+    }
+
+    // =========================================================================
+    // [WHATSAPP DELIVERY INTEGRATION]
+    // =========================================================================
+    // Target developer WhatsApp recipient phone number (+91 7907769496)
+    const DEVELOPER_WHATSAPP_NUMBER = "917907769496"; 
+
+    function getWhatsAppNumber() {
+      return DEVELOPER_WHATSAPP_NUMBER;
+    }
+
+    function formatWhatsAppMessage(ticket) {
+      const icon = ticket.type === 'bug' ? '🐞' : (ticket.type === 'suggestion' ? '💡' : '💬');
+      const typeLabel = ticket.type === 'bug' ? 'BUG REPORT' : (ticket.type === 'suggestion' ? 'FEATURE PROPOSAL' : 'FEEDBACK');
+
+      let text = `*${icon} MUZISO ANDROID - ${typeLabel}*\n`;
+      text += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      text += `*Ticket ID:* \`${ticket.id}\`\n`;
+      text += `*Target Build:* • v1.0.0 Release (Build #27)\n`;
+      text += `*Category:* ${ticket.category}\n`;
+      text += `*Summary:* *${ticket.title}*\n\n`;
+      text += `*Description & Steps:*\n${ticket.desc}\n\n`;
+
+      if (ticket.includeDiag) {
+        text += `━━━━━━━━━━━━━━━━━━━━━\n`;
+        text += `*Device Diagnostics:*\n`;
+        text += `• *OS / Client:* ${ticket.os}\n`;
+        text += `• *Display:* ${ticket.screenRes}\n`;
+        text += `• *Engine:* Native Kotlin 2.1 • Media3 ExoPlayer\n`;
+        text += `• *Time:* ${new Date(ticket.timestamp).toLocaleString()}\n`;
+      }
+      return text;
+    }
+
+    function sendOutputWhatsApp() {
+      if (!currentGeneratedTicket) currentGeneratedTicket = compileTicketData();
+      const phone = getWhatsAppNumber();
+      const waText = formatWhatsAppMessage(currentGeneratedTicket);
+      const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(waText)}`;
+      window.open(url, '_blank');
+    }
+
+    function submitDirectWhatsApp() {
+      const titleInput = document.getElementById('feedback-title-input');
+      const descInput = document.getElementById('feedback-desc-input');
+
+      if (!titleInput?.value.trim()) {
+        alert('Please enter a brief summary or title for your report.');
+        titleInput?.focus();
+        return;
+      }
+      if (!descInput?.value.trim()) {
+        alert('Please enter details or steps for your submission.');
+        descInput?.focus();
+        return;
+      }
+
+      currentGeneratedTicket = compileTicketData();
+      saveTicketToHistory(currentGeneratedTicket);
+      sendOutputWhatsApp();
+    }
+
+    function sendOutputEmail() {
+      if (!currentGeneratedTicket) currentGeneratedTicket = compileTicketData();
+      const subject = `[Muziso Output] ${currentGeneratedTicket.id} - ${currentGeneratedTicket.title}`;
+      const mailto = `mailto:support@muziso.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(currentGeneratedTicket.markdown)}`;
+      window.location.href = mailto;
+    }
+
+    // Local Storage History Management
+    const HISTORY_KEY = 'muziso_feedback_history_v1';
+
+    function getSavedHistory() {
+      try {
+        return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveTicketToHistory(ticket) {
+      try {
+        const history = getSavedHistory();
+        history.unshift(ticket);
+        if (history.length > 30) history.pop();
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+        updateHistoryBadge();
+      } catch (e) {
+        console.warn('Could not persist ticket to localStorage:', e);
+      }
+    }
+
+    function updateHistoryBadge() {
+      const badge = document.getElementById('feedback-history-badge');
+      if (badge) {
+        const count = getSavedHistory().length;
+        badge.innerText = count;
+      }
+    }
+
+    function renderFeedbackHistory() {
+      const listEl = document.getElementById('feedback-history-list');
+      if (!listEl) return;
+      const history = getSavedHistory();
+      if (history.length === 0) {
+        listEl.innerHTML = `
+          <div class="history-empty-card">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:0.5rem; opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>No previous outputs found in browser storage.</div>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = history.map((item, idx) => `
+        <div class="history-item" onclick="loadHistoryTicket(${idx})">
+          <div class="history-item-top">
+            <span class="output-ticket-id" style="font-size:0.75rem;">${item.id}</span>
+            <span style="font-size:0.72rem; color:var(--text-dim);">${new Date(item.timestamp).toLocaleDateString()}</span>
+          </div>
+          <div class="history-item-title">${item.title}</div>
+          <div class="history-item-meta">
+            <span>${item.type === 'bug' ? '🐞 Bug' : (item.type === 'suggestion' ? '💡 Idea' : '💬 General')}</span>
+            <span>&bull;</span>
+            <span>${item.category}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadHistoryTicket(idx) {
+      const history = getSavedHistory();
+      if (history[idx]) {
+        currentGeneratedTicket = history[idx];
+        document.getElementById('output-ticket-id').innerText = currentGeneratedTicket.id;
+        document.getElementById('output-rendered-title').innerText = currentGeneratedTicket.title;
+        document.getElementById('output-rendered-type').innerText = currentGeneratedTicket.type === 'bug' ? '🐞 BUG REPORT' : (currentGeneratedTicket.type === 'suggestion' ? '💡 FEATURE PROPOSAL' : '💬 GENERAL FEEDBACK');
+        document.getElementById('output-rendered-cat').innerText = currentGeneratedTicket.category;
+        document.getElementById('output-rendered-time').innerText = new Date(currentGeneratedTicket.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('output-visual-desc').innerText = currentGeneratedTicket.desc;
+
+        const diagGrid = document.getElementById('output-visual-diag');
+        if (diagGrid) {
+          diagGrid.innerHTML = `
+            <div class="ticket-diag-item">
+              <span>Target Build</span>
+              <span>v1.0.0 (Build #27)</span>
+            </div>
+            <div class="ticket-diag-item">
+              <span>Commit Ref</span>
+              <span>9f38a40</span>
+            </div>
+            <div class="ticket-diag-item">
+              <span>Platform</span>
+              <span>${currentGeneratedTicket.os || 'Android/Web'}</span>
+            </div>
+            <div class="ticket-diag-item">
+              <span>Display Res</span>
+              <span>${currentGeneratedTicket.screenRes || 'Auto'}</span>
+            </div>
+          `;
+        }
+
+        switchOutputTab('visual');
+        switchFeedbackView('output');
+      }
+    }
+
+    function clearFeedbackHistory() {
+      if (confirm('Are you sure you want to clear all saved output history?')) {
+        localStorage.removeItem(HISTORY_KEY);
+        updateHistoryBadge();
+        renderFeedbackHistory();
+      }
+    }
+
+    function exportAllFeedbackHistory() {
+      const history = getSavedHistory();
+      if (history.length === 0) {
+        alert('No history to export.');
+        return;
+      }
+      const blob = new Blob([JSON.stringify(history, null, 2)], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `muziso_feedback_history_${Date.now()}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // =========================================================================
     // [TABS] Master Tab Switcher Synchronized with Desktop, Pills, and Bottom Nav
     // =========================================================================
     function switchTab(tabId, e) {
@@ -2548,6 +3911,7 @@ cd Muziso-Android
         closeLightbox();
         closeBottomSheet();
         closeSideloadGuide();
+        closeFeedbackModal();
       } else if (e.key === 'ArrowRight') {
         if (document.getElementById('lightbox-modal').classList.contains('active')) {
           navigateLightbox(1);
