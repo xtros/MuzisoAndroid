@@ -4281,9 +4281,11 @@ cd Muziso-Android
     // =========================================================================
     // [COUNTDOWN & LOCK ENGINE] Launch Countdown to Today 8:00 PM IST
     // =========================================================================
-    // Target: Temporary 30 seconds countdown test
+    // Target: Today 8:00 PM IST (GMT+5:30)
     function getLaunchTargetTime() {
-      return Date.now() + 30 * 1000; // 30 seconds from load
+      const target = new Date();
+      target.setHours(20, 0, 0, 0); // 8:00:00 PM today local / IST
+      return target.getTime();
     }
 
     const LAUNCH_TIMESTAMP = getLaunchTargetTime();
@@ -4335,23 +4337,23 @@ cd Muziso-Android
         const diff = LAUNCH_TIMESTAMP - now;
 
         if (diff <= 0) {
-          // Unlocked State (>= 8:00 PM)
+          // Unlocked State (>= 8:00 PM) - Automatically remove countdown UI
           isAppUnlocked = true;
-          if (hoursEl) hoursEl.innerText = '00';
-          if (minutesEl) minutesEl.innerText = '00';
-          if (secondsEl) secondsEl.innerText = '00';
-
-          if (headingEl) {
-            headingEl.innerHTML = `
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-              <span style="color:#86efac;">Muziso Android is Live!</span>
-            `;
+          const countdownCard = document.getElementById('launch-countdown-card');
+          if (countdownCard) {
+            countdownCard.style.transition = 'opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, margin 0.4s ease, padding 0.4s ease';
+            countdownCard.style.opacity = '0';
+            countdownCard.style.transform = 'translateY(-10px)';
+            countdownCard.style.maxHeight = '0px';
+            countdownCard.style.padding = '0';
+            countdownCard.style.margin = '0';
+            countdownCard.style.overflow = 'hidden';
+            setTimeout(() => {
+              if (countdownCard && countdownCard.parentNode) {
+                countdownCard.parentNode.removeChild(countdownCard);
+              }
+            }, 450);
           }
-          if (subtextEl) subtextEl.innerText = 'Official v1.0.0 binaries are now unlocked and ready for direct installation.';
-          if (badgeWrap) badgeWrap.classList.add('unlocked');
-          if (badgeText) badgeText.innerText = 'OFFICIAL RELEASE LIVE';
-          if (noticeWrap) noticeWrap.classList.add('unlocked');
-          if (noticeText) noticeText.innerText = '✓ All APK binaries unlocked for download';
 
           // Unlock all download buttons
           downloadButtons.forEach(btn => {
@@ -4362,6 +4364,7 @@ cd Muziso-Android
               span.innerText = span.dataset.origText;
             }
           });
+          return;
         } else {
           // Locked State (< 8:00 PM)
           isAppUnlocked = false;
