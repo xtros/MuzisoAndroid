@@ -1522,185 +1522,7 @@
       color: #ffffff;
     }
 
-    /* ==========================================================================
-       Launch Countdown & APK Lock Engine
-       ========================================================================== */
-    .launch-countdown-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(20, 20, 28, 0.95) 100%) !important;
-      border: 1px solid rgba(255, 255, 255, 0.28) !important;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 255, 255, 0.05) !important;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .launch-countdown-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #ffffff, transparent);
-    }
-    .countdown-top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.85rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .countdown-badge-live {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 999px;
-      padding: 0.25rem 0.65rem;
-      font-size: 0.74rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.05em;
-    }
-    .countdown-badge-live .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ff4d6d;
-      box-shadow: 0 0 8px #ff4d6d;
-      animation: pulseDot 1.5s infinite ease-in-out;
-    }
-    .countdown-badge-live.unlocked .pulse-dot {
-      background: #22c55e !important;
-      box-shadow: 0 0 8px #22c55e !important;
-    }
-    .countdown-time-target {
-      font-family: var(--font-code);
-      font-size: 0.78rem;
-      color: var(--text-dim);
-    }
-    .countdown-heading {
-      font-family: var(--font-heading);
-      font-size: clamp(1.2rem, 3.8vw, 1.6rem);
-      color: #ffffff;
-      margin-bottom: 0.35rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-    .countdown-subtext {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-      max-width: 580px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .countdown-timer-wrap {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.65rem;
-      background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 16px;
-      padding: 0.85rem 1.4rem;
-      margin: 0 auto 1.15rem;
-      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 255, 255, 0.06);
-    }
-    .cd-digit-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 54px;
-    }
-    .cd-digit {
-      font-family: var(--font-code);
-      font-size: clamp(1.5rem, 5vw, 2.2rem);
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1;
-      letter-spacing: 0.02em;
-    }
-    .cd-unit {
-      font-size: 0.62rem;
-      color: var(--text-dim);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      margin-top: 0.35rem;
-    }
-    .cd-colon {
-      font-family: var(--font-code);
-      font-size: clamp(1.3rem, 4vw, 1.8rem);
-      color: rgba(255, 255, 255, 0.4);
-      font-weight: 700;
-      margin-top: -12px;
-      animation: blinkColon 1s infinite;
-    }
-    @keyframes blinkColon {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-    .countdown-lock-notice {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.78rem;
-      color: #fca5a5;
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.25);
-      border-radius: 999px;
-      padding: 0.3rem 0.85rem;
-    }
-    .countdown-lock-notice.unlocked {
-      color: #86efac !important;
-      background: rgba(34, 197, 94, 0.1) !important;
-      border-color: rgba(34, 197, 94, 0.25) !important;
-    }
 
-    /* Locked APK Button Styles */
-    .btn-apk-locked {
-      background: rgba(255, 255, 255, 0.05) !important;
-      color: rgba(255, 255, 255, 0.6) !important;
-      border: 1px dashed rgba(255, 255, 255, 0.25) !important;
-      cursor: not-allowed !important;
-      box-shadow: none !important;
-    }
-    .btn-apk-locked:hover {
-      background: rgba(255, 255, 255, 0.08) !important;
-      color: #ffffff !important;
-      border-color: rgba(255, 255, 255, 0.4) !important;
-    }
-    .locked-toast {
-      position: fixed;
-      bottom: calc(var(--bottom-nav-height) + var(--safe-bottom) + 1.25rem);
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: #18181f;
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 12px;
-      padding: 0.75rem 1.25rem;
-      font-size: 0.84rem;
-      font-weight: 600;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95);
-      z-index: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      max-width: 90vw;
-      text-align: center;
-    }
-    .locked-toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-      pointer-events: auto;
-    }
 
     /* Cards and Grids */
     .grid-3 {
@@ -2405,6 +2227,8 @@
         <p class="hero-desc">
           Muziso Android brings together seamless YouTube Music &amp; JioSaavn streaming, synchronized word-by-word lyrics, real-time Listen Together rooms, Google Cast, SponsorBlock, 10-band hardware DSP Equalizer, and 100% offline encrypted privacy.
         </p>
+
+
       </div>
     </section>
 
@@ -2606,49 +2430,7 @@
         <p style="color: var(--text-muted); font-size: clamp(0.85rem, 2.7vw, 0.98rem);">Direct standalone APK binaries. Tap any button to download directly.</p>
       </div>
 
-      <!-- Launch Countdown Card -->
-      <div id="launch-countdown-card" class="card launch-countdown-card" style="margin-bottom: 1.25rem;">
-        <div class="countdown-top-bar">
-          <span class="countdown-badge-live" id="countdown-badge-wrap">
-            <span class="pulse-dot"></span>
-            <span id="countdown-badge-text">LAUNCH COUNTDOWN</span>
-          </span>
-          <span class="countdown-time-target">Today &bull; 8:00 PM IST</span>
-        </div>
-        
-        <h3 id="countdown-heading" class="countdown-heading">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <span>APK Downloads Unlocking Soon</span>
-        </h3>
-        <p id="countdown-subtext" class="countdown-subtext">
-          Official release binaries will unlock automatically for direct download today at 8:00 PM IST.
-        </p>
 
-        <!-- Timer Digits Grid -->
-        <div class="countdown-timer-wrap">
-          <div class="cd-digit-box">
-            <span class="cd-digit" id="cd-hours">00</span>
-            <span class="cd-unit">HOURS</span>
-          </div>
-          <span class="cd-colon">:</span>
-          <div class="cd-digit-box">
-            <span class="cd-digit" id="cd-minutes">00</span>
-            <span class="cd-unit">MINS</span>
-          </div>
-          <span class="cd-colon">:</span>
-          <div class="cd-digit-box">
-            <span class="cd-digit" id="cd-seconds">00</span>
-            <span class="cd-unit">SECS</span>
-          </div>
-        </div>
-
-        <div>
-          <div id="countdown-lock-notice" class="countdown-lock-notice">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span id="countdown-notice-text">Files are locked until 8:00 PM IST</span>
-          </div>
-        </div>
-      </div>
 
       <!-- APK Matrix Grid -->
       <div class="grid-3" style="margin-bottom: 1.25rem;">
@@ -3383,11 +3165,7 @@ cd Muziso-Android
     </a>
   </div>
 
-  <!-- Locked Notification Toast -->
-  <div id="locked-toast" class="locked-toast">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-    <span id="locked-toast-text">🔒 APK downloads unlock today at 8:00 PM IST!</span>
-  </div>
+
 
   <script>
 
@@ -4278,126 +4056,8 @@ cd Muziso-Android
       }
     });
 
-    // =========================================================================
-    // [COUNTDOWN & LOCK ENGINE] Launch Countdown to Today 8:00 PM IST
-    // =========================================================================
-    // Target: Today 8:00 PM IST (GMT+5:30)
-    function getLaunchTargetTime() {
-      const target = new Date();
-      target.setHours(20, 0, 0, 0); // 8:00:00 PM today local / IST
-      return target.getTime();
-    }
-
-    const LAUNCH_TIMESTAMP = getLaunchTargetTime();
-    let isAppUnlocked = false;
-    let toastTimeout = null;
-
-    function showLockedToast(msg) {
-      const toast = document.getElementById('locked-toast');
-      const textEl = document.getElementById('locked-toast-text');
-      if (!toast) return;
-      if (textEl && msg) textEl.innerText = msg;
-      toast.classList.add('show');
-      if (toastTimeout) clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3500);
-    }
-
-    function onLockedClick(e) {
-      if (!isAppUnlocked) {
-        if (e && e.preventDefault) e.preventDefault();
-        const now = Date.now();
-        const diff = LAUNCH_TIMESTAMP - now;
-        if (diff > 0) {
-          const mins = Math.floor((diff / (1000 * 60)) % 60);
-          const secs = Math.floor((diff / 1000) % 60);
-          showLockedToast(`🔒 APK downloads unlock today at 8:00 PM IST (in ${mins}m ${secs}s)!`);
-        } else {
-          showLockedToast(`🔒 APK downloads unlock today at 8:00 PM IST!`);
-        }
-      }
-    }
-
-    function initLaunchCountdown() {
-      const hoursEl = document.getElementById('cd-hours');
-      const minutesEl = document.getElementById('cd-minutes');
-      const secondsEl = document.getElementById('cd-seconds');
-      const headingEl = document.getElementById('countdown-heading');
-      const subtextEl = document.getElementById('countdown-subtext');
-      const badgeWrap = document.getElementById('countdown-badge-wrap');
-      const badgeText = document.getElementById('countdown-badge-text');
-      const noticeWrap = document.getElementById('countdown-lock-notice');
-      const noticeText = document.getElementById('countdown-notice-text');
-
-      const downloadButtons = document.querySelectorAll('a[href*="downloads/Muziso"], a#mobile-quick-apk');
-
-      function updateTimer() {
-        const now = Date.now();
-        const diff = LAUNCH_TIMESTAMP - now;
-
-        if (diff <= 0) {
-          // Unlocked State (>= 8:00 PM) - Automatically remove countdown UI
-          isAppUnlocked = true;
-          const countdownCard = document.getElementById('launch-countdown-card');
-          if (countdownCard) {
-            countdownCard.style.transition = 'opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, margin 0.4s ease, padding 0.4s ease';
-            countdownCard.style.opacity = '0';
-            countdownCard.style.transform = 'translateY(-10px)';
-            countdownCard.style.maxHeight = '0px';
-            countdownCard.style.padding = '0';
-            countdownCard.style.margin = '0';
-            countdownCard.style.overflow = 'hidden';
-            setTimeout(() => {
-              if (countdownCard && countdownCard.parentNode) {
-                countdownCard.parentNode.removeChild(countdownCard);
-              }
-            }, 450);
-          }
-
-          // Unlock all download buttons
-          downloadButtons.forEach(btn => {
-            btn.classList.remove('btn-apk-locked');
-            btn.removeEventListener('click', onLockedClick);
-            const span = btn.querySelector('span');
-            if (span && span.dataset.origText) {
-              span.innerText = span.dataset.origText;
-            }
-          });
-          return;
-        } else {
-          // Locked State (< 8:00 PM)
-          isAppUnlocked = false;
-          const h = Math.floor(diff / (1000 * 60 * 60));
-          const m = Math.floor((diff / (1000 * 60)) % 60);
-          const s = Math.floor((diff / 1000) % 60);
-
-          if (hoursEl) hoursEl.innerText = String(h).padStart(2, '0');
-          if (minutesEl) minutesEl.innerText = String(m).padStart(2, '0');
-          if (secondsEl) secondsEl.innerText = String(s).padStart(2, '0');
-
-          // Apply locked styling and click interceptors
-          downloadButtons.forEach(btn => {
-            if (!btn.classList.contains('btn-apk-locked')) {
-              btn.classList.add('btn-apk-locked');
-              btn.addEventListener('click', onLockedClick);
-              const span = btn.querySelector('span');
-              if (span && !span.dataset.origText) {
-                span.dataset.origText = span.innerText;
-                span.innerText = '🔒 Unlocks at 8:00 PM';
-              }
-            }
-          });
-        }
-      }
-
-      updateTimer();
-      setInterval(updateTimer, 1000);
-    }
-
     // Deep Link & Gesture Navigation Init
     window.addEventListener('DOMContentLoaded', () => {
-      initLaunchCountdown();
       attachSlideDownToClose('bottom-sheet', 'bottom-sheet-backdrop', closeBottomSheet);
       attachSlideDownToClose('sideload-sheet', 'sideload-sheet-backdrop', closeSideloadGuide);
       attachSlideDownToClose('feedback-sheet', 'feedback-sheet-backdrop', closeFeedbackModal);
