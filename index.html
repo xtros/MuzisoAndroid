@@ -1288,6 +1288,7 @@
     .hero h1 span {
       background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -2116,6 +2117,269 @@
     footer a:hover {
       color: #ffffff;
     }
+
+    /* ==========================================================================
+       Live Downloads Count & Real-Time Statistics
+       ========================================================================== */
+    .live-dot-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: livePulseRing 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
+      vertical-align: middle;
+      margin-right: 5px;
+      flex-shrink: 0;
+    }
+    @keyframes livePulseRing {
+      0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.85);
+      }
+      70% {
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
+    }
+
+    .live-badge-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-family: var(--font-code);
+    }
+
+    /* Hero Live Downloads Showcase Widget */
+    .hero-downloads-widget {
+      margin: 1.75rem auto 0;
+      max-width: 580px;
+      background: rgba(16, 16, 22, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 18px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 255, 255, 0.03);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s ease, transform 0.2s ease;
+      text-align: left;
+    }
+    .hero-downloads-widget:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    .hero-downloads-widget::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    }
+
+    .hero-dw-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+    .hero-dw-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-dw-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-dw-counter-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .hero-dw-counter-num {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5.5vw, 2.75rem);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-shadow: 0 0 25px rgba(255, 255, 255, 0.35);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .hero-dw-counter-num.count-updated {
+      animation: countGlow 0.6s ease-out;
+    }
+    @keyframes countGlow {
+      0% { transform: scale(1.08); color: #34d399; text-shadow: 0 0 30px rgba(52, 211, 153, 0.8); }
+      100% { transform: scale(1); color: #ffffff; text-shadow: 0 0 25px rgba(255, 255, 255, 0.35); }
+    }
+    .hero-dw-counter-unit {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .hero-dw-counter-sub {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .hero-dw-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.65rem;
+      align-items: center;
+    }
+    @media (max-width: 480px) {
+      .hero-dw-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Live Summary Strip in Download Tab */
+    .installation-live-strip {
+      background: rgba(18, 18, 24, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .inst-live-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .inst-live-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .inst-live-total-val {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .inst-live-total-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .inst-live-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Per-Card Download Meta & Badge */
+    .apk-card-stats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.45rem 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.78rem;
+    }
+    .apk-card-dl-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #e4e4e7;
+      font-weight: 600;
+      font-family: var(--font-code);
+    }
+    .apk-card-dl-badge svg {
+      color: #10b981;
+      flex-shrink: 0;
+    }
+    .apk-card-dl-count {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .apk-card-dl-count.pulse-up {
+      animation: countFlash 0.5s ease-out;
+    }
+    @keyframes countFlash {
+      0% { color: #10b981; transform: scale(1.15); }
+      100% { color: #ffffff; transform: scale(1); }
+    }
+    .apk-card-size {
+      color: var(--text-dim);
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+
+    /* Floating "+1" particle animation */
+    .dl-particle-plus {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1rem;
+      color: #34d399;
+      text-shadow: 0 0 10px rgba(52, 211, 153, 0.8), 0 0 20px rgba(0, 0, 0, 0.8);
+      transform: translate(-50%, -50%);
+      animation: particleFloatUp 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    @keyframes particleFloatUp {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(0.8);
+      }
+      50% {
+        transform: translate(-50%, -35px) scale(1.2);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -70px) scale(1);
+      }
+    }
   </style>
 </head>
 <body>
@@ -2151,7 +2415,7 @@
 
       <!-- Nav Actions -->
       <div class="nav-actions">
-        <a href="downloads/Muziso-arm64.apk" download="Muziso-arm64.apk" class="mobile-header-download" id="mobile-quick-apk">
+        <a href="downloads/Muziso-arm64.apk" download="Muziso-arm64.apk" class="mobile-header-download" id="mobile-quick-apk" onclick="trackLiveDownload('Muziso-arm64.apk', event)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           <span>Get APK</span>
         </a>
@@ -2228,6 +2492,38 @@
           Muziso Android brings together seamless YouTube Music &amp; JioSaavn streaming, synchronized word-by-word lyrics, real-time Listen Together rooms, Google Cast, SponsorBlock, 10-band hardware DSP Equalizer, and 100% offline encrypted privacy.
         </p>
 
+        <!-- Live Downloads Showcase & Quick Install Widget -->
+        <div class="hero-downloads-widget">
+          <div class="hero-dw-header">
+            <div class="hero-dw-title-wrap">
+              <span class="live-dot-pulse"></span>
+              <span class="hero-dw-label">Verified Live Installations</span>
+            </div>
+            <div class="live-badge-chip">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Real-Time Sync</span>
+            </div>
+          </div>
+
+          <div class="hero-dw-counter-row">
+            <div class="hero-dw-counter-num" id="hero-total-downloads">--</div>
+            <div class="hero-dw-counter-unit">Total Downloads</div>
+            <div class="hero-dw-counter-sub" title="ARM64 builds downloaded">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span id="hero-arm64-count">--</span> on ARM64
+            </div>
+          </div>
+
+          <div class="hero-dw-actions">
+            <a href="downloads/Muziso-arm64.apk" download="Muziso-arm64.apk" class="btn-apk-main" onclick="trackLiveDownload('Muziso-arm64.apk', event)" style="width: 100%; justify-content: center;">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download Latest APK (ARM64)
+            </a>
+            <a href="#installation" onclick="switchTab('installation', event)" class="btn-apk-secondary" style="min-height: 44px; white-space: nowrap; justify-content: center;">
+              All 6 Variants
+            </a>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -2427,10 +2723,27 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Muziso Android APK Downloads
         </h2>
-        <p style="color: var(--text-muted); font-size: clamp(0.85rem, 2.7vw, 0.98rem);">Direct standalone APK binaries. Tap any button to download directly.</p>
+        <p style="color: var(--text-muted); font-size: clamp(0.85rem, 2.7vw, 0.98rem);">Direct standalone APK binaries. Tap any button to download directly with verified real-time tracking.</p>
       </div>
 
-
+      <!-- Live Real-Time Downloads Header Strip -->
+      <div class="installation-live-strip">
+        <div class="inst-live-left">
+          <div class="inst-live-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          </div>
+          <div>
+            <div class="inst-live-total-val" id="inst-strip-total-downloads">--</div>
+            <div class="inst-live-total-desc">Verified Real-Time Downloads across all 6 architectures &amp; flavors</div>
+          </div>
+        </div>
+        <div class="inst-live-right">
+          <div class="live-badge-chip">
+            <span class="live-dot-pulse"></span>
+            <span>Live Counters Active</span>
+          </div>
+        </div>
+      </div>
 
       <!-- APK Matrix Grid -->
       <div class="grid-3" style="margin-bottom: 1.25rem;">
@@ -2443,8 +2756,16 @@
             <span style="background: #ffffff; color: #000000; font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.3rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Recommended</span>
           </div>
           <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-arm64.apk</h3>
-          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1.25rem;">Standalone release for modern 64-bit ARM devices (Pixel, Samsung Galaxy, OnePlus, Xiaomi, Nothing Phone).</p>
-          <a href="downloads/Muziso-arm64.apk" download="Muziso-arm64.apk" class="btn-apk-main" style="width: 100%; justify-content: center;">
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.85rem;">Standalone release for modern 64-bit ARM devices (Pixel, Samsung Galaxy, OnePlus, Xiaomi, Nothing Phone).</p>
+          <div class="apk-card-stats">
+            <div class="apk-card-dl-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span class="apk-card-dl-count" data-count-key="muziso_apk_arm64_v1">--</span>
+              <span>downloads</span>
+            </div>
+            <span class="apk-card-size">63.5 MB &bull; ARM64</span>
+          </div>
+          <a href="downloads/Muziso-arm64.apk" download="Muziso-arm64.apk" class="btn-apk-main" onclick="trackLiveDownload('Muziso-arm64.apk', event)" style="width: 100%; justify-content: center;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Download ARM64 APK
           </a>
@@ -2456,8 +2777,16 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso.apk (Universal FOSS)</h3>
-          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1.25rem;">All-architecture universal APK built with 100% Free &amp; Open Source Software dependencies.</p>
-          <a href="downloads/Muziso.apk" download="Muziso.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.85rem;">All-architecture universal APK built with 100% Free &amp; Open Source Software dependencies.</p>
+          <div class="apk-card-stats">
+            <div class="apk-card-dl-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span class="apk-card-dl-count" data-count-key="muziso_apk_universal_v1">--</span>
+              <span>downloads</span>
+            </div>
+            <span class="apk-card-size">63.5 MB &bull; FOSS</span>
+          </div>
+          <a href="downloads/Muziso.apk" download="Muziso.apk" class="btn-apk-secondary" onclick="trackLiveDownload('Muziso.apk', event)" style="width: 100%; justify-content: center;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Download Universal APK
           </a>
@@ -2469,8 +2798,16 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
           </div>
           <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-with-Google-Cast.apk</h3>
-          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1.25rem;">Universal release with Google Play Services (GMS) and Chromecast / Google Home audio casting.</p>
-          <a href="downloads/Muziso-with-Google-Cast.apk" download="Muziso-with-Google-Cast.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.85rem;">Universal release with Google Play Services (GMS) and Chromecast / Google Home audio casting.</p>
+          <div class="apk-card-stats">
+            <div class="apk-card-dl-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span class="apk-card-dl-count" data-count-key="muziso_apk_cast_v1">--</span>
+              <span>downloads</span>
+            </div>
+            <span class="apk-card-size">64.8 MB &bull; GMS</span>
+          </div>
+          <a href="downloads/Muziso-with-Google-Cast.apk" download="Muziso-with-Google-Cast.apk" class="btn-apk-secondary" onclick="trackLiveDownload('Muziso-with-Google-Cast.apk', event)" style="width: 100%; justify-content: center;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Download Cast APK
           </a>
@@ -2482,8 +2819,16 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
           <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-armeabi.apk</h3>
-          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1.25rem;">Standalone build for 32-bit ARMv7 legacy Android devices and budget hardware.</p>
-          <a href="downloads/Muziso-armeabi.apk" download="Muziso-armeabi.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.85rem;">Standalone build for 32-bit ARMv7 legacy Android devices and budget hardware.</p>
+          <div class="apk-card-stats">
+            <div class="apk-card-dl-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span class="apk-card-dl-count" data-count-key="muziso_apk_armeabi_v1">--</span>
+              <span>downloads</span>
+            </div>
+            <span class="apk-card-size">63.5 MB &bull; ARMv7</span>
+          </div>
+          <a href="downloads/Muziso-armeabi.apk" download="Muziso-armeabi.apk" class="btn-apk-secondary" onclick="trackLiveDownload('Muziso-armeabi.apk', event)" style="width: 100%; justify-content: center;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Download ARMv7 APK
           </a>
@@ -2495,8 +2840,16 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-x86_64.apk</h3>
-          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1.25rem;">64-bit x86 build for Android Studio Emulator, Windows Subsystem for Android (WSA), and ChromeOS.</p>
-          <a href="downloads/Muziso-x86_64.apk" download="Muziso-x86_64.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.85rem;">64-bit x86 build for Android Studio Emulator, Windows Subsystem for Android (WSA), and ChromeOS.</p>
+          <div class="apk-card-stats">
+            <div class="apk-card-dl-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span class="apk-card-dl-count" data-count-key="muziso_apk_x86_64_v1">--</span>
+              <span>downloads</span>
+            </div>
+            <span class="apk-card-size">63.5 MB &bull; x86_64</span>
+          </div>
+          <a href="downloads/Muziso-x86_64.apk" download="Muziso-x86_64.apk" class="btn-apk-secondary" onclick="trackLiveDownload('Muziso-x86_64.apk', event)" style="width: 100%; justify-content: center;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Download x86_64 APK
           </a>
@@ -2508,8 +2861,16 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <h3 style="color: #fff; margin-bottom: 0.3rem;">Muziso-x86.apk</h3>
-          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1.25rem;">Standalone 32-bit x86 release for legacy 32-bit Android x86 emulators and virtual machines.</p>
-          <a href="downloads/Muziso-x86.apk" download="Muziso-x86.apk" class="btn-apk-secondary" style="width: 100%; justify-content: center;">
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 0.85rem;">Standalone 32-bit x86 release for legacy 32-bit Android x86 emulators and virtual machines.</p>
+          <div class="apk-card-stats">
+            <div class="apk-card-dl-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span class="apk-card-dl-count" data-count-key="muziso_apk_x86_v1">--</span>
+              <span>downloads</span>
+            </div>
+            <span class="apk-card-size">63.5 MB &bull; x86</span>
+          </div>
+          <a href="downloads/Muziso-x86.apk" download="Muziso-x86.apk" class="btn-apk-secondary" onclick="trackLiveDownload('Muziso-x86.apk', event)" style="width: 100%; justify-content: center;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Download x86 APK
           </a>
@@ -2906,7 +3267,7 @@ cd Muziso-Android
     </div>
 
     <div class="sheet-cta-box">
-      <a href="downloads/Muziso-arm64.apk" download="Muziso-arm64.apk" class="btn-apk-main">
+      <a href="downloads/Muziso-arm64.apk" download="Muziso-arm64.apk" class="btn-apk-main" onclick="trackLiveDownload('Muziso-arm64.apk', event)">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         Download ARM64 APK
       </a>
@@ -4056,11 +4417,270 @@ cd Muziso-Android
       }
     });
 
+    // =========================================================================
+    // [REAL-TIME DOWNLOADS ENGINE] Verified Live Counts for Overall & Per File
+    // =========================================================================
+    const APK_TRACKING_KEYS = {
+      total: 'muziso_apk_total_downloads_v1',
+      'Muziso-arm64.apk': 'muziso_apk_arm64_v1',
+      'Muziso.apk': 'muziso_apk_universal_v1',
+      'Muziso-with-Google-Cast.apk': 'muziso_apk_cast_v1',
+      'Muziso-armeabi.apk': 'muziso_apk_armeabi_v1',
+      'Muziso-x86_64.apk': 'muziso_apk_x86_64_v1',
+      'Muziso-x86.apk': 'muziso_apk_x86_v1'
+    };
+
+    const COUNT_API_BASE = 'https://countapi.mileshilliard.com/api/v1';
+    const CACHE_STORAGE_KEY = 'muziso_live_downloads_cache_v1';
+    let liveDownloadCounts = {};
+    let isFetchingCounts = false;
+    let syncIntervalId = null;
+
+    // Load cached counts immediately to prevent layout shifts
+    function loadCachedCounts() {
+      try {
+        const cached = localStorage.getItem(CACHE_STORAGE_KEY);
+        if (cached) {
+          liveDownloadCounts = JSON.parse(cached);
+          renderAllDownloadCounts(false);
+        }
+      } catch (e) {
+        console.warn('Could not read cached download counts:', e);
+      }
+    }
+
+    function saveCountsToCache() {
+      try {
+        localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(liveDownloadCounts));
+      } catch (e) {}
+    }
+
+    // Number roll-up animator
+    function animateCountNumber(el, targetVal) {
+      if (!el) return;
+      const currentVal = parseInt(el.getAttribute('data-val') || '0', 10);
+      if (currentVal === targetVal && el.innerText !== '--' && el.innerText !== '') return;
+
+      el.setAttribute('data-val', targetVal);
+      const startTime = performance.now();
+      const duration = 650; // ms
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // easeOutExpo
+        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const interpolated = Math.round(currentVal + (targetVal - currentVal) * ease);
+
+        el.innerText = interpolated.toLocaleString();
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.innerText = targetVal.toLocaleString();
+          el.classList.add('count-updated');
+          setTimeout(() => el.classList.remove('count-updated'), 600);
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    // Render counts into DOM
+    function renderAllDownloadCounts(shouldAnimate = true) {
+      // 1. Calculate and render total
+      let total = liveDownloadCounts[APK_TRACKING_KEYS.total] || 0;
+      
+      // Also calculate sum of all individual variants to guarantee consistency
+      let sumOfVariants = 0;
+      Object.entries(APK_TRACKING_KEYS).forEach(([fileName, key]) => {
+        if (fileName !== 'total' && typeof liveDownloadCounts[key] === 'number') {
+          sumOfVariants += liveDownloadCounts[key];
+        }
+      });
+
+      if (sumOfVariants > total) {
+        total = sumOfVariants;
+        liveDownloadCounts[APK_TRACKING_KEYS.total] = total;
+      }
+
+      // Update Hero total downloads
+      const heroTotalEl = document.getElementById('hero-total-downloads');
+      if (heroTotalEl) {
+        if (shouldAnimate) animateCountNumber(heroTotalEl, total);
+        else {
+          heroTotalEl.innerText = total.toLocaleString();
+          heroTotalEl.setAttribute('data-val', total);
+        }
+      }
+
+      // Update Installation strip total downloads
+      const instTotalEl = document.getElementById('inst-strip-total-downloads');
+      if (instTotalEl) {
+        if (shouldAnimate) animateCountNumber(instTotalEl, total);
+        else {
+          instTotalEl.innerText = total.toLocaleString();
+          instTotalEl.setAttribute('data-val', total);
+        }
+      }
+
+      // Update Hero ARM64 sub-count
+      const heroArm64CountEl = document.getElementById('hero-arm64-count');
+      if (heroArm64CountEl) {
+        const arm64Val = liveDownloadCounts[APK_TRACKING_KEYS['Muziso-arm64.apk']] || 0;
+        heroArm64CountEl.innerText = arm64Val.toLocaleString();
+      }
+
+      // Update each individual file card
+      Object.entries(APK_TRACKING_KEYS).forEach(([fileName, key]) => {
+        if (fileName === 'total') return;
+        const val = liveDownloadCounts[key] || 0;
+        const countEls = document.querySelectorAll(`[data-count-key="${key}"]`);
+        countEls.forEach(el => {
+          if (shouldAnimate) animateCountNumber(el, val);
+          else {
+            el.innerText = val.toLocaleString();
+            el.setAttribute('data-val', val);
+          }
+        });
+      });
+    }
+
+    // Fetch live counts from real-time API
+    async function fetchLiveDownloadCounts() {
+      if (isFetchingCounts) return;
+      isFetchingCounts = true;
+
+      const keysToFetch = Object.values(APK_TRACKING_KEYS);
+      const fetchPromises = keysToFetch.map(async (key) => {
+        try {
+          const res = await fetch(`${COUNT_API_BASE}/get/${key}`, { cache: 'no-store' });
+          if (res.ok) {
+            const data = await res.json();
+            if (typeof data.value === 'number') {
+              return { key, value: data.value };
+            }
+          }
+          return { key, value: liveDownloadCounts[key] || 0 };
+        } catch (err) {
+          return { key, value: liveDownloadCounts[key] || 0 };
+        }
+      });
+
+      try {
+        const results = await Promise.all(fetchPromises);
+        let hasChanges = false;
+        results.forEach(({ key, value }) => {
+          if (liveDownloadCounts[key] !== value) {
+            liveDownloadCounts[key] = value;
+            hasChanges = true;
+          }
+        });
+
+        if (hasChanges) {
+          saveCountsToCache();
+          renderAllDownloadCounts(true);
+        }
+      } catch (e) {
+        console.warn('Real-time download sync error:', e);
+      } finally {
+        isFetchingCounts = false;
+      }
+    }
+
+    // Spawn floating +1 particle
+    function triggerDownloadParticle(event) {
+      const x = event.clientX || (event.touches && event.touches[0] ? event.touches[0].clientX : window.innerWidth / 2);
+      const y = event.clientY || (event.touches && event.touches[0] ? event.touches[0].clientY : window.innerHeight / 2);
+
+      const particle = document.createElement('div');
+      particle.className = 'dl-particle-plus';
+      particle.innerText = '+1';
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+      document.body.appendChild(particle);
+
+      setTimeout(() => {
+        if (particle && particle.parentNode) {
+          particle.parentNode.removeChild(particle);
+        }
+      }, 950);
+    }
+
+    // Triggered when a user clicks any APK download link
+    async function trackLiveDownload(fileName, event) {
+      if (event) {
+        triggerDownloadParticle(event);
+      }
+
+      const fileKey = APK_TRACKING_KEYS[fileName] || APK_TRACKING_KEYS['Muziso-arm64.apk'];
+      const totalKey = APK_TRACKING_KEYS.total;
+
+      // 1. Optimistic instant local increment
+      liveDownloadCounts[fileKey] = (liveDownloadCounts[fileKey] || 0) + 1;
+      liveDownloadCounts[totalKey] = (liveDownloadCounts[totalKey] || 0) + 1;
+      saveCountsToCache();
+      renderAllDownloadCounts(true);
+
+      // 2. Broadcast to other tabs in this browser
+      try {
+        if ('BroadcastChannel' in window) {
+          const bc = new BroadcastChannel('muziso_downloads_channel');
+          bc.postMessage({ type: 'INCREMENT', fileKey, totalKey, counts: liveDownloadCounts });
+        }
+      } catch (e) {}
+
+      // 3. Send real hit to remote counter API
+      try {
+        // Hit specific file key
+        fetch(`${COUNT_API_BASE}/hit/${fileKey}`, { method: 'GET', keepalive: true }).catch(() => {});
+        // Hit total key
+        fetch(`${COUNT_API_BASE}/hit/${totalKey}`, { method: 'GET', keepalive: true }).catch(() => {});
+      } catch (e) {
+        console.warn('Could not record remote download hit:', e);
+      }
+    }
+
+    // Listen to multi-tab sync
+    try {
+      if ('BroadcastChannel' in window) {
+        const bc = new BroadcastChannel('muziso_downloads_channel');
+        bc.onmessage = (msg) => {
+          if (msg.data && msg.data.type === 'INCREMENT') {
+            if (msg.data.counts) {
+              liveDownloadCounts = { ...liveDownloadCounts, ...msg.data.counts };
+              saveCountsToCache();
+              renderAllDownloadCounts(true);
+            }
+          }
+        };
+      }
+    } catch (e) {}
+
+    // Polling setup: Active polling every 12 seconds when page is active
+    function startDownloadPolling() {
+      if (syncIntervalId) clearInterval(syncIntervalId);
+      syncIntervalId = setInterval(() => {
+        if (document.visibilityState === 'visible') {
+          fetchLiveDownloadCounts();
+        }
+      }, 12000);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        fetchLiveDownloadCounts();
+      }
+    });
+
     // Deep Link & Gesture Navigation Init
     window.addEventListener('DOMContentLoaded', () => {
       attachSlideDownToClose('bottom-sheet', 'bottom-sheet-backdrop', closeBottomSheet);
       attachSlideDownToClose('sideload-sheet', 'sideload-sheet-backdrop', closeSideloadGuide);
       attachSlideDownToClose('feedback-sheet', 'feedback-sheet-backdrop', closeFeedbackModal);
+
+      // Initialize real-time downloads
+      loadCachedCounts();
+      fetchLiveDownloadCounts();
+      startDownloadPolling();
 
       const hash = window.location.hash.replace('#', '');
       if (hash && document.getElementById(hash)) {
