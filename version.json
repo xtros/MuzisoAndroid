@@ -1,0 +1,48 @@
+{
+  "tag_name": "v2.0.0",
+  "name": "2.0.0",
+  "version_name": "2.0.0",
+  "version_code": 2,
+  "body": "Muziso v2.0.0 (Build 2)\n\n\u2022 High-fidelity dual streaming engine (YouTube Music & JioSaavn 320 kbps)\n\u2022 Synchronized word-by-word lyrics with live translation & romanization\n\u2022 Android TV & Google Cast support\n\u2022 10-band DSP Equalizer & offline download engine\n\u2022 Bug fixes and performance improvements",
+  "description": "Muziso v2.0.0 (Build 2)\n\n\u2022 High-fidelity dual streaming engine (YouTube Music & JioSaavn 320 kbps)\n\u2022 Synchronized word-by-word lyrics with live translation & romanization\n\u2022 Android TV & Google Cast support\n\u2022 10-band DSP Equalizer & offline download engine\n\u2022 Bug fixes and performance improvements",
+  "published_at": "2026-10-27T16:00:00Z",
+  "html_url": "https://muziso-android.vercel.app",
+  "assets": [
+    {
+      "name": "Muziso.apk",
+      "browser_download_url": "https://muziso-android.vercel.app/downloads/Muziso.apk",
+      "download_url": "https://muziso-android.vercel.app/downloads/Muziso.apk",
+      "size": 66600529
+    },
+    {
+      "name": "Muziso-with-Google-Cast.apk",
+      "browser_download_url": "https://muziso-android.vercel.app/downloads/Muziso-with-Google-Cast.apk",
+      "download_url": "https://muziso-android.vercel.app/downloads/Muziso-with-Google-Cast.apk",
+      "size": 68049820
+    },
+    {
+      "name": "Muziso-arm64.apk",
+      "browser_download_url": "https://muziso-android.vercel.app/downloads/Muziso-arm64.apk",
+      "download_url": "https://muziso-android.vercel.app/downloads/Muziso-arm64.apk",
+      "size": 66600517
+    },
+    {
+      "name": "Muziso-armeabi.apk",
+      "browser_download_url": "https://muziso-android.vercel.app/downloads/Muziso-armeabi.apk",
+      "download_url": "https://muziso-android.vercel.app/downloads/Muziso-armeabi.apk",
+      "size": 66600505
+    },
+    {
+      "name": "Muziso-x86.apk",
+      "browser_download_url": "https://muziso-android.vercel.app/downloads/Muziso-x86.apk",
+      "download_url": "https://muziso-android.vercel.app/downloads/Muziso-x86.apk",
+      "size": 66600512
+    },
+    {
+      "name": "Muziso-x86_64.apk",
+      "browser_download_url": "https://muziso-android.vercel.app/downloads/Muziso-x86_64.apk",
+      "download_url": "https://muziso-android.vercel.app/downloads/Muziso-x86_64.apk",
+      "size": 66600506
+    }
+  ]
+}
